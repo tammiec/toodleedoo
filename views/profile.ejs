@@ -17,7 +17,7 @@
 
   </head>
 
-  <body class="bg-light">
+  <body>
 
     <% include ./partials/_header %>
 
@@ -29,13 +29,16 @@
           <h3>My Profile</h3>
 
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Email"/>
+            <label><%= user %></label>
+            <input type="text" class="form-control" placeholder="Update Email"/>
           </div>
           <div class="form-group">
-            <input id="old-password" type="password" class="form-control" placeholder="Old Password" required/>
+            <label>Password</label>
+            <input id="old-password" type="password" class="form-control" placeholder="Password" required/>
           </div>
           <div class="form-group">
-            <input id="new-password" type="password" class="form-control" placeholder="New Password" required/>
+            <label>New Password</label>
+            <input id="new-password" type="password" class="form-control" placeholder="New Password (*optional)"/>
           </div>
           <div class="form-group">
             <input type="submit" class="btn" value="Update Profile"/>

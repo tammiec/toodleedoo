@@ -1,3 +1,19 @@
 @import 'partials/variables';
 @import 'partials/base';
 
+main {
+  padding-top: 6em;
+}
+
+h3 {
+  color: $base-color;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.container {
+  min-width: 300px;
+  max-width: 40%;
+  background-color: $accent-color;
+  padding: 2em;
+}
