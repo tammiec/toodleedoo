@@ -1,0 +1,34 @@
+body {
+  background-color: #04D9C4;
+}
+
+.btn {
+  background-color: #202426;
+  color: #A3D9C9;
+  border-radius: 2px;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.card {
+  border-radius: 2px;
+}
+
+main {
+  padding-top: 6em;
+}
+
+h3 {
+  color: #202426;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.container {
+  min-width: 300px;
+  max-width: 40%;
+  background-color: #A3D9C9;
+  padding: 2em;
+}

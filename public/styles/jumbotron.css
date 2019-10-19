@@ -1,3 +1,7 @@
+body {
+  background-color: #04D9C4;
+}
+
 .btn {
   background-color: #202426;
   color: #A3D9C9;
@@ -10,10 +14,6 @@
 
 .card {
   border-radius: 2px;
-}
-
-body {
-  background-color: #04D9C4;
 }
 
 main {
