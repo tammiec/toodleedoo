@@ -1,45 +1,28 @@
 @import 'partials/variables';
 @import 'partials/base';
 
-
-html,
-body {
-  height: 100%;
+.login-container{
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
-body {
-  background-color: $background-color;
+.login-form-1{
+  padding: 9%;
+  background: $base-color;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
-
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-  justify-self: center;
-  align-self: center;
+.login-form-1 h3{
+  text-align: center;
+  margin-bottom:12%;
+  color: $accent-color;
 }
-.form-signin .checkbox {
-  font-weight: 400;
-  border-radius: 2px;
+.login-form-2{
+  padding: 9%;
+  background: $accent-color;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
-.form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.login-form-2 h3{
+  text-align: center;
+  margin-bottom:12%;
+  color: $base-color;
 }
