@@ -1,3 +1,8 @@
+.btn {
+  background-color: #202426;
+  color: #A3D9C9;
+}
+
 body {
   background-color: #04D9C4;
 }
@@ -13,10 +18,8 @@ main {
   align-content: center;
 }
 
-.new-todo button {
+.btn {
   margin-left: 1em;
-  background-color: #202426;
-  color: #A3D9C9;
 }
 
 .card-deck {

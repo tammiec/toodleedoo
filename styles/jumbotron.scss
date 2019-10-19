@@ -1,4 +1,5 @@
 @import 'partials/variables';
+@import 'partials/base';
 
 body {
   background-color: $background-color;
@@ -15,10 +16,8 @@ main {
   align-content: center;
 }
 
-.new-todo button {
+.btn {
   margin-left: 1em;
-  background-color: $base-color;
-  color: $accent-color;
 }
 
 .card-deck {
