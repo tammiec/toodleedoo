@@ -1,6 +1,15 @@
 .btn {
   background-color: #202426;
   color: #A3D9C9;
+  border-radius: 2px;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.card {
+  border-radius: 2px;
 }
 
 body {
@@ -38,8 +47,13 @@ main {
   min-width: 300px;
 }
 
-.card-title {
+.card-header {
   text-align: center;
+}
+
+.card-body {
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .list-group-item {

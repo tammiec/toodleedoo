@@ -34,10 +34,16 @@ main {
   margin-right: 0.5em;
   margin-top: 1.5em;
   min-width: 300px;
+
 }
 
-.card-title {
+.card-header {
   text-align: center;
+}
+
+.card-body {
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .list-group-item {
