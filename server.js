@@ -56,11 +56,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render("login");
+  let templateVars = {
+    user: null
+  };
+  res.render("login", templateVars);
 });
 
 app.get("/landing", (req, res) => {
-  res.render("landing");
+  //must send temlateVars to be used in header
+  //hard coded for now
+  let templateVars = {
+    user: 'user@email.com'
+  };
+  res.render("landing", templateVars);
 });
 
 app.get("/profile", (req, res) => {
