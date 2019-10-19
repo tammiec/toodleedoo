@@ -1,5 +1,8 @@
 header.main-header {
   display: flex;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 div.logo {
   text-transform: uppercase;
@@ -15,10 +18,103 @@ div.user-view {
 header nav {
   width: 100%;
 }
-.user-view ul {
+.user-view > ul {
   flex-direction: row;
   justify-content: end;
 }
+.user-view > ul > li {
+  padding-right: 1.6em;
+}
 .nav-item {
   padding: 0 5px;
+}
+
+/**handling the hamburger**/
+
+.b-a {
+  transition: all 0.25s;
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 6px;
+  width: 30px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+.menu-collapsed {
+  transition: all 0.25s;
+  position: fixed;
+  top: 10px;
+  right: 9px;
+  height: 36px;
+  width: 36px;
+  z-index: 1;
+  background-color: #f33;
+  cursor: pointer;
+  ul {
+    transition: all 0s;
+    position: fixed;
+    right: -9000px;
+  }
+}
+/*
+.bar {
+  @extend .b-a;
+  position: relative;
+  // left: 12px;
+  top: 14px;
+  &:before {
+    @extend .b-a;
+    top: -8px;
+  }
+  &:after {
+    @extend .b-a;
+    top: 8px;
+  }
+}
+.b-a-expanded {
+  transition: all .25s;
+  top: -0px;
+}
+*/
+.menu-expanded {
+  transition: all .25s;
+  text-align: center;
+  line-height: 70px;
+  height: 100%;
+  width: 100%;
+  border-radius: 0px;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.85);
+  ul {
+    transition: all 0s;
+    position: relative;
+    left: 0;
+    z-index: 2;
+  }
+  a {
+    color: #ccd;
+
+  }
+  a:hover {
+    color: #f33;
+    text-decoration: none;
+
+  }
+/*
+  .bar {
+    background-color: transparent;
+    left: 94%;
+    transition: all .25s;
+    &:before {
+      @extend .b-a-expanded;
+      transform: rotate(45deg);
+    }
+    &:after {
+      @extend .b-a-expanded;
+      transform: rotate(-45deg);
+    }
+  }
+  */
 }
