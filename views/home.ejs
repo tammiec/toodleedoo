@@ -18,18 +18,67 @@
 
     <% include ./partials/_header %>
 
-    <main role="main">
+    <main>
 
+      <div class='container'>
+        <form class="new-todo form-group">
+            <input type="text" class="form-control" placeholder="What task do you need doing?">
+            <button type="submit" class="btn" action='#' method='POST'>Categorize!</button>
+          </form>
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="container">
-              <form>
-                  <div class="form-group">
-                    <input type="text" class="form-text" placeholder="What task do you need doing?">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Categorize Me!</button>
-                </form>
+      </div>
+
+      <div class='card-deck'>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">To Watch</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                  </ul>
+              </div>
           </div>
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">To Read</h5>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Cras justo odio</li>
+                      <li class="list-group-item">Dapibus ac facilisis in</li>
+                      <li class="list-group-item">Morbi leo risus</li>
+                      <li class="list-group-item">Porta ac consectetur ac</li>
+                      <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">To Eat</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">To Buy</h5>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Cras justo odio</li>
+                          <li class="list-group-item">Dapibus ac facilisis in</li>
+                          <li class="list-group-item">Morbi leo risus</li>
+                          <li class="list-group-item">Porta ac consectetur ac</li>
+                          <li class="list-group-item">Vestibulum at eros</li>
+                        </ul>
+                    </div>
+                </div>
+
+      </div>
 
       </main>
 
