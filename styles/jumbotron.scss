@@ -1,0 +1,17 @@
+@import 'partials/variables';
+
+body {
+  background-color: $background-color;
+}
+
+header {
+  font: $font-header;
+  color: $base-color;
+}
+
+main {
+  font: $font-body;
+  padding-top: 4em;
+}
+
+

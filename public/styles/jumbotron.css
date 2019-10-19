@@ -1,4 +1,13 @@
-/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+  background-color: #04D9C4;
+}
+
+header {
+  font: "Cormorant Garamond", serif;
+  color: #202426;
+}
+
 main {
-  padding-top: 4rem;
+  font: "Raleway", sans-serif;
+  padding-top: 4em;
 }
