@@ -1,0 +1,17 @@
+body {
+  background-color: #04D9C4;
+}
+
+.btn {
+  background-color: #202426;
+  color: #A3D9C9;
+  border-radius: 2px;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.card {
+  border-radius: 2px;
+}

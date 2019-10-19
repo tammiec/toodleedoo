@@ -72,7 +72,10 @@ app.get("/landing", (req, res) => {
 });
 
 app.get("/profile", (req, res) => {
-  res.render("profile");
+  let templateVars = {
+    user: 'user@email.com'
+  };
+  res.render("profile", templateVars);
 });
 
 app.listen(PORT, () => {
