@@ -48,7 +48,11 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   //must send temlateVars to be used in header
-  res.render("home");
+  //hard coded for now
+  let templateVars = {
+    user: null
+  };
+  res.render("home", templateVars);
 });
 
 app.get("/login", (req, res) => {
