@@ -1,11 +1,9 @@
-<header>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between">
-    <div class="logo">td</div>
+<header class="main-header">
+  <div class="logo">td</div>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-end">
     <% if (user) { %>
-      <div class="user-view">
-
-        <div class="collapse navbar-collapse" id="navbarsExample03">
-          <ul class="navbar-nav mr-auto">
+      <div class="navbar-inner user-view">
+          <ul class="navbar-nav mr-auto nav-collapse">
             <li class="nav-item active">
               <a class="nav-link" href="#"><%= user %><span class="sr-only">(current)</span></a>
             </li>
@@ -14,11 +12,9 @@
               <div class="dropdown-menu" aria-labelledby="dropdown03">
                 <a class="dropdown-item" href="#">Update</a>
                 <a class="dropdown-item" href="#">Logout</a>
-
               </div>
             </li>
           </ul>
-        </div>
       </div>
     <% } else { %>
       <div>
