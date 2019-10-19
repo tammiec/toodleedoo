@@ -1,6 +1,15 @@
 .btn {
   background-color: #202426;
   color: #A3D9C9;
+  border-radius: 2px;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.card {
+  border-radius: 2px;
 }
 
 html,
@@ -17,10 +26,13 @@ body {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
+  justify-self: center;
+  align-self: center;
 }
 
 .form-signin .checkbox {
   font-weight: 400;
+  border-radius: 2px;
 }
 
 .form-signin .form-control {
