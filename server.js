@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
   //must send temlateVars to be used in header
   //hard coded for now
   let templateVars = {
-    user: null
+    user: 'user@email.com'
   };
   res.render("home", templateVars);
 });
@@ -66,7 +66,7 @@ app.get("/landing", (req, res) => {
   //must send temlateVars to be used in header
   //hard coded for now
   let templateVars = {
-    user: 'user@email.com'
+    user: null
   };
   res.render("landing", templateVars);
 });
