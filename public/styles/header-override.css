@@ -36,7 +36,7 @@ header nav {
 }
 
 /**handling the hamburger**/
-.b-a {
+.b-a, .bar, .bar:before, .bar:after {
   transition: all 0.25s;
   content: "";
   position: absolute;
@@ -55,7 +55,6 @@ header nav {
   height: 36px;
   width: 36px;
   z-index: 1;
-  background-color: #f33;
   cursor: pointer;
 }
 
@@ -65,26 +64,24 @@ header nav {
   right: -9000px;
 }
 
-/*
 .bar {
-  @extend .b-a;
   position: relative;
-  // left: 12px;
   top: 14px;
-  &:before {
-    @extend .b-a;
-    top: -8px;
-  }
-  &:after {
-    @extend .b-a;
-    top: 8px;
-  }
 }
-.b-a-expanded {
+
+.bar:before {
+  top: -8px;
+}
+
+.bar:after {
+  top: 8px;
+}
+
+.b-a-expanded, .menu-expanded .bar:before, .menu-expanded .bar:after {
   transition: all .25s;
   top: -0px;
 }
-*/
+
 .menu-expanded {
   transition: all .25s;
   text-align: center;
@@ -95,21 +92,6 @@ header nav {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.85);
-  /*
-  .bar {
-    background-color: transparent;
-    left: 94%;
-    transition: all .25s;
-    &:before {
-      @extend .b-a-expanded;
-      transform: rotate(45deg);
-    }
-    &:after {
-      @extend .b-a-expanded;
-      transform: rotate(-45deg);
-    }
-  }
-  */
 }
 
 .menu-expanded ul {
@@ -126,4 +108,18 @@ header nav {
 .menu-expanded a:hover {
   color: #f33;
   text-decoration: none;
+}
+
+.menu-expanded .bar {
+  background-color: transparent;
+  left: 94%;
+  transition: all .25s;
+}
+
+.menu-expanded .bar:before {
+  transform: rotate(45deg);
+}
+
+.menu-expanded .bar:after {
+  transform: rotate(-45deg);
 }
