@@ -1,0 +1,9 @@
+div.logo {
+  text-transform: uppercase;
+  width: max-content;
+  font-size: 2rem;
+  background-color: orange;
+  padding: 0.2rem;
+}
+
+/*# sourceMappingURL=header-override.css.map */
