@@ -8,4 +8,41 @@ main {
   padding-top: 4em;
 }
 
+.new-todo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+}
 
+.new-todo button {
+  margin-left: 1em;
+  background-color: $base-color;
+  color: $accent-color;
+}
+
+.card-deck {
+  margin-top: 6em;
+  margin-right: 1em;
+  margin-left: 1em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.card {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-top: 1.5em;
+  min-width: 300px;
+}
+
+.card-title {
+  text-align: center;
+}
+
+.list-group-item {
+  text-align: left;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
