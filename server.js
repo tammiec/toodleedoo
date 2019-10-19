@@ -47,15 +47,28 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("home");
+  //must send temlateVars to be used in header
+  //hard coded for now
+  let templateVars = {
+    user: null
+  };
+  res.render("home", templateVars);
 });
 
 app.get("/login", (req, res) => {
-  res.render("login");
+  let templateVars = {
+    user: null
+  };
+  res.render("login", templateVars);
 });
 
 app.get("/landing", (req, res) => {
-  res.render("landing");
+  //must send temlateVars to be used in header
+  //hard coded for now
+  let templateVars = {
+    user: 'user@email.com'
+  };
+  res.render("landing", templateVars);
 });
 
 app.get("/profile", (req, res) => {
