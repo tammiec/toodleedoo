@@ -1,3 +1,7 @@
+header.main-header {
+  display: flex;
+}
+
 div.logo {
   text-transform: uppercase;
   width: max-content;
@@ -6,4 +10,20 @@ div.logo {
   padding: 0.2rem;
 }
 
-/*# sourceMappingURL=header-override.css.map */
+div.user-view {
+  width: auto;
+  text-transform: uppercase;
+}
+
+header nav {
+  width: 100%;
+}
+
+.user-view ul {
+  flex-direction: row;
+  justify-content: end;
+}
+
+.nav-item {
+  padding: 0 5px;
+}
