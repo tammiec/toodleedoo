@@ -52,7 +52,7 @@ module.exports = (db, dbHandler) => {
     let templateVars = {
       user: null
     };
-    res.render('landing', templateVars);
+    res.render('landing', {templateVars, layout: 'layouts/main.ejs'});
   });
 
   // User profile page
