@@ -17,7 +17,7 @@ module.exports = (db, dbHandler) => {
 
   // Login - Sign In page
   router.get('/login', (req, res) => {
-    res.render('login2', {layout: 'layouts/main.ejs'});
+    res.render('login', {layout: 'layouts/main.ejs'});
   });
   router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
