@@ -19,6 +19,7 @@
     "dotenv": "^2.0.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+    "express-partials": "^0.3.0",
     "express-session": "^1.17.0",
     "morgan": "^1.9.1",
     "node-sass-middleware": "^0.11.0",

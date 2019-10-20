@@ -12,12 +12,12 @@ module.exports = (db, dbHandler) => {
     let templateVars = {
       user: 'user@email.com'
     };
-    res.render('home', templateVars);
+    res.render('home2', {templateVars, layout:'layouts/main.ejs'});
   });
 
   // Login - Sign In page
   router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login2', {layout:'layouts/main.ejs'});
   });
   router.post('/login', passport.authenticate('local', {
     successRedirect:'/',
