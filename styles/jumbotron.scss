@@ -47,3 +47,12 @@ main {
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
+
+ul li:hover {
+  background: $accent-color;
+}
+
+ul li.checked {
+  background: $accent-color;
+  text-decoration: line-through;
+}
