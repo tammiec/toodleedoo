@@ -21,7 +21,7 @@ module.exports = (db, dbHandler) => {
   }))
 
   router.post('/signup', async (req, res) => {
-    let {email, password} = req.body;
+    let { email, password } = req.body;
     try {
       const isEmail = await dbHandler.isRecord('users', { email });
       if (isEmail) {
@@ -46,8 +46,39 @@ module.exports = (db, dbHandler) => {
   });
 
   // User profile page
-  router.get('/profile',isAuthenticated, (req, res) => {
+  router.get('/profile', isAuthenticated, (req, res) => {
     res.render('profile', {layout: 'layouts/main.ejs'});
+  });
+
+  router.put('/profile', async (req, res) => {
+    let { id, email, oldPassword, newPassword } = req.body;
+    console.log('Update profile input >', { id, email, oldPassword, newPassword });
+    try {
+      {
+        const userObj = await dbHandler.isRecord('users', {id}, true);
+        //if (userObj)
+        if (oldPassword) {
+          const match = bcrypt.compareSync(oldPassword, userObj.password);
+          console.log('match', match);
+          if (match) {
+            let update = {};
+            if (userObj.email !== email) update['email'] = email;
+            if (newPassword) update['password'] = bcrypt.hashSync(newPassword, 12);
+
+            console.log('update FROM ROUTE', update);
+            // const password = bcrypt.hashSync(newPassword, 12);
+            const res = await dbHandler.updateRecord('users', update, { id });
+          } else {
+            console.log('Not valid password');
+          }
+
+        }
+        // console.log('userObj', userObj);
+        res.redirect('/login');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   });
 
   router.get('/logout', (req,res) => {
@@ -55,36 +86,4 @@ module.exports = (db, dbHandler) => {
     res.redirect('/');
   });
   return router;
-};
-
-// const pgHandler = {
-//   async isRecord(tableName, obj, DB) {
-//     try {
-//     const condition = Object.keys(obj).map(k => `${k}='${obj[k]}'`).join(` AND `);
-//     const query = `SELECT * FROM ${tableName} WHERE ${condition}`;
-//     const res = await DB.query(query);
-//     return res.rows.length > 0;
-//     } catch (err) {
-//       console.error('Error:', err);
-//     }
-//   },
-//   async insertRecord(tableName, obj, DB) {
-//     const _query = this.queryInsert(tableName, obj);
-//     console.log('_query', _query);
-//     try {
-//       const res = await DB.query(_query);
-//       return res;
-//     } catch (err) {
-//       console.error('Error:', err);
-//     }
-//   },
-//   queryInsert(tableName, obj) {
-//     const keys = Object.keys(obj).join(',');
-//     const values = Object.values(obj).map(v => `'${v}'`).join(',');
-//     return `INSERT INTO ${tableName} (${keys}) VALUES (${values});`;
-//   },
-//   querySelect(tableName, filter, logical, obj) {
-//     const condition = Object.keys(obj).map(k => `${k}='${obj[k]}'`).join(` ${logical} `);
-//     return `SELECT ${filter} FROM ${tableName} WHERE ${condition};`;
-//   }
-// };
+}

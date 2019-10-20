@@ -1,26 +1,27 @@
-<main>
-  <div class="profile-container">
+    <main>
+      <div class="container">
 
-    <form id="update-profile" action='#' method='PUT'>
-      <h3>My Profile</h3>
+        <form id="update-profile" action='/profile?_method=PUT' method='POST'>
+          <h3>My Profile</h3>
+          <div class="form-group">
+            <input name="id" type="hidden" value="<%= locals.user.id %>"  />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input name="email" type="text" class="form-control" placeholder="Update Email" value="<%= locals.user.email %>"/>
+          </div>
+          <div class="form-group">
+            <label>Old Password</label>
+            <input name="oldPassword" id="old-password" type="password" class="form-control" placeholder="Password" required/>
+          </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input name="newPassword" id="new-password" type="password" class="form-control" placeholder="New Password (*optional)"/>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn" value="Update Profile"/>
+          </div>
 
-      <div class="form-group">
-        <label><%= locals.user.email %></label>
-        <input type="text" class="form-control" placeholder="Update Email"/>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input id="old-password" type="password" class="form-control" placeholder="Password" required/>
-      </div>
-      <div class="form-group">
-        <label>New Password</label>
-        <input id="new-password" type="password" class="form-control" placeholder="New Password (*optional)"/>
-      </div>
-      <div class="form-group">
-        <input type="submit" class="btn" value="Update Profile"/>
-      </div>
-
-    </form>
-
+        </form>
   </div>
 </main>

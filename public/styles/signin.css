@@ -1,6 +1,10 @@
 body {
   background-color: #04D9C4;
+<<<<<<< HEAD
   padding-top: 7vh;
+=======
+  padding-top: 30px;
+>>>>>>> origin/feature/core-apis
 }
 
 .btn {
