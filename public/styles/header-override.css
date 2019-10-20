@@ -1,17 +1,41 @@
+body {
+  background-color: #04D9C4;
+  padding-top: 7vh;
+}
+
+.btn {
+  background-color: #202426;
+  color: #A3D9C9;
+  border-radius: 2px;
+  margin: 0;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.card {
+  border-radius: 2px;
+}
+
 header.main-header {
   display: flex;
   position: fixed;
   top: 0px;
   width: 100%;
   z-index: 1;
+  background-color: #202426;
 }
 
 div.logo {
   text-transform: uppercase;
   width: max-content;
   font-size: 2rem;
-  background-color: orange;
+  background-color: #A3D9C9;
   padding: 0.2rem;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  color: #202426;
 }
 
 div.user-view {
@@ -21,6 +45,8 @@ div.user-view {
 
 header nav {
   width: 100%;
+  color: #A3D9C9;
+  background-color: #202426;
 }
 
 .user-view > ul {
@@ -34,6 +60,10 @@ header nav {
 
 .nav-item {
   padding: 0 5px;
+}
+
+a {
+  color: #A3D9C9;
 }
 
 /**handling the hamburger**/
@@ -184,7 +214,8 @@ body input:checked + label span:last-child {
 }
 
 body input ~ nav {
-  background: white;
+  background: #202426;
+  opacity: 0.9;
   position: fixed;
   top: 0;
   left: 0;
@@ -214,7 +245,8 @@ body input ~ nav > ul > li {
 body input ~ nav > ul > li > a {
   text-decoration: none;
   text-transform: uppercase;
-  color: black;
+  color: #A3D9C9;
+  opacity: 1;
   font-weight: 700;
   font-family: sans-serif;
   display: block;

@@ -48,11 +48,11 @@ main {
   padding-right: 0.5em;
 }
 
-ul li:hover {
+.card ul li:hover {
   background: $accent-color;
 }
 
-ul li:hover span {
+.card ul li:hover span {
   display: inline;
 }
 
@@ -65,7 +65,7 @@ ul li:hover span {
   background: $background-color;
 }
 
-ul li span {
+.card ul li span {
   float: right;
   display: none;
 }

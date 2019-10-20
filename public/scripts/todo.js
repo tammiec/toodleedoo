@@ -14,17 +14,17 @@ const createListCard = function(obj) {
 };
 
 $(() => {
-  $('ul li').click(function() {
+  $('.card ul li').click(function() {
     $(this).toggleClass('checked');
   })
 
-  $('ul li').dblclick(function() {
+  $('.card ul li').dblclick(function() {
     $(this).toggleClass('important');
   })
 
-  $('ul li').append('<span>&#x2715</span>');
+  $('.card ul li').append('<span>&#x2715</span>');
 
-  $('ul li span').click(function() {
+  $('.card ul li span').click(function() {
     $(this).parent().hide();
   })
 });

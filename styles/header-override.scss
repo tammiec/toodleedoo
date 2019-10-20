@@ -1,4 +1,5 @@
 @import 'partials/variables';
+@import 'partials/base';
 
 header.main-header {
   display: flex;
@@ -6,13 +7,17 @@ header.main-header {
   top: 0px;
   width: 100%;
   z-index: 1;
+  background-color: $base-color;
 }
 div.logo {
   text-transform: uppercase;
   width: max-content;
   font-size: 2rem;
-  background-color: orange;
+  background-color: $accent-color;
   padding: 0.2rem;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  color: $base-color;
 }
 div.user-view {
   width: auto;
@@ -20,6 +25,8 @@ div.user-view {
 }
 header nav {
   width: 100%;
+  color: $accent-color;
+  background-color: $base-color;
 }
 .user-view > ul {
   flex-direction: row;
@@ -30,6 +37,10 @@ header nav {
 }
 .nav-item {
   padding: 0 5px;
+}
+
+a {
+  color: $accent-color;
 }
 
 /**handling the hamburger**/
@@ -175,7 +186,8 @@ body {
       }
     }
     input ~ nav {
-      background: white;
+      background: $base-color;
+      opacity: 0.9;
       position: fixed;
       top: 0;
       left: 0;
@@ -199,7 +211,8 @@ body {
           > a {
             text-decoration: none;
             text-transform: uppercase;
-            color: black;
+            color: $accent-color;
+            opacity: 1;
             font-weight: 700;
             font-family: sans-serif;
             display: block;
