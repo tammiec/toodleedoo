@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt');
+const bcrypt   = require('bcrypt');
 const passport = require('passport');
-const express = require('express');
-const router  = express.Router();
+const express  = require('express');
+const router   = express.Router();
 const isAuthenticated = require('../auth/is_auth');
 
 module.exports = (db, dbHandler) => {
@@ -12,17 +12,17 @@ module.exports = (db, dbHandler) => {
     let templateVars = {
       user: 'user@email.com'
     };
-    res.render('home2', {templateVars, layout:'layouts/main.ejs'});
+    res.render('home2', {templateVars, layout: 'layouts/main.ejs'});
   });
 
   // Login - Sign In page
   router.get('/login', (req, res) => {
-    res.render('login2', {layout:'layouts/main.ejs'});
+    res.render('login2', {layout: 'layouts/main.ejs'});
   });
   router.post('/login', passport.authenticate('local', {
-    successRedirect:'/',
-    failureRedirect:'/landing',
-    failureFlash:true
+    successRedirect: '/',
+    failureRedirect: '/landing',
+    failureFlash: true
   }))
 
   router.post('/signup', async (req, res) => {
@@ -56,7 +56,7 @@ module.exports = (db, dbHandler) => {
   });
 
   // User profile page
-  router.get('/profile', (req, res) => {
+  router.get('/profile',isAuthenticated, (req, res) => {
     let templateVars = {
       user: 'user@email.com'
     };
