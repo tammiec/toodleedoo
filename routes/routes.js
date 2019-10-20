@@ -12,7 +12,7 @@ module.exports = (db, dbHandler) => {
     let templateVars = {
       user: 'user@email.com'
     };
-    res.render('home2', {templateVars, layout: 'layouts/main.ejs'});
+    res.render('home', {templateVars, layout: 'layouts/main.ejs'});
   });
 
   // Login - Sign In page
