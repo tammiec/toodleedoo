@@ -1,7 +1,7 @@
 <header class="main-header">
   <div class="logo">td</div>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-end">
-    <% if (user) { %>
+    <% if (locals.user) { %>
       <div class="navbar-inner user-view">
           <ul class="navbar-nav mr-auto nav-collapse">
             <li class="nav-item active">
@@ -30,7 +30,7 @@
                 <ul class="nav-list">
                   <li><a href="#">Home</a></li>
                   <li><a href="#">Update</a></li>
-                  <li><a href="#">Logout</a></li>
+                  <li><a href="/logout">Logout</a></li>
                 </ul>
               </div> -->
 
