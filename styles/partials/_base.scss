@@ -1,7 +1,9 @@
-@import 'partials/_variables';
+@import 'partials/variables';
+
 
 body {
   background-color: $background-color;
+  padding-top: 30px;
 }
 
 .btn {

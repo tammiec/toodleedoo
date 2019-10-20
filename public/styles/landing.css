@@ -1,0 +1,22 @@
+body {
+  padding-top: 56px;
+}
+
+.logo {
+  text-transform: uppercase;
+}
+
+.text-center .cover-container {
+  height: 100vh;
+}
+
+.main-block {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mastfoot {
+  grid-area: 3/1/4/2;
+}
