@@ -7,14 +7,16 @@ const ENV        = process.env.ENV || "development";
 const express    = require("express");
 const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
-const app        = express();
 const morgan     = require('morgan');
+const app        = express();
 
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+const dbHandler = require('./lib/dbHandler');
+dbHandler.db = db;
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -33,50 +35,16 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const usersRoutes = require("./routes/api_users");
+const widgetsRoutes = require("./routes/api_widgets");
+const mainRoutes = require("./routes/routes");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
+app.use("/", mainRoutes(db, dbHandler));
 // Note: mount other resources here, using the same pattern above
-
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  //must send temlateVars to be used in header
-  //hard coded for now
-  let templateVars = {
-    user: 'user@email.com'
-  };
-  res.render("home", templateVars);
-});
-
-app.get("/login", (req, res) => {
-  let templateVars = {
-    user: null
-  };
-  res.render("login", templateVars);
-});
-
-app.get("/landing", (req, res) => {
-  //must send temlateVars to be used in header
-  //hard coded for now
-  let templateVars = {
-    user: null
-  };
-  res.render("landing", templateVars);
-});
-
-app.get("/profile", (req, res) => {
-  let templateVars = {
-    user: 'user@email.com'
-  };
-  res.render("profile", templateVars);
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
