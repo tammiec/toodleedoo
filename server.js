@@ -8,6 +8,9 @@ const express    = require("express");
 const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const morgan     = require('morgan');
+const passport   = require('passport');
+const session    = require('express-session');
+const flash      = require('connect-flash');
 const app        = express();
 
 // PG database client/connection setup
@@ -18,6 +21,7 @@ db.connect();
 const dbHandler = require('./lib/dbHandler');
 dbHandler.db = db;
 
+require('./auth/passport');
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -32,6 +36,26 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+
+app.use(session({
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+
+// Global Variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  res.locals.JWT_KEY = 'this is my key';
+  next();
+});
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own

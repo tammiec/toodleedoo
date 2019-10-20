@@ -1,9 +1,12 @@
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 const express = require('express');
 const router  = express.Router();
+const isAuthenticated = require('../auth/is_auth');
 
 module.exports = (db, dbHandler) => {
   // Home page
-  router.get('/', (req, res) => {
+  router.get('/', isAuthenticated, (req, res) => {
     //must send temlateVars to be used in header
     //hard coded for now
     let templateVars = {
@@ -14,34 +17,28 @@ module.exports = (db, dbHandler) => {
 
   // Login - Sign In page
   router.get('/login', (req, res) => {
-    // let templateVars = {
-    //   user: null
-    // };
     res.render('login');
   });
-  router.post('/login', async (req, res) => {
-    const _query = queryBuilder.querySelect('users', '*', 'AND', req.body);
-    try {
-      const result = await db.query(_query);
-      res.send(result.rows.length > 0 ? true : false);
-    } catch (err) {
-      console.error(err);
-    }
-  });
+  router.post('/login', passport.authenticate('local', {
+    successRedirect:'/',
+    failureRedirect:'/landing',
+    failureFlash:true
+  }))
 
   router.post('/signup', async (req, res) => {
-    const {email, password} = req.body;
+    let {email, password} = req.body;
     try {
-      const isEmail = await dbHandler.isRecord('users', {email});
+      const isEmail = await dbHandler.isRecord('users', { email });
       if (isEmail) {
-        // res.send('Email already exists');
-        //req.flash('error_msg', 'Mail already exists');
+        res.send('Email already exists');
+        req.flash('error_msg', 'Mail already exists');
         console.log('Email already exists');
         res.redirect('/login');
       }
       else {
-        const resInsert = await dbHandler.insertRecord('users', req.body);
-        res.send(resInsert);
+        password = bcrypt.hashSync(password, 12);
+        const resInsert = await dbHandler.insertRecord('users', { email, password });
+        res.redirect('/login');
       }
     } catch (err) {
       console.error(err);
@@ -66,6 +63,10 @@ module.exports = (db, dbHandler) => {
     res.render('profile', templateVars);
   });
 
+  router.get('/logout', (req,res) => {
+    req.logout();
+    res.redirect('/');
+  });
   return router;
 }
 
