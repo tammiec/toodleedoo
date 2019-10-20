@@ -1,14 +1,16 @@
 @import 'partials/variables';
 @import 'partials/base';
 
-main {
-  padding-top: 6em;
-}
-
 h3 {
   color: $base-color;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+main .profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .profile-container {

@@ -1,9 +1,11 @@
 @import 'partials/variables';
 
 
-body {
+body, html {
   background-color: $background-color;
   padding-top: 7vh;
+  height: 100%;
+  width: 100%;
 }
 
 .btn {

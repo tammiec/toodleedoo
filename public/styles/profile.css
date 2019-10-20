@@ -1,6 +1,8 @@
-body {
+body, html {
   background-color: #04D9C4;
   padding-top: 7vh;
+  height: 100%;
+  width: 100%;
 }
 
 .btn {
@@ -18,14 +20,16 @@ body {
   border-radius: 2px;
 }
 
-main {
-  padding-top: 6em;
-}
-
 h3 {
   color: #202426;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+main .profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .profile-container {
