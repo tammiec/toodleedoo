@@ -191,6 +191,7 @@ body {
         top: 35%;
         left: 20%;
         right: 20%;
+        list-style-type: none;
         > li {
           opacity: 0;
           transition: .5s;
@@ -203,6 +204,9 @@ body {
             font-family: sans-serif;
             display: block;
             padding: 30px;
+          }
+          > a:hover {
+            text-decoration: none;
           }
         }
       }

@@ -202,6 +202,7 @@ body input ~ nav > ul {
   top: 35%;
   left: 20%;
   right: 20%;
+  list-style-type: none;
 }
 
 body input ~ nav > ul > li {
@@ -218,6 +219,10 @@ body input ~ nav > ul > li > a {
   font-family: sans-serif;
   display: block;
   padding: 30px;
+}
+
+body input ~ nav > ul > li > a:hover {
+  text-decoration: none;
 }
 
 body input:checked ~ nav {
