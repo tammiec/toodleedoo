@@ -55,7 +55,7 @@ module.exports = (db, dbHandler) => {
     res.redirect('/');
   });
   return router;
-}
+};
 
 // const pgHandler = {
 //   async isRecord(tableName, obj, DB) {
