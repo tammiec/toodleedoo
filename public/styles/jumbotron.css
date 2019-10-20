@@ -25,12 +25,12 @@ main {
 .new-todo {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
 }
 
-.btn {
-  margin-left: 1em;
+.new-todo input {
+  margin-right: 1em;
 }
 
 .card-deck {
@@ -68,20 +68,20 @@ ul li:hover {
   background: #A3D9C9;
 }
 
-ul li.checked {
+ul li:hover span {
+  display: inline;
+}
+
+.checked {
   background: #A3D9C9;
   text-decoration: line-through;
 }
 
-ul li.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
+.important {
+  background: #04D9C4;
+}
+
+ul li span {
+  float: right;
+  display: none;
 }

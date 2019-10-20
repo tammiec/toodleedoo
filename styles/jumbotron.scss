@@ -8,12 +8,12 @@ main {
 .new-todo {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
 }
 
-.btn {
-  margin-left: 1em;
+.new-todo input {
+  margin-right: 1em;
 }
 
 .card-deck {
@@ -52,7 +52,20 @@ ul li:hover {
   background: $accent-color;
 }
 
-ul li.checked {
+ul li:hover span {
+  display: inline;
+}
+
+.checked {
   background: $accent-color;
   text-decoration: line-through;
+}
+
+.important {
+  background: $background-color;
+}
+
+ul li span {
+  float: right;
+  display: none;
 }
