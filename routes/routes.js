@@ -7,12 +7,7 @@ const isAuthenticated = require('../auth/is_auth');
 module.exports = (db, dbHandler) => {
   // Home page
   router.get('/', isAuthenticated, (req, res) => {
-    //must send temlateVars to be used in header
-    //hard coded for now
-    let templateVars = {
-      user: 'user@email.com'
-    };
-    res.render('home', {templateVars, layout: 'layouts/main.ejs'});
+    res.render('home', {layout: 'layouts/main.ejs'});
   });
 
   // Login - Sign In page
@@ -47,20 +42,12 @@ module.exports = (db, dbHandler) => {
 
   // Landing page
   router.get('/landing', (req, res) => {
-    //must send temlateVars to be used in header
-    //hard coded for now
-    let templateVars = {
-      user: null
-    };
-    res.render('landing', {templateVars, layout: 'layouts/main.ejs'});
+    res.render('landing', {layout: 'layouts/main.ejs'});
   });
 
   // User profile page
   router.get('/profile',isAuthenticated, (req, res) => {
-    let templateVars = {
-      user: 'user@email.com'
-    };
-    res.render('profile', templateVars);
+    res.render('profile', {layout: 'layouts/main.ejs'});
   });
 
   router.get('/logout', (req,res) => {
