@@ -1,6 +1,13 @@
-.mastfoot {
+.fixed-bottom {
   text-align: center;
-  position: relative;
-  bottom: 0;
-  margin-top: 3em;
+  background-color: #202426;
+  color: #A3D9C9;
+  font-weight: 300;
+  font-size: smaller;
+  display: flex;
+  padding: 0.5em;
+}
+
+footer p {
+  margin: auto;
 }

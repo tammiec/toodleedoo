@@ -49,3 +49,8 @@ h3 {
   cursor: pointer;
   opacity: 1;
 }
+
+#update-profile .btn {
+  margin-top: 1em;
+  float: right;
+}

@@ -25,6 +25,10 @@ body, html {
   margin-bottom: 5%;
 }
 
+.login-container .btn {
+  float: right;
+}
+
 .login-form {
   padding: 9%;
   background: #202426;

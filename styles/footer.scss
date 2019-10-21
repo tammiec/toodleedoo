@@ -1,6 +1,15 @@
-.mastfoot {
+@import "partials/variables";
+
+.fixed-bottom {
   text-align: center;
-  position: relative;
-  bottom: 0;
-  margin-top: 3em;
+  background-color: $base-color;
+  color: $accent-color;
+  font-weight: 300;
+  font-size: smaller;
+  display: flex;
+  padding: 0.5em;
+}
+
+footer p {
+  margin: auto;
 }

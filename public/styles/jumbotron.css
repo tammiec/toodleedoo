@@ -20,10 +20,6 @@ body, html {
   border-radius: 2px;
 }
 
-main {
-  padding-top: 4em;
-}
-
 .new-todo {
   display: flex;
   flex-direction: row;
