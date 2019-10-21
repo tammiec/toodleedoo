@@ -14,9 +14,9 @@
 // };
 
 // AJAX DELETE - delete task item
-const deleteTask = async (taskName) => {
+const deleteTask = async (taskId) => {
   try {
-    await $.ajax(`/todo/delete?taskName=${taskName}`, { method: 'PUT'});
+    await $.ajax(`/todo/delete?taskId=${taskId}`, { method: 'PUT'});
   } catch (err) {
     console.error(err);
   }
@@ -35,7 +35,9 @@ const toDoBehaviour = function() {
   });
 
   $('.list-group-item span').click(function() {
-    deleteTask($(this).parent().contents().first().text());
+    const taskId = ($(this).parent().attr('id')).split('-')[1];
+    console.log('taskId', taskId);
+    deleteTask(taskId);
     $(this).parent().remove();
   });
 };
