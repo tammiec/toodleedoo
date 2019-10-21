@@ -36,6 +36,7 @@ const toDoBehaviour = function() {
 
   $('.list-group-item span').click(function() {
     const taskId = ($(this).parent().attr('id')).split('-')[1];
+    console.log('taskId', taskId);
     deleteTask(taskId);
     $(this).parent().remove();
   });
