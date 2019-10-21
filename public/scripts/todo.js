@@ -13,17 +13,38 @@
 //   `;
 // };
 
+// Defines listeners for individual tasks
+const toDoBehaviour = function() {
+  $('.list-group-item').click(function() {
+    $(this).toggleClass('checked');
+  });
+  $('.list-group-item').dblclick(function() {
+    $(this).toggleClass('important');
+  });
+  $('.list-group-item span').click(function() {
+    $.ajax('/todo/delete', { method: 'PUT'})
+    $(this).parent().remove();
+  });
+};
 
+// creates list items for existing tasks
+const renderTasks = function(tasks) {
+  for (let task of tasks) {
+    console.log(task);
+    $('#' + task.key).append(`<li class="list-group-item">${task.title}<span>&#x2715</span></li>`);
+    toDoBehaviour();
+  }
+};
+
+// loads all tasks from database
+const loadTasks = function() {
+  $.get('/todo', function(tasks) {
+    renderTasks(tasks);
+  });
+};
 $(() => {
-  // creates list items for existing tasks
-  const renderTasks = function() {
-    const tasks = $.ajax('/todo', { method: 'GET'});
-    for (let task of tasks) {
-      console.log(task);
-      $('#' + task.key).append(`<li class="list-group-item">${task.title}<span>&#x2715</span></li>`);
-    }
-  };
-  renderTasks();
+
+  loadTasks();
 
   const getCategoryBtn = $('#getCategoryBtn');
     const inputTask = $('#inputTask');
@@ -49,18 +70,7 @@ $(() => {
         $('#' + cat[0].key).append(`<li class="list-group-item">${inputTask.val()}<span>&#x2715</span></li>`);
         // alert(cat[0].title);
         $('#inputTask').val('');
-        $('.list-group-item').click(function() {
-          $(this).toggleClass('checked');
-        });
-
-        $('.list-group-item').dblclick(function() {
-          $(this).toggleClass('important');
-        });
-
-        $('.list-group-item span').click(function() {
-          $.ajax('/todo/delete', { method: 'PUT'})
-          $(this).parent().remove();
-        });
+        toDoBehaviour();
       } catch (err) {
         console.error(err);
       }
