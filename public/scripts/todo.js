@@ -45,7 +45,6 @@ const renderTasks = function(tasks) {
   for (let task of tasks) {
     if (task.status_id !== 3) {
       $('#' + task.key).append(`<li class="list-group-item">${task.title}<span>&#x2715</span></li>`);
-      toDoBehaviour();
     }
   }
 };
@@ -54,6 +53,7 @@ const renderTasks = function(tasks) {
 const loadTasks = function() {
   $.get('/todo', function(tasks) {
     renderTasks(tasks);
+    toDoBehaviour();
   });
 };
 $(() => {

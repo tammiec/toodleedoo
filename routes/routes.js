@@ -90,7 +90,7 @@ module.exports = (db, dbHandler) => {
   router.get('/category', async(req,res) => {
     const input = req.query.input;
     const result = await api(input);
-    console.log('result', result[0].title);
+    // console.log('result', result[0].title);
     let keyName = result[0].key;
     const categoryNames = {
       toWatch: 1,
