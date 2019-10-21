@@ -16,13 +16,11 @@ const createListCard = function(obj) {
 $(() => {
   $('.card ul li').click(function() {
     $(this).toggleClass('checked');
-  })
+  });
 
   $('.card ul li').dblclick(function() {
     $(this).toggleClass('important');
-  })
-
-  $('.card ul li').append('<span>&#x2715</span>');
+  });
 
   $('.card ul li span').click(function() {
     $(this).parent().hide();
@@ -49,7 +47,7 @@ $(() => {
         console.log(cat[0]);
         console.log('#' + cat[0].key);
         // console.log(lanes);
-        $('#' + cat[0].key).append(`<li class="list-group-item">${inputTask.val()}</li>`);
+        $('#' + cat[0].key).append(`<li class="list-group-item">${inputTask.val()}<span>&#x2715</span></li>`);
         // alert(cat[0].title);
         $('#inputTask').val('');
       } catch (err) {
