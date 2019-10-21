@@ -113,12 +113,10 @@ module.exports = (db, dbHandler) => {
         description: null,
         status_id: 1
       });
+      res.json(result);
     } catch (err) {
       console.log('Error:', err.message);
     }
-
-    // res.send('Cat from the server, your input: ' + result);
-    res.json(result);
   });
 
   router.get('/todo', async (req, res) => {
