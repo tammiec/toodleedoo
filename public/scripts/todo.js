@@ -13,16 +13,29 @@
 //   `;
 // };
 
+// AJAX DELETE - delete task item
+const deleteTask = async (taskName) => {
+  try {
+    await $.ajax(`/todo/delete?taskName=${taskName}`, { method: 'PUT'});
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 // Defines listeners for individual tasks
 const toDoBehaviour = function() {
+  // Mark task item as complete
   $('.list-group-item').click(function() {
     $(this).toggleClass('checked');
   });
+
+  // Mark task item as important
   $('.list-group-item').dblclick(function() {
     $(this).toggleClass('important');
   });
+
   $('.list-group-item span').click(function() {
-    $.ajax('/todo/delete', { method: 'PUT'})
+    deleteTask($(this).parent().contents().first().text());
     $(this).parent().remove();
   });
 };
@@ -30,9 +43,10 @@ const toDoBehaviour = function() {
 // creates list items for existing tasks
 const renderTasks = function(tasks) {
   for (let task of tasks) {
-    console.log(task);
-    $('#' + task.key).append(`<li class="list-group-item">${task.title}<span>&#x2715</span></li>`);
-    toDoBehaviour();
+    if (task.status_id !== 3) {
+      $('#' + task.key).append(`<li class="list-group-item">${task.title}<span>&#x2715</span></li>`);
+      toDoBehaviour();
+    }
   }
 };
 

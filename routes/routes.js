@@ -118,8 +118,11 @@ module.exports = (db, dbHandler) => {
     res.send(tasks.rows);
   });
 
-  router.delete('/todo', async (req, res) => {
-
+  router.put('/todo/delete', async (req, res) => {
+    const taskName = req.query.taskName;
+    const userId = res.locals.user.id;
+    console.log(taskName);
+    await dbHandler.deleteTask(taskName, userId);
   });
 
   return router;
