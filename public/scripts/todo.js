@@ -13,7 +13,6 @@
 //   `;
 // };
 
-
 $(() => {
   // creates list items for existing tasks
   const renderTasks = function() {
