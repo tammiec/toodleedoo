@@ -11,7 +11,11 @@ const allowDrop = function(ev) {
 const moveToDo = function(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
+  // ev.target.appendChild(document.getElementById(data));
+  let target = document.getElementById('toBuy');
+  console.log('my target-->', target);
+  target.appendChild(document.getElementById(data));
+  console.log("we have dropped");
   // let cat = document.getElementById('category');
   // cat.innerHTML = '2';
 };
