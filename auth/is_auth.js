@@ -3,6 +3,6 @@ const isAuthenticated = (req, res, next) => {
         return next();
     }
     req.flash('error_msg', 'Not allowed');
-    res.redirect('/login');
+    res.redirect('/landing');
 };
 module.exports = isAuthenticated;
