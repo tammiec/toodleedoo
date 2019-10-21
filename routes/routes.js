@@ -113,8 +113,8 @@ module.exports = (db, dbHandler) => {
         description: null,
         status_id: 1
       });
-      console.log(task);
-      result['taskId'] = task.id;
+      result[0]['taskId'] = task.rows[0].id;
+      console.log(result);
       res.json(result);
     } catch (err) {
       console.log('Error:', err.message);
