@@ -90,7 +90,7 @@ module.exports = (db, dbHandler) => {
   router.get('/category', async(req,res) => {
     const input = req.query.input;
     const result = await api(input);
-    console.log('result', result[0].title);
+    // console.log('result', result[0].title);
     let keyName = result[0].key;
     const categoryNames = {
       toWatch: 1,
@@ -118,8 +118,11 @@ module.exports = (db, dbHandler) => {
     res.send(tasks.rows);
   });
 
-  router.delete('/todo', async (req, res) => {
-
+  router.put('/todo/delete', async (req, res) => {
+    const taskName = req.query.taskName;
+    const userId = res.locals.user.id;
+    console.log(taskName);
+    await dbHandler.deleteTask(taskName, userId);
   });
 
   return router;
