@@ -20,6 +20,10 @@ body, html {
   border-radius: 2px;
 }
 
+.main-page-container {
+  margin-bottom: 6vh;
+}
+
 h3 {
   color: #202426;
   padding-top: 0.5em;
