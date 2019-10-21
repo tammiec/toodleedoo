@@ -82,7 +82,7 @@ $(() => {
         console.log(cat[0]);
         console.log('#' + cat[0].key);
         // console.log(lanes);
-        $('#' + cat[0].key).append(`<li class="list-group-item" id="task-${cat[0].id}" class="draggable" draggable="true" ondragstart="drag(event)">${inputTask.val()}<span>&#x2715</span></li>`);
+        $('#' + cat[0].key).append(`<li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${inputTask.val()}<span>&#x2715</span></li>`);
         // alert(cat[0].title);
         $('#inputTask').val('');
         toDoBehaviour();

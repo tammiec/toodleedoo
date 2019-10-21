@@ -106,13 +106,15 @@ module.exports = (db, dbHandler) => {
         misc: 5
       };
       //added
-      await dbHandler.insertRecord('to_do_items', {
+      const task = await dbHandler.insertRecord('to_do_items', {
         user_id: res.locals.user.id,
         category_id: categoryNames[keyName],
         title: input,
         description: null,
         status_id: 1
       });
+      console.log(task);
+      result['taskId'] = task.id;
       res.json(result);
     } catch (err) {
       console.log('Error:', err.message);
