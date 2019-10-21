@@ -118,5 +118,9 @@ module.exports = (db, dbHandler) => {
     res.send(tasks.rows);
   });
 
+  router.delete('/todo', async (req, res) => {
+
+  });
+
   return router;
 }
