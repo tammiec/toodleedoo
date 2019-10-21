@@ -91,6 +91,24 @@ module.exports = (db, dbHandler) => {
     const input = req.query.input;
     const result = await api(input);
     console.log('result', result[0].title);
+    let keyName = result[0].key;
+    const categoryNames = {
+      toWatch: 1,
+      toEat: 2,
+      toRead: 3,
+      toBuy: 4,
+      misc: 5
+    };
+
+    //added
+    await dbHandler.insertRecord('to_do_items', {
+      user_id: res.locals.user.id,
+      category_id: categoryNames[keyName],
+      title: input,
+      description: null,
+      status_id: 1
+    });
+
     // res.send('Cat from the server, your input: ' + result);
     res.json(result);
   });
