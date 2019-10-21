@@ -113,8 +113,9 @@ module.exports = (db, dbHandler) => {
     res.json(result);
   });
 
-  router.put('/todo/delete', async(req, res) => {
-    console.log(req);
+  router.get('/todo', async (req, res) => {
+    const tasks = await dbHandler.getUserTasks(res.locals.user.id);
+    res.send(tasks.rows);
   });
 
   return router;

@@ -16,7 +16,14 @@
 
 $(() => {
   // creates list items for existing tasks
-
+  const renderTasks = function() {
+    const tasks = $.ajax('/todo', { method: 'GET'});
+    for (let task of tasks) {
+      console.log(task);
+      $('#' + task.key).append(`<li class="list-group-item">${task.title}<span>&#x2715</span></li>`);
+    }
+  };
+  renderTasks();
 
   const getCategoryBtn = $('#getCategoryBtn');
     const inputTask = $('#inputTask');
