@@ -1,4 +1,5 @@
 const drag = function(ev) {
+  console.log('were on the move');
   ev.dataTransfer.setData("text", ev.target.id);
 };
 
