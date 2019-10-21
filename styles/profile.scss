@@ -7,15 +7,27 @@ h3 {
   padding-bottom: 0.5em;
 }
 
-main .profile {
+.profile {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
 .profile-container {
+  width: 40%;
   min-width: 300px;
-  max-width: 40%;
   background-color: $accent-color;
   padding: 2em;
 }
+
+.edit {
+  float: right;
+  height: 20px;
+  opacity: 0.8;
+}
+
+.edit:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
