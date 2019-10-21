@@ -138,5 +138,10 @@ module.exports = (db, dbHandler) => {
     }
   });
 
+  // 404 Page Not Found
+  router.get('/*', (req, res) => {
+    res.render('404', {layout: 'layouts/main.ejs'});
+  });
+
   return router;
 }

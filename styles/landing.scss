@@ -1,21 +1,42 @@
-.logo {
+.landing-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+}
+
+.landing-content {
+  width: 60%;
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
+
+.landing-content img {
+  max-height: 10em;
+  margin-bottom: 3em;
+}
+
+.landing-title {
   text-transform: uppercase;
 }
 
-.text-center .cover-container {
-  height: 60vh;
-  width: 80%;
-  justify-content: center;
+.lead {
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
-.main-block {
-  // flex-grow: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+// .text-center .cover-container {
+//   height: 60vh;
+//   width: 80%;
+//   justify-content: center;
+//   align-content: center;
+// }
 
-.mastfoot {
-  height: 7vh;
-}
-
+// .main-block {
+//   // flex-grow: 2;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+// }
