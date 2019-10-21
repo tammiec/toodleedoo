@@ -11,6 +11,8 @@ const allowDrop = function(ev) {
 const moveToDo = function(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("text");
+  console.log('data-->', data);
+  console.log('ev.target-->', ev.target);
   // ev.target.appendChild(document.getElementById(data));
   let target = document.getElementById('toBuy');
   console.log('my target-->', target);
