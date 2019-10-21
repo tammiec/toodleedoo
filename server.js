@@ -56,6 +56,10 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  res.locals.regEmail = req.flash('regEmail');
+  res.locals.regPwd = req.flash('regPwd');
+  res.locals.linEmail = req.flash('linEmail');
+  res.locals.linPwd = req.flash('linPwd');
   res.locals.user = req.user || null;
   // res.locals.JWT_KEY = 'this is my key';
   next();

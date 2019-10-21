@@ -16,7 +16,7 @@ passport.use(new localStrategy({ usernameField: 'email',}, async (email, passwor
         if(match){
             done(null, user);
         } else {
-            return done(null, false, {message:'Wrong password'});
+            return done(null, false, {message: 'Wrong password'});
         }
     }
 }));
