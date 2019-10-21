@@ -95,8 +95,8 @@ module.exports = (db, dbHandler) => {
     res.json(result);
   });
 
-  router.get('/test', (req, res) => {
-    res.render('testAPI', {layout: 'layouts/main.ejs'});
+  router.put('/todo/delete', async(req, res) => {
+    console.log(req);
   });
 
   return router;

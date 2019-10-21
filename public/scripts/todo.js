@@ -1,30 +1,22 @@
 // jQuery code for manipulating the to-do items
 
-// creates HTML for each to-do list
-const createListCard = function(obj) {
-  return `
-  <div class='card-deck'>
-    <div class="card">
-      <h5 class="card-header">To ${category.name}</h5>
-      <div class="card-body">
-        <ul class="list-group list-group-flush"></ul>
-      </div>
-    </div>
-  `;
-};
+// // creates HTML for each to-do list
+// const createListCard = function(obj) {
+//   return `
+//   <div class='card-deck'>
+//     <div class="card">
+//       <h5 class="card-header">To ${category.name}</h5>
+//       <div class="card-body">
+//         <ul class="list-group list-group-flush"></ul>
+//       </div>
+//     </div>
+//   `;
+// };
+
 
 $(() => {
-  $('.card ul li').click(function() {
-    $(this).toggleClass('checked');
-  });
+  // creates list items for existing tasks
 
-  $('.card ul li').dblclick(function() {
-    $(this).toggleClass('important');
-  });
-
-  $('.card ul li span').click(function() {
-    $(this).parent().hide();
-  });
 
   const getCategoryBtn = $('#getCategoryBtn');
     const inputTask = $('#inputTask');
@@ -50,6 +42,18 @@ $(() => {
         $('#' + cat[0].key).append(`<li class="list-group-item">${inputTask.val()}<span>&#x2715</span></li>`);
         // alert(cat[0].title);
         $('#inputTask').val('');
+        $('.list-group-item').click(function() {
+          $(this).toggleClass('checked');
+        });
+
+        $('.list-group-item').dblclick(function() {
+          $(this).toggleClass('important');
+        });
+
+        $('.list-group-item span').click(function() {
+          $.ajax('/todo/delete', { method: 'PUT'})
+          $(this).parent().remove();
+        });
       } catch (err) {
         console.error(err);
       }
