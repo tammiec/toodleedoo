@@ -76,7 +76,7 @@ body, html {
 }
 
 .checked {
-  background: #A3D9C9;
+  color: rgba(0, 0, 0, 0.4);
   text-decoration: line-through;
 }
 
