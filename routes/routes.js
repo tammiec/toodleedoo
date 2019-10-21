@@ -130,5 +130,17 @@ module.exports = (db, dbHandler) => {
     await dbHandler.deleteTask(taskName, userId);
   });
 
+  router.put('/todo/update', async (req, res) => {
+    const key = req.query.catKey;
+    const taskId = req.query.taskId;
+    try {
+      const cat = await dbHandler.isRecord('categories', {key}, true);
+      await dbHandler.updateRecord('to_do_items', {category_id: cat.id}, {id: taskId});
+      res.send(true);
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
   return router;
 }
