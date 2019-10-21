@@ -2,8 +2,8 @@
 
     <div class='container'>
       <form class="new-todo form-group">
-        <input type="text" class="form-control" placeholder="What task do you need doing?">
-        <button type="submit" class="btn btn-submit" action='#' method='POST'>Categorize!</button>
+        <input id="inputTask" type="text" class="form-control" placeholder="What task do you need doing?">
+        <button id="getCategoryBtn" class="btn btn-submit">Categorize!</button>
       </form>
 
     </div>
@@ -12,56 +12,38 @@
       <div class="card">
         <h5 class="card-header">To Watch</h5>
         <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+          <ul id='toWatch' class="list-group list-group-flush">
           </ul>
         </div>
       </div>
       <div class="card">
         <h5 class="card-header">To Read</h5>
         <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+          <ul id='toRead' class="list-group list-group-flush">
           </ul>
         </div>
       </div>
       <div class="card">
         <h5 class="card-header">To Eat</h5>
         <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+          <ul id='toRead' class="list-group list-group-flush">
           </ul>
         </div>
       </div>
       <div class="card">
         <h5 class="card-header">To Buy</h5>
         <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+          <ul id='toBuy' class="list-group list-group-flush">
           </ul>
         </div>
       </div>
+      <div class="card">
+          <h5 class="card-header">Miscellaneous</h5>
+          <div class="card-body">
+            <ul id='misc' class="list-group list-group-flush">
+            </ul>
+          </div>
+        </div>
 
     </div>
 
