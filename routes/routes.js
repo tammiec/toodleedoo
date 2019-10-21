@@ -17,24 +17,37 @@ module.exports = (db, dbHandler) => {
   });
   router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/landing',
-    failureFlash: true
-  }))
+    failureRedirect: '/login',
+    failureFlash: true,
+  }));
+
+
+  // router.get('/login', (req, res, next) => {
+  //   passport.authenticate('local', (err, user, info) => {
+  //     if (err) { return next(err); }
+  //     if (!user) {
+  //       return res.redirect('/login');
+  //     }
+  //     req.logIn(user, function(err) {
+  //       if (err) { return next(err); }
+  //       return res.redirect('/');
+  //     });
+  //   })(req, res, next);
+  // });
 
   router.post('/signup', async (req, res) => {
     let { email, password } = req.body;
     try {
-      const isEmail = await dbHandler.isRecord('users', { email });
+      const isEmail = await dbHandler.isRecord('users', {email});
       if (isEmail) {
-        res.send('Email already exists');
-        req.flash('error_msg', 'Mail already exists');
-        console.log('Email already exists');
+        req.flash('error', 'Mail already exists');
+        req.flash('regEmail', email);
+        req.flash('regPwd', password);
         res.redirect('/login');
-      }
-      else {
+      } else {
         password = bcrypt.hashSync(password, 12);
         const resInsert = await dbHandler.insertRecord('users', { email, password });
-        res.redirect('/login');
+        res.redirect(307, '/login');
       }
     } catch (err) {
       console.error(err);
@@ -53,28 +66,20 @@ module.exports = (db, dbHandler) => {
 
   router.put('/profile', async (req, res) => {
     let { id, email, oldPassword, newPassword } = req.body;
-    console.log('Update profile input >', { id, email, oldPassword, newPassword });
     try {
       {
-        const userObj = await dbHandler.isRecord('users', {id}, true);
-        //if (userObj)
+        const userObj = await dbHandler.isRecord('users', { id }, true);
         if (oldPassword) {
           const match = bcrypt.compareSync(oldPassword, userObj.password);
-          console.log('match', match);
           if (match) {
             let update = {};
             if (userObj.email !== email) update['email'] = email;
             if (newPassword) update['password'] = bcrypt.hashSync(newPassword, 12);
-
-            console.log('update FROM ROUTE', update);
-            // const password = bcrypt.hashSync(newPassword, 12);
             const res = await dbHandler.updateRecord('users', update, { id });
           } else {
             console.log('Not valid password');
           }
-
         }
-        // console.log('userObj', userObj);
         res.redirect('/login');
       }
     } catch (err) {
@@ -90,8 +95,6 @@ module.exports = (db, dbHandler) => {
   router.get('/category', async(req,res) => {
     const input = req.query.input;
     const result = await api(input);
-    console.log('result', result[0].title);
-    // res.send('Cat from the server, your input: ' + result);
     res.json(result);
   });
 
