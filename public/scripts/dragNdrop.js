@@ -1,3 +1,5 @@
+
+
 const drag = function(ev) {
   console.log('were on the move');
   ev.dataTransfer.setData("text", ev.target.id);
@@ -26,11 +28,39 @@ const addToUl = function(target, data) {
   //target.parentNode
   //target.firstElementChild
   let elem = target.localName;
+  let key;
+  let id = data.split('-')[1];
+  console.log('id IS-->', id);
   if (elem === 'div') {
     target.firstElementChild.appendChild(document.getElementById(data));
+    console.log('THE CHILD', target.firstElementChild);
+    key = target.firstElementChild.id;
+    console.log('key-->', key);
   } else if (elem === 'li') {
     target.parentNode.appendChild(document.getElementById(data));
+    console.log('THE PARENT', target.parentNode);
+
+    key = target.parentNode.id;
+    console.log('key-->', key);
+
   } else {
     target.appendChild(document.getElementById(data));
+    console.log('THE TARGET', target);
+
+    key = target.id;
+    console.log('key-->', key);
+
   }
+  sendAJAX(key, id);
 };
+
+const sendAJAX = async(key, id) => {
+  try {
+    await $.ajax(`/todo/update?catKey=${key}&taskId=${id}`, { method: 'PUT'});
+  } catch (err) {
+    console.error(err);
+  }
+  console.log("we've sent the request");
+};
+
+
