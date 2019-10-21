@@ -44,7 +44,7 @@ const toDoBehaviour = function() {
 const renderTasks = function(tasks) {
   for (let task of tasks) {
     if (task.status_id !== 3) {
-      $('#' + task.key).append(`<li class="list-group-item" id="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span>&#x2715</span></li>`);
+      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span>&#x2715</span></li>`);
     }
   }
 };
