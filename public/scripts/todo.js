@@ -16,13 +16,11 @@ const createListCard = function(obj) {
 $(() => {
   $('.card ul li').click(function() {
     $(this).toggleClass('checked');
-  })
+  });
 
   $('.card ul li').dblclick(function() {
     $(this).toggleClass('important');
-  })
-
-  $('.card ul li').append('<span>&#x2715</span>');
+  });
 
   $('.card ul li span').click(function() {
     $(this).parent().hide();
@@ -38,22 +36,27 @@ $(() => {
   inputTask.keypress(function (e) {
     if (e.which == 13) {
       getCategory();
-      return false;    //<---- Add this line
-    }
-  });
-  // AJAX GET - Get category from server
-  const getCategory = async () => {
-    try {
-      console.log(inputTask.val());
-      const cat = await $.ajax('/category?input=' + inputTask.val(), { method: 'GET' });
-      console.log(cat[0]);
-      console.log('#' + cat[0].key);
-      // console.log(lanes);
-      $('#' + cat[0].key).append(`<li class="list-group-item">${inputTask.val()}</li>`);
-      // alert(cat[0].title);
-      $('#inputTask').val('');
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    });
+
+    inputTask.keypress(function (e) {
+      if (e.which == 13) {
+        getCategory();
+        return false;    //<---- Add this line
+      }
+    });
+    // AJAX GET - Get category from server
+    const getCategory = async () => {
+      try {
+        console.log(inputTask.val());
+        const cat = await $.ajax('/category?input=' + inputTask.val(), { method: 'GET' });
+        console.log(cat[0]);
+        console.log('#' + cat[0].key);
+        // console.log(lanes);
+        $('#' + cat[0].key).append(`<li class="list-group-item">${inputTask.val()}<span>&#x2715</span></li>`);
+        // alert(cat[0].title);
+        $('#inputTask').val('');
+      } catch (err) {
+        console.error(err);
+      }
+    };
 });
