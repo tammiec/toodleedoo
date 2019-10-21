@@ -1,6 +1,6 @@
-INSERT INTO categories (name)
-VALUES ('To Watch'),
-('To Eat'),
-('To Read'),
-('To Buy'),
-('Miscellaneous');
+INSERT INTO categories (name, key)
+VALUES ('To Watch', 'toWatch'),
+('To Eat', 'toEat'),
+('To Read', 'toRead'),
+('To Buy', 'toBuy'),
+('Miscellaneous', 'misc');
