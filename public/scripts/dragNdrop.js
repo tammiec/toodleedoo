@@ -12,6 +12,6 @@ const moveToDo = function(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("text");
   ev.target.appendChild(document.getElementById(data));
-  let cat = document.getElementById('category');
-  cat.innerHTML = '2';
+  // let cat = document.getElementById('category');
+  // cat.innerHTML = '2';
 };
