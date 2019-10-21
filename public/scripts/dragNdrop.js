@@ -19,3 +19,4 @@ const moveToDo = function(ev) {
   // let cat = document.getElementById('category');
   // cat.innerHTML = '2';
 };
+
