@@ -1,19 +1,28 @@
-.logo {
+.landing-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+}
+
+.landing-content {
+  width: 60%;
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
+
+.landing-content img {
+  max-height: 10em;
+  margin-bottom: 3em;
+}
+
+.landing-title {
   text-transform: uppercase;
 }
 
-.text-center .cover-container {
-  height: 60vh;
-  width: 80%;
-  justify-content: center;
-}
-
-.main-block {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.mastfoot {
-  height: 7vh;
+.lead {
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
