@@ -1,4 +1,6 @@
 node_modules/
+Private/
+lib/api/Private/
 .env
 *.log
 *.sqlite3

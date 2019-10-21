@@ -27,7 +27,9 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^6.4.2",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "@google-cloud/language": "^3.5.0",
+    "axios": "^0.19.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
