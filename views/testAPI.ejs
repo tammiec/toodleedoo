@@ -1,68 +1,78 @@
 <main>
 
-    <div class='container'>
-      <form class="new-todo form-group">
-        <input type="text" class="form-control" placeholder="What task do you need doing?">
-        <button type="submit" class="btn btn-submit" action='#' method='POST'>Categorize!</button>
-      </form>
+  <div class='container'>
+    <section class="new-todo form-group">
+      <input id="inputTask" type="text" class="form-control" placeholder="(TEST) What task do you need doing?">
+      <button id='getCategoryBtn' class="btn btn-submit">Categorize!</button>
+    </section>
 
+  </div>
+
+  <div class='card-deck'>
+    <div class="card">
+      <h5 class="card-header">To Watch</h5>
+      <div class="card-body">
+        <ul id='toWatch' class="list-group list-group-flush">
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <h5 class="card-header">To Read</h5>
+      <div class="card-body">
+        <ul id='toRead' class="list-group list-group-flush">
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <h5 class="card-header">To Eat</h5>
+      <div class="card-body">
+        <ul id='toEat' class="list-group list-group-flush">
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <h5 class="card-header">To Buy</h5>
+      <div class="card-body">
+        <ul id='toBuy' class="list-group list-group-flush">
+        </ul>
+      </div>
     </div>
 
-    <div class='card-deck'>
-      <div class="card">
-        <h5 class="card-header">To Watch</h5>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <h5 class="card-header">To Read</h5>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <h5 class="card-header">To Eat</h5>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <h5 class="card-header">To Buy</h5>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-        </div>
-      </div>
+  </div>
 
-    </div>
+</main>
 
-  </main>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const getCategoryBtn = $('#getCategoryBtn');
+    const inputTask = $('#inputTask');
+
+    getCategoryBtn.on('click', (e) => {
+      getCategory();
+    });
+
+    inputTask.keypress(function (e) {
+      if (e.which == 13) {
+        getCategory();
+        return false;    //<---- Add this line
+      }
+    });
+    // AJAX GET - Get category from server
+    const getCategory = async () => {
+      try {
+        console.log(inputTask.val());
+        const cat = await $.ajax('/category?input=' + inputTask.val(), { method: 'GET' });
+        console.log(cat[0]);
+        console.log('#' + cat[0].key);
+        // console.log(lanes);
+        $('#' + cat[0].key).append(`<li class="list-group-item">${inputTask.val()}</li>`);
+        // alert(cat[0].title);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+  });
+</script>

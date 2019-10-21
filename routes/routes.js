@@ -3,6 +3,7 @@ const passport = require('passport');
 const express  = require('express');
 const router   = express.Router();
 const isAuthenticated = require('../auth/is_auth');
+const api = require('../lib/api/api');
 
 module.exports = (db, dbHandler) => {
   // Home page
@@ -85,5 +86,18 @@ module.exports = (db, dbHandler) => {
     req.logout();
     res.redirect('/');
   });
+
+  router.get('/category', async(req,res) => {
+    const input = req.query.input;
+    const result = await api(input);
+    console.log('result', result[0].title);
+    // res.send('Cat from the server, your input: ' + result);
+    res.json(result);
+  });
+
+  router.get('/test', (req, res) => {
+    res.render('testAPI', {layout: 'layouts/main.ejs'});
+  });
+
   return router;
 }
