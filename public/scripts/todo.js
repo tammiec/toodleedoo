@@ -31,7 +31,7 @@ const toDoBehaviour = function() {
 const renderTasks = function(tasks) {
   for (let task of tasks) {
     console.log(task);
-    $('#' + task.key).append(`<li class="list-group-item">${task.title}<span>&#x2715</span></li>`);
+    $('#' + task.key).append(`<li class="list-group-item" draggable="true" ondragstart="drag(event)">${task.title}<span>&#x2715</span></li>`);
     toDoBehaviour();
   }
 };
