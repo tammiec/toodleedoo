@@ -21,9 +21,9 @@ const deleteTask = async (taskId) => {
     console.error(err);
   }
 };
-const updateStatus = async (taskId, statusId) => {
+const updateStatus = async (taskId) => {
   try {
-    await $.ajax(`/todo/update?statusId=${statusId}&taskId=${taskId}`, {method: 'PUT'});
+    await $.ajax(`/todo/update?taskId=${taskId}`, {method: 'PUT'});
   } catch (err) {
     console.error(err);
   }
@@ -39,9 +39,9 @@ const toDoBehaviour = function() {
   });
 
   // Mark task item as important
-  $('.list-group-item').dblclick(function() {
-    $(this).toggleClass('important');
-  });
+  // $('.list-group-item').dblclick(function() {
+  //   $(this).toggleClass('important');
+  // });
 
   $('.list-group-item span').click(function() {
     const taskId = ($(this).parent().attr('id')).split('-')[1];

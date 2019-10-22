@@ -147,12 +147,17 @@ module.exports = (db, dbHandler) => {
     const taskId = req.query.taskId;
     const statusId = req.query.statusId;
 
-    let obj = (statusId) ? {status_id: statusId} : null;
+    let obj;
+    // {status_id: statusId}
     //object built with ternary
     try {
       if (key) {
         const cat = await dbHandler.isRecord('categories', {key}, true);
         obj = {category_id: cat.id};
+      } else {
+        const toDo = await dbHandler.isRecord('to_do_items', {id: taskId}, true);
+        let newStatus = (toDo.status_id === 1) ? 2 : 1;
+        obj = {status_id: newStatus};
       }
 
       await dbHandler.updateRecord('to_do_items', obj, {id: taskId});
