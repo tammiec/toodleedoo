@@ -1,8 +1,15 @@
 body, html {
   background-color: #04D9C4;
-  padding-top: 7vh;
   height: 100%;
   width: 100%;
+}
+
+main {
+  padding-top: 7vh;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: safe center;
 }
 
 .btn {
@@ -22,6 +29,13 @@ body, html {
 
 .main-page-container {
   margin-bottom: 6vh;
+}
+
+.main-page-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: -7vh;
+  overflow-y: auto;
 }
 
 .new-todo {

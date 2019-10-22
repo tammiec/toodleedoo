@@ -1,6 +1,13 @@
 @import 'partials/variables';
 @import 'partials/base';
 
+.main-page-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: -7vh;
+  overflow-y: auto;
+}
+
 .new-todo {
   display: flex;
   flex-direction: row;

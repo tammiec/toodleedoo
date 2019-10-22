@@ -2,8 +2,11 @@
 @import 'partials/base';
 
 .login-container{
-  margin-top: 5%;
-  margin-bottom: 5%;
+  max-height: 80%;
+  width: 70%;
+  justify-self: center;
+  align-self: safe center;
+  margin-top: -7vh;
 }
 
 .login-container .btn {
