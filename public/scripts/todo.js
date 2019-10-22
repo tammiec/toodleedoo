@@ -58,8 +58,10 @@ const toDoBehaviour = function(id) {
     event.stopPropagation();
     let importance = $(this).attr('src');
     if (importance === '../images/not-important.png') {
+      //call updateStatus with status_id = 4
       importance = '../images/important-a.png';
     } else {
+      //call updateStatus with status_id = 1
       importance = '../images/not-important.png';
     }
     $(this).attr('src', importance);
@@ -70,10 +72,8 @@ const toDoBehaviour = function(id) {
 const renderTasks = function(tasks) {
   for (let task of tasks) {
     if (task.status_id === 2) {
-      console.log('adding unimportant');
       $('#' + task.key).append(`<li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="../images/not-important.png"><span>&#x2715</span></li>`);
     } else if (task.status_id === 1) {
-      console.log('adding IMPORTNATN');
       $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="../images/not-important.png"><span>&#x2715</span></li>`);
     }
   }

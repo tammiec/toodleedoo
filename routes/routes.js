@@ -148,8 +148,6 @@ module.exports = (db, dbHandler) => {
     const statusId = req.query.statusId;
 
     let obj;
-    // {status_id: statusId}
-    //object built with ternary
     try {
       if (key) {
         const cat = await dbHandler.isRecord('categories', {key}, true);
