@@ -63,7 +63,7 @@
   background: rgba(0, 0, 0, 0.15);
 }
 
-.card ul li:hover span {
+.card ul li:hover .x {
   display: inline;
   cursor: pointer;
 }
@@ -73,11 +73,16 @@
   text-decoration: line-through;
 }
 
-.important {
-  background: rgba(217, 115, 115, 0.3);
+
+.x {
+  display: none;
+  float: right;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-.card ul li span {
+.star img {
+  margin-top: 3px;
+  height: 18px;
   float: right;
-  display: none;
 }

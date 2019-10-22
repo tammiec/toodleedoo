@@ -84,9 +84,9 @@ const renderTasks = function(tasks) {
       imgSrc = '../images/important-a.png';
     }
     if (task.status_id === 2) {
-      $('#' + task.key).append(`<li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="${imgSrc}"><span>&#x2715</span></li>`);
+      $('#' + task.key).append(`<li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span class='x'>&#x2715</span><span class='star'><img class="marked-important" src="${imgSrc}"></span></li>`);
     } else if (task.status_id === 1) {
-      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="${imgSrc}"><span>&#x2715</span></li>`);
+      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span class='x'>&#x2715</span><span class='star'><img class="marked-important" src="${imgSrc}"></span></li>`);
     }
   }
 };
@@ -127,7 +127,7 @@ $(() => {
         console.log(cat[0]);
         console.log('#' + cat[0].key);
         // console.log(lanes);
-        $('#' + cat[0].key).append(`<li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${inputTask.val()}<img class="marked-important" src="../images/not-important.png"><span>&#x2715</span></li>`);
+        $('#' + cat[0].key).append(`<li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${inputTask.val()}<span class='x'>&#x2715</span><span class='star'><img class="marked-important" src="../images/not-important.png"></span></li>`);
         // alert(cat[0].title);
         $('#inputTask').val('');
         // toDoBehaviour();

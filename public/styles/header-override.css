@@ -6,7 +6,7 @@ body, html {
 }
 
 main {
-  padding-top: 7vh;
+  padding-top: 70px;
   height: 100%;
   margin: 0;
 }
@@ -44,18 +44,22 @@ header.main-header {
   background-color: #FFFF;
 }
 
-div.logo {
+.logo {
   width: max-content;
   font-size: 2rem;
-  padding: 0.2rem;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  padding: 0.2em;
   background-color: #FFFF;
-  color: #595959;
 }
 
-div.logo h1 {
+.logo img {
+  height: 60px;
+}
+
+nav li img {
+  height: 50px;
+  border-radius: 100px;
   margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 div.user-view {
@@ -64,6 +68,7 @@ div.user-view {
 
 header nav {
   width: 100%;
+  height: 70px;
   background-color: #FFFF;
 }
 
@@ -87,6 +92,11 @@ a {
 .nav-link {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.navbar-nav {
+  justify-items: center;
+  align-items: center;
 }
 
 /**NEW HAMBURG**/
