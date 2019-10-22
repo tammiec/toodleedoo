@@ -35,6 +35,15 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 6vh;
 }
 
+.main-login {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("/images/profile-background.jpg");
+  background-size: cover;
+}
+
 .login-container {
   max-height: 80%;
   width: 70%;

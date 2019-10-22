@@ -47,11 +47,11 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  margin-top: -7vh;
 }
 
 .landing-content {
   width: 60%;
+  margin-top: -7vh;
   text-align: center;
   justify-self: center;
   align-self: center;

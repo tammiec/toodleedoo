@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card ul li:hover {
-  background: #A6A6A6;
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .card ul li:hover span {
@@ -102,12 +102,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .checked {
-  background: #A6A6A6;
+  background: rgba(0, 0, 0, 0.15);
   text-decoration: line-through;
 }
 
 .important {
-  background: #595959;
+  background: rgba(217, 115, 115, 0.3);
 }
 
 .card ul li span {

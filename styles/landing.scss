@@ -13,16 +13,16 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  margin-top: -7vh;
 }
 
 .landing-content {
   width: 60%;
+  margin-top: -7vh;
   text-align: center;
   justify-self: center;
   align-self: center;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(6px);
+  background-color: $glass-background;
+  backdrop-filter: $glass-blur;
   padding: 1em;
   color: $base-color;
 }

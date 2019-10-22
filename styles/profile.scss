@@ -8,15 +8,22 @@ h3 {
 }
 
 .profile {
+  height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  background-image: url('/images/profile-background.jpg');
+  background-size: cover;
 }
 
 .profile-container {
+  margin-top: -7vh;
+  justify-self: center;
+  align-self: center;
   width: 40%;
   min-width: 300px;
-  background-color: $accent-color;
+  background-color: $glass-background;
+  backdrop-filter: $glass-blur;
   padding: 2em;
 }
 

@@ -36,8 +36,8 @@
   margin-top: 1.5em;
   min-width: 300px;
   border: none;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(6px);
+  background-color: $glass-background;
+  backdrop-filter: $glass-blur;
 }
 
 .card-header {
@@ -60,7 +60,7 @@
 }
 
 .card ul li:hover {
-  background: $highlight-color;
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .card ul li:hover span {
@@ -69,12 +69,12 @@
 }
 
 .checked {
-  background: $highlight-color;
+  background: rgba(0, 0, 0, 0.15);
   text-decoration: line-through;
 }
 
 .important {
-  background: $accent-color;
+  background: rgba(217, 115, 115, 0.3);
 }
 
 .card ul li span {

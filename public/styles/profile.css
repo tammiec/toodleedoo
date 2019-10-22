@@ -42,15 +42,22 @@ h3 {
 }
 
 .profile {
+  height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  background-image: url("/images/profile-background.jpg");
+  background-size: cover;
 }
 
 .profile-container {
+  margin-top: -7vh;
+  justify-self: center;
+  align-self: center;
   width: 40%;
   min-width: 300px;
-  background-color: #595959;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
   padding: 2em;
 }
 
