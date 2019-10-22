@@ -21,12 +21,21 @@ const deleteTask = async (taskId) => {
     console.error(err);
   }
 };
+const updateStatus = async (taskId, statusId) => {
+  try {
+    await $.ajax(`/todo/update?statusId=${statusId}&taskId=${taskId}`, {method: 'PUT'});
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 // Defines listeners for individual tasks
 const toDoBehaviour = function() {
   // Mark task item as complete
   $('.list-group-item').click(function() {
     $(this).toggleClass('checked');
+    const taskId = ($(this).attr('id')).split('-')[1];
+    updateStatus(taskId, 2);
   });
 
   // Mark task item as important

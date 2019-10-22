@@ -145,9 +145,17 @@ module.exports = (db, dbHandler) => {
   router.put('/todo/update', async (req, res) => {
     const key = req.query.catKey;
     const taskId = req.query.taskId;
+    const statusId = req.query.statusId;
+
+    let obj = (statusId) ? {status_id: statusId} : null;
+    //object built with ternary
     try {
-      const cat = await dbHandler.isRecord('categories', {key}, true);
-      await dbHandler.updateRecord('to_do_items', {category_id: cat.id}, {id: taskId});
+      if (key) {
+        const cat = await dbHandler.isRecord('categories', {key}, true);
+        obj = {category_id: cat.id};
+      }
+
+      await dbHandler.updateRecord('to_do_items', obj, {id: taskId});
       res.send(true);
     } catch (err) {
       console.error(err);
