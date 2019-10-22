@@ -16,9 +16,13 @@
 // AJAX DELETE - delete task item
 const deleteTask = async (taskId) => {
   try {
-    await $.ajax(`/todo/delete?taskId=${taskId}`, { method: 'PUT'});
+    console.log(taskId);
+    if (taskId !== undefined) {
+      await $.ajax(`/todo/delete?taskId=${taskId}`, { method: 'PUT'});
+    }
   } catch (err) {
-    console.error(err);
+    //whats this
+    // console.log(err);
   }
 };
 const updateStatus = async (taskId, important = false) => {
@@ -34,11 +38,22 @@ const updateStatus = async (taskId, important = false) => {
   }
 };
 
+const handleChecked = (ob) => {
+  ob.each(function() {
+    let id = $(this)[0].id.split('-')[1];
+    console.log(id);
+    deleteTask(id);
+    $(this).remove();
+    console.log("DELETED");
+  });
+};
+
+
+
 // Defines listeners for individual tasks
 // const toDoBehaviour = function() {
 const toDoBehaviour = function(id) {
   // Mark task item as complete
-  // $('.list-group-item').click(function() {
   $('#task-' + id).click(function() {
     $(this).toggleClass('checked');
     const taskId = ($(this).attr('id')).split('-')[1];
@@ -50,7 +65,6 @@ const toDoBehaviour = function(id) {
   //   $(this).toggleClass('important');
   // });
 
-  // $('.list-group-item span').click(function() {
   $('#task-' + id + ' span').click(function() {
     const taskId = ($(this).parent().attr('id')).split('-')[1];
     // console.log('taskId', taskId);
@@ -102,6 +116,13 @@ const loadTasks = function() {
   });
 };
 $(() => {
+
+
+  $('#clearAll').click(function(event) {
+    // event.stopPropagation();
+    let allChecked = $('.checked');
+    handleChecked(allChecked);
+  });
 
   loadTasks();
 
