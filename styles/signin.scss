@@ -19,14 +19,14 @@
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
-.login-form h3{
+.login-form h2 {
   text-align: center;
   margin-bottom:12%;
-  color: $accent-color;
+  color: $background-color;
 }
 
 .btn-login {
-  background-color: $accent-color;
+  background-color: $background-color;
   color: $base-color;
 }
 
@@ -36,8 +36,16 @@
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
-.register-form h3{
+.register-form h2 {
   text-align: center;
   margin-bottom:12%;
   color: $base-color;
+}
+
+.input-group-text {
+  background-color: $base-color;
+}
+
+.input-group-text i {
+  color: $accent-color;
 }

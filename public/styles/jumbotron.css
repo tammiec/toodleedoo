@@ -1,20 +1,24 @@
 body, html {
-  background-color: #04D9C4;
+  background-color: #FFFF;
   height: 100%;
   width: 100%;
+  font-family: "Muli", sans-serif;
 }
 
 main {
   padding-top: 7vh;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-content: safe center;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 0;
 }
 
 .btn {
-  background-color: #202426;
-  color: #A3D9C9;
+  background-color: #0D0D0D;
+  color: #FFFF;
   border-radius: 2px;
   margin: 0;
 }
@@ -34,8 +38,9 @@ main {
 .main-page-container {
   display: flex;
   flex-direction: column;
-  margin-top: -7vh;
   overflow-y: auto;
+  background-image: url("/images/home-background.jpg");
+  background-size: cover;
 }
 
 .new-todo {
@@ -43,6 +48,7 @@ main {
   flex-direction: row;
   justify-content: space-around;
   align-content: center;
+  margin-top: 10vh;
 }
 
 .new-todo input {
@@ -63,10 +69,14 @@ main {
   margin-right: 0.5em;
   margin-top: 1.5em;
   min-width: 300px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
 }
 
 .card-header {
   text-align: center;
+  text-shadow: 1px 1px 5px #FFFF;
 }
 
 .card-body {
@@ -78,10 +88,12 @@ main {
   text-align: left;
   padding-left: 0.5em;
   padding-right: 0.5em;
+  background: transparent;
+  text-shadow: 1px 1px 5px #FFFF;
 }
 
 .card ul li:hover {
-  background: #A3D9C9;
+  background: #A6A6A6;
 }
 
 .card ul li:hover span {
@@ -90,12 +102,12 @@ main {
 }
 
 .checked {
-  background: #A3D9C9;
+  background: #A6A6A6;
   text-decoration: line-through;
 }
 
 .important {
-  background: #04D9C4;
+  background: #595959;
 }
 
 .card ul li span {

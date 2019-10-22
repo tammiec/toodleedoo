@@ -2,18 +2,16 @@
   <div class="login-container">
     <div class="row">
       <form class="col-md-6 login-form" action='/login' method='POST'>
-        <h3>Log In</h3>
+        <h2>Log In</h2>
         <div class="form-group input-group">
           <div class="input-group-prepend">
-            <div class="input-group-text" style="background: rgb(32, 36, 38);"><i style="color: #A3D9C9"
-                class="fas fa-envelope"></i></div>
+            <div class="input-group-text"><i class="fas fa-envelope"></i></div>
           </div>
           <input type="email" name="email" class="form-control" placeholder="Email" value="<%- locals.linEmail %>" required />
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
-            <div class="input-group-text" style="background: rgb(32, 36, 38);"><i style="color: #A3D9C9"
-                class="fas fa-key"></i></div>
+            <div class="input-group-text"><i class="fas fa-key"></i></div>
           </div>
           <input type="password" name="password" class="form-control" placeholder="Password" value="<%- locals.linEmail %>" required />
         </div>
@@ -23,30 +21,25 @@
 
       </form>
       <form class="col-md-6 register-form" action='/signup' method='POST'>
-        <h3>Register</h3>
+        <h2>Register</h2>
 
         <div class="form-group input-group">
           <div class="input-group-prepend">
-            <div class="input-group-text" style="background: rgb(32, 36, 38);"><i style="color: #A3D9C9"
-                class="fas fa-envelope"></i></div>
+            <div class="input-group-text"><i class="fas fa-envelope"></i></div>
           </div>
           <input type="text" name="email" class="form-control" placeholder="Email" value="<%- locals.regEmail %>" required/>
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
-            <div class="input-group-text" style="background: rgb(32, 36, 38);"><i style="color: #A3D9C9"
-                class="fas fa-key"></i></div>
+            <div class="input-group-text"><i class="fas fa-key"></i></div>
           </div>
           <input type="password" name="password" class="form-control" placeholder="Password" value="<%- locals.regPwd %>" required />
         </div>
         <div class="form-group">
           <input type="submit" class="btn btn-register" value="Register" />
         </div>
-        <div class="form-group">
-        </div>
       </form>
     </div>
-  </div>
   </div>
 
 </main>

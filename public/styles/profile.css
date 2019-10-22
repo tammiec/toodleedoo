@@ -1,20 +1,24 @@
 body, html {
-  background-color: #04D9C4;
+  background-color: #FFFF;
   height: 100%;
   width: 100%;
+  font-family: "Muli", sans-serif;
 }
 
 main {
   padding-top: 7vh;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-content: safe center;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 0;
 }
 
 .btn {
-  background-color: #202426;
-  color: #A3D9C9;
+  background-color: #0D0D0D;
+  color: #FFFF;
   border-radius: 2px;
   margin: 0;
 }
@@ -32,7 +36,7 @@ main {
 }
 
 h3 {
-  color: #202426;
+  color: #0D0D0D;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
@@ -46,7 +50,7 @@ h3 {
 .profile-container {
   width: 40%;
   min-width: 300px;
-  background-color: #A3D9C9;
+  background-color: #595959;
   padding: 2em;
 }
 

@@ -1,20 +1,24 @@
 body, html {
-  background-color: #04D9C4;
+  background-color: #FFFF;
   height: 100%;
   width: 100%;
+  font-family: "Muli", sans-serif;
 }
 
 main {
   padding-top: 7vh;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-content: safe center;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 0;
 }
 
 .btn {
-  background-color: #202426;
-  color: #A3D9C9;
+  background-color: #0D0D0D;
+  color: #FFFF;
   border-radius: 2px;
   margin: 0;
 }
@@ -45,29 +49,37 @@ main {
 
 .login-form {
   padding: 9%;
-  background: #202426;
+  background: #0D0D0D;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
-.login-form h3 {
+.login-form h2 {
   text-align: center;
   margin-bottom: 12%;
-  color: #A3D9C9;
+  color: #FFFF;
 }
 
 .btn-login {
-  background-color: #A3D9C9;
-  color: #202426;
+  background-color: #FFFF;
+  color: #0D0D0D;
 }
 
 .register-form {
   padding: 9%;
-  background: #A3D9C9;
+  background: #595959;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
-.register-form h3 {
+.register-form h2 {
   text-align: center;
   margin-bottom: 12%;
-  color: #202426;
+  color: #0D0D0D;
+}
+
+.input-group-text {
+  background-color: #0D0D0D;
+}
+
+.input-group-text i {
+  color: #595959;
 }
