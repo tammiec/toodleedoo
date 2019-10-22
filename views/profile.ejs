@@ -3,14 +3,11 @@
 
         <form id="update-profile" action='/profile?_method=PUT' method='POST'>
           <h3>My Profile</h3>
-<<<<<<< HEAD
-=======
           <div class="form-group">
             <label>Profile picture</label><img class="edit" src='images/edit.png'>
             <img id="profile-photo" style="width: 200px; height: 200px; border-radius: 100px; margin-top:20px; margin-bottom: 20px; margin-left: 20%; cursor: pointer;" src="<%= locals.user.photo_url ? locals.user.photo_url : '/images/avatar.png'%>" alt="">
             <input name="photo" type="file" id="photo-upload" accept="image/*" style="display:none"/>
           </div>
->>>>>>> origin/feature/stretch-user
           <div class="form-group">
             <input name="id" type="hidden" value="<%= locals.user.id %>"  />
           </div>
