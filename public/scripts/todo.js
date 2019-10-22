@@ -21,9 +21,14 @@ const deleteTask = async (taskId) => {
     console.error(err);
   }
 };
-const updateStatus = async (taskId) => {
+const updateStatus = async (taskId, important = false) => {
   try {
-    await $.ajax(`/todo/update?taskId=${taskId}`, {method: 'PUT'});
+    //add conditional
+    if (important) {
+      await $.ajax(`/todo/update?taskId=${taskId}&important=${important}`, {method: 'PUT'});
+    } else {
+      await $.ajax(`/todo/update?taskId=${taskId}`, {method: 'PUT'});
+    }
   } catch (err) {
     console.error(err);
   }
@@ -56,12 +61,15 @@ const toDoBehaviour = function(id) {
   //change the star img when clicked
   $('#task-' + id + ' img').click(function(event) {
     event.stopPropagation();
+    console.log('id passed into parent--->', id);
     let importance = $(this).attr('src');
     if (importance === '../images/not-important.png') {
-      //call updateStatus with status_id = 4
+      //call updateStatus with 'true' as a string
+      updateStatus(id, 'true');
       importance = '../images/important-a.png';
     } else {
-      //call updateStatus with status_id = 1
+      //call updateStatus with 'false' as a string
+      updateStatus(id, 'false');
       importance = '../images/not-important.png';
     }
     $(this).attr('src', importance);
