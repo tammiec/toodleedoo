@@ -36,7 +36,6 @@ const toDoBehaviour = function(id) {
   // $('.list-group-item').click(function() {
   $('#task-' + id).click(function() {
     $(this).toggleClass('checked');
-    console.log("why no class change");
     const taskId = ($(this).attr('id')).split('-')[1];
     updateStatus(taskId, 2);
   });
@@ -49,19 +48,31 @@ const toDoBehaviour = function(id) {
   // $('.list-group-item span').click(function() {
   $('#task-' + id + ' span').click(function() {
     const taskId = ($(this).parent().attr('id')).split('-')[1];
-    console.log('taskId', taskId);
+    // console.log('taskId', taskId);
     deleteTask(taskId);
     $(this).parent().remove();
+  });
+
+  //change the star img when clicked
+  $('#task-' + id + ' img').click(function(event) {
+    event.stopPropagation();
+    let importance = $(this).attr('src');
+    if (importance === '../images/not-important.png') {
+      importance = '../images/important-a.png';
+    } else {
+      importance = '../images/not-important.png';
+    }
+    $(this).attr('src', importance);
   });
 };
 
 // creates list items for existing tasks
 const renderTasks = function(tasks) {
   for (let task of tasks) {
-    //here is where to check the status_id
-    //here is where to check the status_id
-    if (task.status_id !== 3) {
-      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span>&#x2715</span></li>`);
+    if (task.status_id === 2) {
+      $('#' + task.key).append(`<li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="../images/not-important.png"><span>&#x2715</span></li>`);
+    } else if (task.status_id === 1) {
+      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="../images/not-important.png"><span>&#x2715</span></li>`);
     }
   }
 };
