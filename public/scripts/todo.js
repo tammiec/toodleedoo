@@ -79,10 +79,14 @@ const toDoBehaviour = function(id) {
 // creates list items for existing tasks
 const renderTasks = function(tasks) {
   for (let task of tasks) {
+    let imgSrc = '../images/not-important.png';
+    if (task.important) {
+      imgSrc = '../images/important-a.png';
+    }
     if (task.status_id === 2) {
-      $('#' + task.key).append(`<li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="../images/not-important.png"><span>&#x2715</span></li>`);
+      $('#' + task.key).append(`<li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="${imgSrc}"><span>&#x2715</span></li>`);
     } else if (task.status_id === 1) {
-      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="../images/not-important.png"><span>&#x2715</span></li>`);
+      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="${imgSrc}"><span>&#x2715</span></li>`);
     }
   }
 };
