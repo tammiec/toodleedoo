@@ -32,7 +32,12 @@
 
       <form id='register-form' action='/signup' method='POST'>
         <h2>Register</h2>
-
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fas fa-user"></i></div>
+          </div>
+          <input type="text" name="name" class="form-control" placeholder="Name" value="<%- locals.regName %>" required />
+        </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <div class="input-group-text"><i class="fas fa-envelope"></i></div>

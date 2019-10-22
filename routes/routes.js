@@ -21,17 +21,18 @@ module.exports = (db, dbHandler) => {
   }));
 
   router.post('/signup', async (req, res) => {
-    let { email, password } = req.body;
+    let { email, password, name } = req.body;
     try {
       const isEmail = await dbHandler.isRecord('users', { email });
       if (isEmail) {
         req.flash('error', 'Mail already exists');
+        req.flash('regName', name);
         req.flash('regEmail', email);
         req.flash('regPwd', password);
         res.redirect('/login');
       } else {
         password = bcrypt.hashSync(password, 12);
-        const resInsert = await dbHandler.insertRecord('users', { email, password });
+        const resInsert = await dbHandler.insertRecord('users', { email, password, name });
         res.redirect(307, '/login');
       }
     } catch (err) {
@@ -56,26 +57,27 @@ module.exports = (db, dbHandler) => {
     res.render('profile', { layout: 'layouts/main.ejs' });
   });
 
-  router.put('/profile', async (req, res) => {
-    let { id, name, email, oldPassword, newPassword } = req.body;
+  router.put('/profile', isAuthenticated, async (req, res) => {
+    let { id, name, email, oldPassword, newPassword, photo } = req.body;
+    console.log('photo', photo);
+    console.log('req file', req.body.photo.filename);
     try {
-      {
-        const userObj = await dbHandler.isRecord('users', { id }, true);
-        if (oldPassword) {
-          const match = bcrypt.compareSync(oldPassword, userObj.password);
-          if (match) {
-            let update = {};
-            if (userObj.email !== email) update['email'] = email;
-            if (userObj.name !== name) update['name'] = name;
-            if (newPassword) update['password'] = bcrypt.hashSync(newPassword, 12);
-            const res = await dbHandler.updateRecord('users', update, { id });
-            // res.redirect('/');
-          } else {
-            console.log('Not valid password');
-            // res.redirect('/');
-          }
-          res.redirect('/');
+      const userObj = await dbHandler.isRecord('users', { id }, true);
+      if (oldPassword) {
+        const match = bcrypt.compareSync(oldPassword, userObj.password);
+        if (match) {
+          let update = {};
+          if (userObj.email !== email) update['email'] = email;
+          if (userObj.name !== name) update['name'] = name;
+          if (newPassword) update['password'] = bcrypt.hashSync(newPassword, 12);
+          const res = await dbHandler.updateRecord('users', update, { id });
+        } else {
+          req.flash('error', 'Wrong password');
+          console.log('Not valid password');
+          res.redirect('/profile');
+          return;
         }
+        res.redirect('/');
       }
     } catch (err) {
       console.error(err);
@@ -146,18 +148,18 @@ module.exports = (db, dbHandler) => {
     let obj;
     try {
       if (key) {
-        const cat = await dbHandler.isRecord('categories', {key}, true);
-        obj = {category_id: cat.id};
+        const cat = await dbHandler.isRecord('categories', { key }, true);
+        obj = { category_id: cat.id };
       } else if (important) {
-        obj = {important: important};
+        obj = { important: important };
       } else {
-        const toDo = await dbHandler.isRecord('to_do_items', {id: taskId}, true);
+        const toDo = await dbHandler.isRecord('to_do_items', { id: taskId }, true);
         let newStatus = (toDo.status_id === 1) ? 2 : 1;
-        obj = {status_id: newStatus};
+        obj = { status_id: newStatus };
       }
 
-      await dbHandler.updateRecord('to_do_items', obj, {id: taskId});
-      console.log('SOMETHING', await dbHandler.isRecord('to_do_items', {id: taskId}, true));
+      await dbHandler.updateRecord('to_do_items', obj, { id: taskId });
+      console.log('SOMETHING', await dbHandler.isRecord('to_do_items', { id: taskId }, true));
       res.send(true);
     } catch (err) {
       console.error(err);

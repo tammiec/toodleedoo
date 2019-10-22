@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .new-todo input {
-  margin-right: 1em;
+  margin: 0 1em;
   box-shadow: 5px 5px 20px #0D0D0D;
 }
 

@@ -23,7 +23,7 @@
               <nav>
                 <ul>
                   <li><a href="/">Home</a></li>
-                  <li><a href="/profile">Edit Profile</a></li>
+                  <li><a href="/profile" <%= locals.user.google_id ? "hidden" : "" %>>Edit Profile</a></li>
                   <li><a href="/logout">Logout</a></li>
                 </ul>
               </nav>
