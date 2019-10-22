@@ -61,7 +61,6 @@ const toDoBehaviour = function(id) {
   //change the star img when clicked
   $('#task-' + id + ' img').click(function(event) {
     event.stopPropagation();
-    console.log('id passed into parent--->', id);
     let importance = $(this).attr('src');
     if (importance === '../images/not-important.png') {
       //call updateStatus with 'true' as a string
