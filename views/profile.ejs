@@ -3,8 +3,13 @@
 
         <form id="update-profile" action='/profile?_method=PUT' method='POST'>
           <h3>My Profile</h3>
+          <h6>You should provide your password to make changes</h6>
           <div class="form-group">
             <input name="id" type="hidden" value="<%= locals.user.id %>"  />
+          </div>
+          <div class="form-group">
+            <label>Name</label><img class="edit" src='images/edit.png'>
+            <input name="name" id="new-name" type="text" class="form-control" placeholder="Update Name" value="<%= locals.user.name %>"/>
           </div>
           <div class="form-group">
             <label>Email</label><img class="edit" src='images/edit.png'>

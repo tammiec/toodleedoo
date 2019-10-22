@@ -3,26 +3,32 @@ require('dotenv').config();
 
 // Web server config
 const PORT            = process.env.PORT || 8080;
-const ENV             = process.env.ENV || "development";
-const express         = require("express");
-const bodyParser      = require("body-parser");
-const sass            = require("node-sass-middleware");
+const ENV             = process.env.ENV || 'development';
+const express         = require('express');
+const bodyParser      = require('body-parser');
+const sass            = require('node-sass-middleware');
 const morgan          = require('morgan');
 const passport        = require('passport');
 const session         = require('express-session');
 const flash           = require('connect-flash');
 const partials        = require('express-partials')
 const methodOverride  = require('method-override');
+const GoogleStrategy  = require('passport-google-oauth').OAuth2Strategy;
 const app             = express();
 
 // PG database client/connection setup
-const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
+const { Pool }        = require('pg');
+const dbParams        = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+
 //New DB management
-const dbHandler = require('./lib/dbHandler');
+const dbHandler       = require('./lib/dbHandler');
 dbHandler.db = db;
+
+// Models
+const User            = require('./models/usersModel');
+User.dbHandler = dbHandler;
 
 require('./auth/passport');
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -49,6 +55,34 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  // callbackURL: "http://www.example.com/auth/google/callback"
+  callbackURL: "http://localhost:8080/oauthCallback/"
+},
+async function(accessToken, refreshToken, profile, done) {
+    console.log('refreshToken', refreshToken);
+    console.log('accessToken', accessToken);
+    // console.log('done', done);
+    // console.log('profile', profile);
+    try {
+      const user = await User.findOrCreateGoogle(profile._json);
+      console.log('user', user);
+      return done(null, user);
+    } catch (err) {
+      console.log('err Strategy', err);
+      return done(null, false, { message: 'Error from Google Auth' });
+    }
+
+    //  User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    //    return done(err, user);
+    //  });
+}
+));
+
 
 
 // Global Variables
