@@ -42,7 +42,7 @@
 
 .card-header {
   text-align: center;
-  text-shadow: 1px 1px 5px $background-color;
+  text-shadow: $text-shadow-white;
 }
 
 .card-body {
@@ -56,7 +56,7 @@
   padding-left: 0.5em;
   padding-right: 0.5em;
   background: transparent;
-  text-shadow: 1px 1px 5px $background-color;
+  text-shadow: $text-shadow-white;
 }
 
 .card ul li:hover {

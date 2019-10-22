@@ -25,6 +25,7 @@
   backdrop-filter: $glass-blur;
   padding: 1em;
   color: $base-color;
+  box-shadow: 10px 10px 20px $base-color;
 }
 
 .landing-content h1 {
@@ -33,7 +34,7 @@
 
 .landing-content p {
   font-size: 2vh;
-  text-shadow: 1px 1px 5px $background-color;
+  text-shadow: $text-shadow-white;
 }
 
 .landing-content img {

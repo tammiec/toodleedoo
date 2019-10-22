@@ -1,7 +1,15 @@
 <main class='main-login'>
-  <div class="login-container">
-    <div class="row">
-      <form class="col-md-6 login-form" action='/login' method='POST'>
+
+  <div id='container'>
+
+    <div id='tab-container'>
+      <a href="#" id="register" class="tab register">Register</a>
+      <a href="#" id="login" class="tab select">Login</a>
+    </div>
+
+    <div id='panel'>
+
+      <form id='login-form' action='/login' method='POST'>
         <h2>Log In</h2>
         <div class="form-group input-group">
           <div class="input-group-prepend">
@@ -20,7 +28,8 @@
         </div>
 
       </form>
-      <form class="col-md-6 register-form" action='/signup' method='POST'>
+
+      <form id='register-form' action='/signup' method='POST'>
         <h2>Register</h2>
 
         <div class="form-group input-group">
@@ -39,8 +48,11 @@
           <input type="submit" class="btn btn-register" value="Register" />
         </div>
       </form>
+
     </div>
+
   </div>
+
 
 </main>
 

@@ -13,48 +13,130 @@
 .login-container{
   max-height: 80%;
   width: 70%;
+  max-width: 800px;
   justify-self: center;
-  align-self: safe center;
+  align-self: center;
   margin-top: -7vh;
+  overflow: hidden;
 }
 
 .login-container .btn {
   float: right;
 }
 
-.login-form {
-  padding: 9%;
-  background: $base-color;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+.login-container .tab-group {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.login-container .tab-group:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.login-container .tab-group li a {
+	display: block;
+	text-decoration: none;
+	padding: 15px;
+	background: #e5e6e7;
+	color: #888;
+	font-size: 20px;
+	float: left;
+	width: 50%;
+	text-align: center;
+	border-top: 3px solid transparent;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+.login-container .tab-group li a:hover {
+	background: #dedfdf;
+	color: #666;
+}
+.login-container .tab-group .active a {
+	background: #fff;
+	color: #444;
+	border-top: 3px solid #73cf41;
 }
 
-.login-form h2 {
-  text-align: center;
-  margin-bottom:12%;
-  color: $background-color;
+.login-container input {
+	font-size: 16px;
+	display: block;
+	width: 100%;
+	padding: 10px 20px;
+	border: 1px solid #ddd;
+	color: #666;
+	border-radius: 0;
+	margin-bottom: 10px;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
 }
-
-.btn-login {
-  background-color: $background-color;
-  color: $base-color;
+.login-container input:focus {
+	outline: 0;
+	border-color: #2e5ed7;
 }
+.login-container label {
+	font-size: 16px;
+	font-weight: normal;
+	color: #666;
+	margin-bottom: 5px;
+	display: block;
+}
+.login-container .button {
+	border: 0;
+	outline: none;
+	border-radius: 0;
+	padding: 10px 0;
+	font-size: 18px;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	background: #73cf41;
+	color: #ffffff;
+	cursor: pointer;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+.login-container .button:hover, .button:focus { background: #56ae26; }
 
-.register-form {
+
+// #login-form {
+//   padding: 9%;
+//   background: $base-color;
+// }
+
+// .login-form h2 {
+//   text-align: center;
+//   margin-bottom:12%;
+//   color: $background-color;
+// }
+
+// .btn-login {
+//   background-color: $background-color;
+//   color: $base-color;
+// }
+
+#register-form {
   padding: 9%;
   background: $accent-color;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  display: none;
 }
 
-.register-form h2 {
-  text-align: center;
-  margin-bottom:12%;
-  color: $base-color;
-}
+// .register-form h2 {
+//   text-align: center;
+//   margin-bottom:12%;
+//   color: $base-color;
+// }
 
-.input-group-text {
-  background-color: $base-color;
-}
+// .input-group-text {
+//   background-color: $base-color;
+// }
 
-.input-group-text i {
-  color: $accent-color;
-}
+// .input-group-text i {
+//   color: $accent-color;
+// }

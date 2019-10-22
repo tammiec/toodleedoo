@@ -57,7 +57,7 @@ h3 {
   width: 40%;
   min-width: 300px;
   background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
   padding: 2em;
 }
 

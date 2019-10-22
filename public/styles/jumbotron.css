@@ -71,12 +71,12 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 300px;
   border: none;
   background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
 }
 
 .card-header {
   text-align: center;
-  text-shadow: 1px 1px 5px #FFFF;
+  text-shadow: 2px 2px 4px #FFFF;
 }
 
 .card-body {
@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 0.5em;
   padding-right: 0.5em;
   background: transparent;
-  text-shadow: 1px 1px 5px #FFFF;
+  text-shadow: 2px 2px 4px #FFFF;
 }
 
 .card ul li:hover {
