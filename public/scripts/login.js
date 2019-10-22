@@ -1,5 +1,8 @@
 $(() => {
+  // let hash = window.location.hash;
+
   $('#register-form').hide();
+
   $(".tab").click(function() {
     var x = $(this).attr('id');
     if (x === 'register') {
