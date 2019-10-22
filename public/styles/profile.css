@@ -1,13 +1,24 @@
 body, html {
-  background-color: #04D9C4;
-  padding-top: 7vh;
+  background-color: #FFFF;
   height: 100%;
   width: 100%;
+  font-family: "Muli", sans-serif;
+}
+
+main {
+  padding-top: 7vh;
+  height: 100%;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 0;
 }
 
 .btn {
-  background-color: #202426;
-  color: #A3D9C9;
+  background-color: #0D0D0D;
+  color: #FFFF;
   border-radius: 2px;
   margin: 0;
 }
@@ -25,21 +36,28 @@ body, html {
 }
 
 h3 {
-  color: #202426;
+  color: #0D0D0D;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
 
 .profile {
+  height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  background-image: url("/images/profile-background.jpg");
+  background-size: cover;
 }
 
 .profile-container {
+  margin-top: -7vh;
+  justify-self: center;
+  align-self: center;
   width: 40%;
   min-width: 300px;
-  background-color: #A3D9C9;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
   padding: 2em;
 }
 

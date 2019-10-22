@@ -1,0 +1,124 @@
+body, html {
+  background-color: #FFFF;
+  height: 100%;
+  width: 100%;
+  font-family: "Muli", sans-serif;
+}
+
+main {
+  padding-top: 7vh;
+  height: 100%;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 0;
+}
+
+.btn {
+  background-color: #0D0D0D;
+  color: #FFFF;
+  border-radius: 2px;
+  margin: 0;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.card {
+  border-radius: 2px;
+}
+
+.main-page-container {
+  margin-bottom: 6vh;
+}
+
+.main-login {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("/images/profile-background.jpg");
+  background-size: cover;
+}
+
+#container {
+  width: 60%;
+  min-width: 350px;
+  max-height: 80%;
+  justify-self: center;
+  align-self: center;
+  overflow: hidden;
+  margin-top: -7vh;
+}
+
+#tab-container {
+  height: 40px;
+  width: 100%;
+}
+
+#panel {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+#panel form {
+  align-self: center;
+}
+
+#panel h2 {
+  margin-bottom: 1em;
+}
+
+#panel .btn {
+  margin-top: 0.5em;
+}
+
+.tab {
+  background-color: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  width: 80px;
+  float: right;
+  font-weight: bold;
+}
+
+#tab-container a {
+  color: #0D0D0D;
+  text-shadow: 2px 2px 4px #FFFF;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  width: 50%;
+}
+
+.signup {
+  margin-left: 8px;
+}
+
+.select {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+#login-form {
+  min-height: 200px;
+  padding: 10px;
+  width: 80%;
+}
+
+#register-form {
+  min-height: 200px;
+  padding: 10px;
+  width: 80%;
+}
