@@ -1,19 +1,18 @@
-const bcrypt   = require('bcrypt');
+const bcrypt = require('bcrypt');
 const passport = require('passport');
-const express  = require('express');
-const router   = express.Router();
+const express = require('express');
+const router = express.Router();
 const isAuthenticated = require('../auth/is_auth');
 const api = require('../lib/api/api');
 
 module.exports = (db, dbHandler) => {
   // Home page
   router.get('/', isAuthenticated, (req, res) => {
-    res.render('home', {layout: 'layouts/main.ejs'});
+    res.render('home', { layout: 'layouts/main.ejs' });
   });
-
   // Login - Sign In page
   router.get('/login', (req, res) => {
-    res.render('login', {layout: 'layouts/main.ejs'});
+    res.render('login', { layout: 'layouts/main.ejs' });
   });
   router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
@@ -21,24 +20,10 @@ module.exports = (db, dbHandler) => {
     failureFlash: true,
   }));
 
-
-  // router.get('/login', (req, res, next) => {
-  //   passport.authenticate('local', (err, user, info) => {
-  //     if (err) { return next(err); }
-  //     if (!user) {
-  //       return res.redirect('/login');
-  //     }
-  //     req.logIn(user, function(err) {
-  //       if (err) { return next(err); }
-  //       return res.redirect('/');
-  //     });
-  //   })(req, res, next);
-  // });
-
   router.post('/signup', async (req, res) => {
     let { email, password } = req.body;
     try {
-      const isEmail = await dbHandler.isRecord('users', {email});
+      const isEmail = await dbHandler.isRecord('users', { email });
       if (isEmail) {
         req.flash('error', 'Mail already exists');
         req.flash('regEmail', email);
@@ -54,18 +39,25 @@ module.exports = (db, dbHandler) => {
     }
   });
 
+  router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+  router.get('/oauthCallback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function (req, res) {
+      res.redirect('/');
+    });
+
   // Landing page
   router.get('/landing', (req, res) => {
-    res.render('landing', {layout: 'layouts/main.ejs'});
+    res.render('landing', { layout: 'layouts/main.ejs' });
   });
 
   // User profile page
   router.get('/profile', isAuthenticated, (req, res) => {
-    res.render('profile', {layout: 'layouts/main.ejs'});
+    res.render('profile', { layout: 'layouts/main.ejs' });
   });
 
   router.put('/profile', async (req, res) => {
-    let { id, email, oldPassword, newPassword } = req.body;
+    let { id, name, email, oldPassword, newPassword } = req.body;
     try {
       {
         const userObj = await dbHandler.isRecord('users', { id }, true);
@@ -74,25 +66,28 @@ module.exports = (db, dbHandler) => {
           if (match) {
             let update = {};
             if (userObj.email !== email) update['email'] = email;
+            if (userObj.name !== email) update['name'] = name;
             if (newPassword) update['password'] = bcrypt.hashSync(newPassword, 12);
             const res = await dbHandler.updateRecord('users', update, { id });
+            // res.redirect('/');
           } else {
             console.log('Not valid password');
+            // res.redirect('/');
           }
+          res.redirect('/');
         }
-        res.redirect('/login');
       }
     } catch (err) {
       console.error(err);
     }
   });
 
-  router.get('/logout', (req,res) => {
+  router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   });
 
-  router.get('/category', async(req,res) => {
+  router.get('/category', async (req, res) => {
     try {
       const input = req.query.input;
       const result = await api(input);
@@ -136,7 +131,7 @@ module.exports = (db, dbHandler) => {
       // const taskName = req.query.taskName;
       // const userId = res.locals.user.id;
       // await dbHandler.deleteTask(taskName, userId);
-      await dbHandler.deleteTask('to_do_items', {status_id: 3 }, {id:taskId});
+      await dbHandler.deleteTask('to_do_items', { status_id: 3 }, { id: taskId });
     } catch (err) {
       console.log('Error:', err.message);
     }
@@ -168,9 +163,10 @@ module.exports = (db, dbHandler) => {
       console.error(err);
     }
   });
+
   // 404 Page Not Found
   router.get('/*', (req, res) => {
-    res.render('404', {layout: 'layouts/main.ejs'});
+    res.render('404', { layout: 'layouts/main.ejs' });
   });
 
   return router;
