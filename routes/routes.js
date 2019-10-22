@@ -145,13 +145,16 @@ module.exports = (db, dbHandler) => {
   router.put('/todo/update', async (req, res) => {
     const key = req.query.catKey;
     const taskId = req.query.taskId;
-    const statusId = req.query.statusId;
+    const important = req.query.important;
+    console.log('important', important);
 
     let obj;
     try {
       if (key) {
         const cat = await dbHandler.isRecord('categories', {key}, true);
         obj = {category_id: cat.id};
+      } else if (important) {
+        obj = {important: important};
       } else {
         const toDo = await dbHandler.isRecord('to_do_items', {id: taskId}, true);
         let newStatus = (toDo.status_id === 1) ? 2 : 1;
@@ -159,6 +162,7 @@ module.exports = (db, dbHandler) => {
       }
 
       await dbHandler.updateRecord('to_do_items', obj, {id: taskId});
+      console.log('SOMETHING', await dbHandler.isRecord('to_do_items', {id: taskId}, true));
       res.send(true);
     } catch (err) {
       console.error(err);
