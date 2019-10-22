@@ -30,6 +30,8 @@
   background-color: $glass-background;
   backdrop-filter: $glass-blur;
   height: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

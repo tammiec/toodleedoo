@@ -64,6 +64,8 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   height: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
