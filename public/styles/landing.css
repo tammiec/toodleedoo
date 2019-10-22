@@ -66,7 +66,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .landing-content p {
-  font-size: medium;
+  font-size: 2vh;
   text-shadow: 1px 1px 5px #FFFF;
 }
 
@@ -76,7 +76,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .landing-title {
-  font-size: 100px;
+  font-size: 80px;
+  font-size: 7vw;
 }
 
 .lead {
