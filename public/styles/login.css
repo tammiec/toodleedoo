@@ -47,6 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 #container {
   width: 60%;
   min-width: 350px;
+  max-width: 500px;
   max-height: 80%;
   justify-self: center;
   align-self: center;
@@ -62,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 #panel {
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
-  height: 300px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

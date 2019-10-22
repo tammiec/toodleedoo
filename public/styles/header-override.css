@@ -84,6 +84,11 @@ a {
   color: #595959;
 }
 
+.nav-link {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 /**NEW HAMBURG**/
 body {
   /**apply from here**/
