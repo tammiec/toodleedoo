@@ -6,7 +6,7 @@ body, html {
 }
 
 main {
-  padding-top: 7vh;
+  padding-top: 70px;
   height: 100%;
   margin: 0;
 }
@@ -47,11 +47,13 @@ h1, h2, h3, h4, h5, h6 {
 #container {
   width: 60%;
   min-width: 350px;
+  max-width: 500px;
   max-height: 80%;
   justify-self: center;
   align-self: center;
   overflow: hidden;
   margin-top: -7vh;
+  box-shadow: 10px 10px 20px #0D0D0D;
 }
 
 #tab-container {
@@ -60,9 +62,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #panel {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
-  height: 300px;
+  height: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -107,7 +111,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .select {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
 }
 

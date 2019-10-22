@@ -66,7 +66,7 @@ module.exports = (db, dbHandler) => {
           if (match) {
             let update = {};
             if (userObj.email !== email) update['email'] = email;
-            if (userObj.name !== email) update['name'] = name;
+            if (userObj.name !== name) update['name'] = name;
             if (newPassword) update['password'] = bcrypt.hashSync(newPassword, 12);
             const res = await dbHandler.updateRecord('users', update, { id });
             // res.redirect('/');
