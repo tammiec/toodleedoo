@@ -1,13 +1,24 @@
 body, html {
-  background-color: #04D9C4;
-  padding-top: 7vh;
+  background-color: #FFFF;
   height: 100%;
   width: 100%;
+  font-family: "Muli", sans-serif;
+}
+
+main {
+  padding-top: 7vh;
+  height: 100%;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 0;
 }
 
 .btn {
-  background-color: #202426;
-  color: #A3D9C9;
+  background-color: #0D0D0D;
+  color: #FFFF;
   border-radius: 2px;
   margin: 0;
 }
@@ -30,29 +41,30 @@ header.main-header {
   top: 0px;
   width: 100%;
   z-index: 1;
-  background-color: #202426;
+  background-color: #FFFF;
 }
 
 div.logo {
-  text-transform: uppercase;
   width: max-content;
   font-size: 2rem;
-  background-color: #A3D9C9;
   padding: 0.2rem;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  color: #202426;
+  background-color: #FFFF;
+  color: #595959;
+}
+
+div.logo h1 {
+  margin-top: 2px;
 }
 
 div.user-view {
   width: auto;
-  text-transform: uppercase;
 }
 
 header nav {
   width: 100%;
-  color: #A3D9C9;
-  background-color: #202426;
+  background-color: #FFFF;
 }
 
 .user-view > ul {
@@ -69,98 +81,9 @@ header nav {
 }
 
 a {
-  color: #A3D9C9;
+  color: #595959;
 }
 
-/**handling the hamburger**/
-/*
-.b-a {
-  transition: all 0.25s;
-  content: "";
-  position: absolute;
-  left: 0;
-  height: 6px;
-  width: 30px;
-  border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.95);
-}
-.menu-collapsed {
-  transition: all 0.25s;
-  position: fixed;
-  top: 10px;
-  right: 9px;
-  height: 36px;
-  width: 36px;
-  z-index: 1;
-  cursor: pointer;
-  ul {
-    transition: all 0s;
-    position: fixed;
-    right: -9000px;
-  }
-}
-
-.bar {
-  @extend .b-a;
-  position: relative;
-  // left: 12px;
-  top: 14px;
-  &:before {
-    @extend .b-a;
-    top: -8px;
-  }
-  &:after {
-    @extend .b-a;
-    top: 8px;
-  }
-}
-.b-a-expanded {
-  transition: all .25s;
-  top: -0px;
-}
-
-.menu-expanded {
-  transition: all .25s;
-  text-align: center;
-  line-height: 70px;
-  height: 100%;
-  width: 100%;
-  border-radius: 0px;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,0.85);
-  ul {
-    transition: all 0s;
-    position: relative;
-    left: 0;
-    z-index: 2;
-  }
-  a {
-    color: #ccd;
-
-  }
-  a:hover {
-    color: #f33;
-    text-decoration: none;
-
-  }
-
-  .bar {
-    background-color: transparent;
-    left: 94%;
-    transition: all .25s;
-    &:before {
-      @extend .b-a-expanded;
-      transform: rotate(45deg);
-    }
-    &:after {
-      @extend .b-a-expanded;
-      transform: rotate(-45deg);
-    }
-  }
-
-}
-*/
 /**NEW HAMBURG**/
 body {
   /**apply from here**/
@@ -188,7 +111,7 @@ body input + label span {
   margin-top: -1px;
   left: 0;
   display: block;
-  background: #A3D9C9;
+  background: #595959;
   transition: .5s;
 }
 
@@ -220,7 +143,7 @@ body input:checked + label span:last-child {
 }
 
 body input ~ nav {
-  background: #202426;
+  background: #0D0D0D;
   opacity: 0.9;
   position: fixed;
   top: 0;
@@ -251,10 +174,9 @@ body input ~ nav > ul > li {
 body input ~ nav > ul > li > a {
   text-decoration: none;
   text-transform: uppercase;
-  color: #A3D9C9;
+  color: #FFFF;
   opacity: 1;
-  font-weight: 700;
-  font-family: sans-serif;
+  font-family: "Muli", sans-serif;
   display: block;
   padding: 30px;
 }

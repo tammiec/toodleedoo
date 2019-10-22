@@ -21,32 +21,72 @@ const deleteTask = async (taskId) => {
     console.error(err);
   }
 };
+const updateStatus = async (taskId, important = false) => {
+  try {
+    //add conditional
+    if (important) {
+      await $.ajax(`/todo/update?taskId=${taskId}&important=${important}`, {method: 'PUT'});
+    } else {
+      await $.ajax(`/todo/update?taskId=${taskId}`, {method: 'PUT'});
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 // Defines listeners for individual tasks
-const toDoBehaviour = function() {
+// const toDoBehaviour = function() {
+const toDoBehaviour = function(id) {
   // Mark task item as complete
-  $('.list-group-item').click(function() {
+  // $('.list-group-item').click(function() {
+  $('#task-' + id).click(function() {
     $(this).toggleClass('checked');
+    const taskId = ($(this).attr('id')).split('-')[1];
+    updateStatus(taskId);
   });
 
   // Mark task item as important
-  $('.list-group-item').dblclick(function() {
-    $(this).toggleClass('important');
-  });
+  // $('.list-group-item').dblclick(function() {
+  //   $(this).toggleClass('important');
+  // });
 
-  $('.list-group-item span').click(function() {
+  // $('.list-group-item span').click(function() {
+  $('#task-' + id + ' span').click(function() {
     const taskId = ($(this).parent().attr('id')).split('-')[1];
-    console.log('taskId', taskId);
+    // console.log('taskId', taskId);
     deleteTask(taskId);
     $(this).parent().remove();
+  });
+
+  //change the star img when clicked
+  $('#task-' + id + ' img').click(function(event) {
+    event.stopPropagation();
+    console.log('id passed into parent--->', id);
+    let importance = $(this).attr('src');
+    if (importance === '../images/not-important.png') {
+      //call updateStatus with 'true' as a string
+      updateStatus(id, 'true');
+      importance = '../images/important-a.png';
+    } else {
+      //call updateStatus with 'false' as a string
+      updateStatus(id, 'false');
+      importance = '../images/not-important.png';
+    }
+    $(this).attr('src', importance);
   });
 };
 
 // creates list items for existing tasks
 const renderTasks = function(tasks) {
   for (let task of tasks) {
-    if (task.status_id !== 3) {
-      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span>&#x2715</span></li>`);
+    let imgSrc = '../images/not-important.png';
+    if (task.important) {
+      imgSrc = '../images/important-a.png';
+    }
+    if (task.status_id === 2) {
+      $('#' + task.key).append(`<li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="${imgSrc}"><span>&#x2715</span></li>`);
+    } else if (task.status_id === 1) {
+      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<img class="marked-important" src="${imgSrc}"><span>&#x2715</span></li>`);
     }
   }
 };
@@ -55,7 +95,11 @@ const renderTasks = function(tasks) {
 const loadTasks = function() {
   $.get('/todo', function(tasks) {
     renderTasks(tasks);
-    toDoBehaviour();
+
+    //new, putting into a loop
+    for (let task of tasks) {
+      toDoBehaviour(task.id);
+    }
   });
 };
 $(() => {
@@ -83,10 +127,12 @@ $(() => {
         console.log(cat[0]);
         console.log('#' + cat[0].key);
         // console.log(lanes);
-        $('#' + cat[0].key).append(`<li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${inputTask.val()}<span>&#x2715</span></li>`);
+        $('#' + cat[0].key).append(`<li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${inputTask.val()}<img class="marked-important" src="../images/not-important.png"><span>&#x2715</span></li>`);
         // alert(cat[0].title);
         $('#inputTask').val('');
-        toDoBehaviour();
+        // toDoBehaviour();
+        toDoBehaviour(cat[0].taskId);
+
       } catch (err) {
         console.error(err);
       }

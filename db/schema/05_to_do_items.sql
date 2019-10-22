@@ -7,5 +7,6 @@ CREATE TABLE to_do_items (
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   description TEXT,
-  status_id INTEGER REFERENCES status(id) ON DELETE CASCADE
+  status_id INTEGER REFERENCES status(id) ON DELETE CASCADE,
+  important BOOLEAN DEFAULT false
 );

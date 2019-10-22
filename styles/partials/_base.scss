@@ -3,14 +3,25 @@
 
 body, html {
   background-color: $background-color;
-  padding-top: 7vh;
   height: 100%;
   width: 100%;
+  font-family: $primary-font;
+}
+
+main {
+  padding-top: 7vh;
+  height: 100%;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $accent-font;
+  margin-bottom: 0;
 }
 
 .btn {
   background-color: $base-color;
-  color: $accent-color;
+  color: $background-color;
   border-radius: 2px;
   margin: 0;
 }

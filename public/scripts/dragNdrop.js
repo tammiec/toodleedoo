@@ -30,26 +30,15 @@ const addToUl = function(target, data) {
   let elem = target.localName;
   let key;
   let id = data.split('-')[1];
-  console.log('id IS-->', id);
   if (elem === 'div') {
     target.firstElementChild.appendChild(document.getElementById(data));
-    console.log('THE CHILD', target.firstElementChild);
     key = target.firstElementChild.id;
-    console.log('key-->', key);
   } else if (elem === 'li') {
     target.parentNode.appendChild(document.getElementById(data));
-    console.log('THE PARENT', target.parentNode);
-
     key = target.parentNode.id;
-    console.log('key-->', key);
-
   } else {
     target.appendChild(document.getElementById(data));
-    console.log('THE TARGET', target);
-
     key = target.id;
-    console.log('key-->', key);
-
   }
   sendAJAX(key, id);
 };

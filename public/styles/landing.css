@@ -1,3 +1,45 @@
+body, html {
+  background-color: #FFFF;
+  height: 100%;
+  width: 100%;
+  font-family: "Muli", sans-serif;
+}
+
+main {
+  padding-top: 7vh;
+  height: 100%;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 0;
+}
+
+.btn {
+  background-color: #0D0D0D;
+  color: #FFFF;
+  border-radius: 2px;
+  margin: 0;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.card {
+  border-radius: 2px;
+}
+
+.main-page-container {
+  margin-bottom: 6vh;
+}
+
+.main-landing {
+  background-image: url("/images/landing-background.jpg");
+  background-size: cover;
+}
+
 .landing-container {
   position: relative;
   display: flex;
@@ -5,14 +47,28 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  margin-top: -7vh;
 }
 
 .landing-content {
   width: 60%;
+  margin-top: -7vh;
   text-align: center;
   justify-self: center;
   align-self: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 1em;
+  color: #0D0D0D;
+  box-shadow: 10px 10px 20px #0D0D0D;
+}
+
+.landing-content h1 {
+  color: #0D0D0D;
+}
+
+.landing-content p {
+  font-size: 2vh;
+  text-shadow: 2px 2px 4px #FFFF;
 }
 
 .landing-content img {
@@ -21,7 +77,8 @@
 }
 
 .landing-title {
-  text-transform: uppercase;
+  font-size: 80px;
+  font-size: 7vw;
 }
 
 .lead {

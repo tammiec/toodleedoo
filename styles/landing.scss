@@ -1,3 +1,11 @@
+@import "partials/variables";
+@import "partials/base";
+
+.main-landing {
+  background-image: url('/images/landing-background.jpg');
+  background-size: cover;
+}
+
 .landing-container {
   position: relative;
   display: flex;
@@ -5,14 +13,28 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  margin-top: -7vh;
 }
 
 .landing-content {
   width: 60%;
+  margin-top: -7vh;
   text-align: center;
   justify-self: center;
   align-self: center;
+  background-color: $glass-background;
+  backdrop-filter: $glass-blur;
+  padding: 1em;
+  color: $base-color;
+  box-shadow: 10px 10px 20px $base-color;
+}
+
+.landing-content h1 {
+  color: $base-color;
+}
+
+.landing-content p {
+  font-size: 2vh;
+  text-shadow: $text-shadow-white;
 }
 
 .landing-content img {
@@ -21,7 +43,8 @@
 }
 
 .landing-title {
-  text-transform: uppercase;
+  font-size: 80px;
+  font-size: 7vw;
 }
 
 .lead {

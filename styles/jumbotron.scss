@@ -1,11 +1,20 @@
 @import 'partials/variables';
 @import 'partials/base';
 
+.main-page-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-image: url('/images/home-background.jpg');
+  background-size: cover;
+}
+
 .new-todo {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-content: center;
+  margin-top: 10vh;
 }
 
 .new-todo input {
@@ -26,11 +35,14 @@
   margin-right: 0.5em;
   margin-top: 1.5em;
   min-width: 300px;
-
+  border: none;
+  background-color: $glass-background;
+  backdrop-filter: $glass-blur;
 }
 
 .card-header {
   text-align: center;
+  text-shadow: $text-shadow-white;
 }
 
 .card-body {
@@ -38,14 +50,17 @@
   overflow-y: auto;
 }
 
+
 .list-group-item {
   text-align: left;
   padding-left: 0.5em;
   padding-right: 0.5em;
+  background: transparent;
+  text-shadow: $text-shadow-white;
 }
 
 .card ul li:hover {
-  background: $accent-color;
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .card ul li:hover span {
@@ -54,12 +69,12 @@
 }
 
 .checked {
-  background: $accent-color;
+  background: rgba(0, 0, 0, 0.15);
   text-decoration: line-through;
 }
 
 .important {
-  background: $background-color;
+  background: rgba(217, 115, 115, 0.3);
 }
 
 .card ul li span {
