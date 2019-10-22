@@ -30,10 +30,13 @@ const updateStatus = async (taskId) => {
 };
 
 // Defines listeners for individual tasks
-const toDoBehaviour = function() {
+// const toDoBehaviour = function() {
+const toDoBehaviour = function(id) {
   // Mark task item as complete
-  $('.list-group-item').click(function() {
+  // $('.list-group-item').click(function() {
+  $('#task-' + id).click(function() {
     $(this).toggleClass('checked');
+    console.log("why no class change");
     const taskId = ($(this).attr('id')).split('-')[1];
     updateStatus(taskId, 2);
   });
@@ -43,7 +46,8 @@ const toDoBehaviour = function() {
   //   $(this).toggleClass('important');
   // });
 
-  $('.list-group-item span').click(function() {
+  // $('.list-group-item span').click(function() {
+  $('#task-' + id + 'span').click(function() {
     const taskId = ($(this).parent().attr('id')).split('-')[1];
     console.log('taskId', taskId);
     deleteTask(taskId);
@@ -54,6 +58,8 @@ const toDoBehaviour = function() {
 // creates list items for existing tasks
 const renderTasks = function(tasks) {
   for (let task of tasks) {
+    //here is where to check the status_id
+    //here is where to check the status_id
     if (task.status_id !== 3) {
       $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span>&#x2715</span></li>`);
     }
@@ -64,7 +70,11 @@ const renderTasks = function(tasks) {
 const loadTasks = function() {
   $.get('/todo', function(tasks) {
     renderTasks(tasks);
-    toDoBehaviour();
+
+    //new, putting into a loop
+    for (let task of tasks) {
+      toDoBehaviour(task.id);
+    }
   });
 };
 $(() => {
@@ -95,7 +105,9 @@ $(() => {
         $('#' + cat[0].key).append(`<li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${inputTask.val()}<span>&#x2715</span></li>`);
         // alert(cat[0].title);
         $('#inputTask').val('');
-        toDoBehaviour();
+        // toDoBehaviour();
+        toDoBehaviour(cat[0].taskId);
+
       } catch (err) {
         console.error(err);
       }
