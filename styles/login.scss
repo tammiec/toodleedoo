@@ -13,11 +13,13 @@
 #container {
   width: 60%;
   min-width: 350px;
+  max-width: 500px;
   max-height: 80%;
   justify-self: center;
   align-self: center;
   overflow: hidden;
   margin-top: -7vh;
+  box-shadow: 10px 10px 20px $base-color;
 }
 
 #tab-container {
@@ -28,7 +30,9 @@
 #panel {
   background-color: $glass-background;
   backdrop-filter: $glass-blur;
-  height:300px;
+  height: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

@@ -6,7 +6,7 @@ body, html {
 }
 
 main {
-  padding-top: 7vh;
+  padding-top: 70px;
   height: 100%;
   margin: 0;
 }
@@ -56,7 +56,7 @@ h3 {
   align-self: center;
   width: 40%;
   min-width: 300px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
   padding: 2em;
 }
