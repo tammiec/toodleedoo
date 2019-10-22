@@ -47,7 +47,7 @@ const toDoBehaviour = function(id) {
   // });
 
   // $('.list-group-item span').click(function() {
-  $('#task-' + id + 'span').click(function() {
+  $('#task-' + id + ' span').click(function() {
     const taskId = ($(this).parent().attr('id')).split('-')[1];
     console.log('taskId', taskId);
     deleteTask(taskId);
