@@ -22,17 +22,17 @@ passport.use(new localStrategy({ usernameField: 'email',}, async (email, passwor
 }));
 
 passport.serializeUser((user, done) => {
-    console.log('user from PASSPORT>>>', user);
+    // console.log('user from PASSPORT>>>', user);
     done(null, user.id || user.google_id);
 });
 
 passport.deserializeUser( async(id, done) => {
   try {
-    console.log('id from PASSPORT>>>', id);
+    // console.log('id from PASSPORT>>>', id);
     let user = await dbHandler.isRecord('users', {id}, true);
-    console.log('user from success 1', user);
+    // console.log('user from success 1', user);
     user = !user ? await dbHandler.isRecord('users', { google_id: id }, true) : user;
-    console.log('user from success 2', user);
+    // console.log('user from success 2', user);
     done(null, user);
   } catch (err) {
     done(err, null);
