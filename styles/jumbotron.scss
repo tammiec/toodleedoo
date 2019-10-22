@@ -19,6 +19,7 @@
 
 .new-todo input {
   margin-right: 1em;
+  box-shadow: 5px 5px 20px $base-color;
 }
 
 .card-deck {
@@ -38,6 +39,7 @@
   border: none;
   background-color: $glass-background;
   backdrop-filter: $glass-blur;
+  box-shadow: 5px 5px 20px $base-color;
 }
 
 .card-header {
@@ -78,7 +80,7 @@
   display: none;
   float: right;
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: -5px;
 }
 
 .star img {
