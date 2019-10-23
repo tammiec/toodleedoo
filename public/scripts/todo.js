@@ -171,7 +171,7 @@ const renderTasks = function(tasks) {
         <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
           <img class='checkbox checked' src="../images/checked.png">
           <span class='task-name'>${task.title}</span>
-          <span class='x'>&#x2715</span>
+
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
         </li>
       `);
