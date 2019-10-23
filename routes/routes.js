@@ -50,13 +50,16 @@ module.exports = (db, dbHandler) => {
 
   router.get('/login/facebook',
     passport.authenticate('facebook'));
-
   router.get('/return',
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
-      console.log('Worked FB!!!!!!')
-      res.redirect('/');
+      res.redirect('/test');
     });
+
+  //test route (Delete eventually)
+  router.get('/test', isAuthenticated, (req, res) => {
+    res.render('test', { layout: 'layouts/main.ejs' });
+  });
 
   // Landing page
   router.get('/landing', (req, res) => {
@@ -102,8 +105,8 @@ module.exports = (db, dbHandler) => {
   router.get('/category', async (req, res) => {
     try {
       const input = req.query.input;
-      const result = await api(input);
-      // console.log('result', result[0].title);
+      let result = await api(input);
+      result = !result ? [{ key: 'misc'}] : result;
       let keyName = result[0].key;
       const categoryNames = {
         toWatch: 1,
@@ -140,10 +143,8 @@ module.exports = (db, dbHandler) => {
   router.put('/todo/delete', async (req, res) => {
     try {
       const taskId = req.query.taskId;
-      // const taskName = req.query.taskName;
-      // const userId = res.locals.user.id;
-      // await dbHandler.deleteTask(taskName, userId);
       await dbHandler.deleteTask('to_do_items', { status_id: 3 }, { id: taskId });
+      res.send(true);
     } catch (err) {
       console.log('Error:', err.message);
     }

@@ -2,21 +2,21 @@
 require('dotenv').config();
 
 // Web server config
-const PORT            = process.env.PORT || 8080;
-const ENV             = process.env.ENV || 'development';
-const express         = require('express');
-const bodyParser      = require('body-parser');
-const sass            = require('node-sass-middleware');
-const morgan          = require('morgan');
-const passport        = require('passport');
-const session         = require('express-session');
-const flash           = require('connect-flash');
-const partials        = require('express-partials')
-const methodOverride  = require('method-override');
-const GoogleStrategy  = require('passport-google-oauth').OAuth2Strategy;
-const app             = express();
-const facebookStrategy = require('passport-facebook').Strategy;
-
+const PORT                = process.env.PORT || 8080;
+const ENV                 = process.env.ENV || 'development';
+const express             = require('express');
+const bodyParser          = require('body-parser');
+const sass                = require('node-sass-middleware');
+const morgan              = require('morgan');
+const passport            = require('passport');
+const session             = require('express-session');
+const flash               = require('connect-flash');
+const partials            = require('express-partials')
+const methodOverride      = require('method-override');
+const GoogleStrategy      = require('passport-google-oauth').OAuth2Strategy;
+const app                 = express();
+const facebookStrategy    = require('passport-facebook').Strategy;
+const downloadAndSaveImg  = require('./lib/downloadSaveImage');
 
 // PG database client/connection setup
 const { Pool }        = require('pg');
@@ -62,7 +62,6 @@ app.use(flash());
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  // callbackURL: "http://www.example.com/auth/google/callback"
   callbackURL: "http://localhost:8080/oauthCallback/"
 },
 async function(accessToken, refreshToken, profile, done) {
@@ -84,25 +83,15 @@ passport.use(new facebookStrategy({
 },
 async function(accessToken, refreshToken, profile, done) {
   console.log('profile', profile);
-  // In this example, the user's Facebook profile is supplied as the user
-  // record.  In a production-quality application, the Facebook profile should
-  // be associated with a user record in the application's database, which
-  // allows for account linking and authentication with other identity
-  // providers.
-  // console.log('Here Im suposed rto get de FB user');
-  // return cb(null, profile);
   try {
     const prof = profile._json;
     prof['sub'] = prof.id;
-    const user = await User.findOrCreateGoogle(profile._json);
-    console.log('user', user);
-
-
-
+    prof['picture'] = `assets/profile_photos/${prof.id}.jpg`;
+    const user = await User.findOrCreateGoogle(prof);
+    downloadAndSaveImg(`https://graph.facebook.com/${prof.id}/picture`, `public/assets/profile_photos/${prof.id}.jpg`, () => console.log('FB avatar saved!'));
     return done(null, user);
   } catch (err) {
-    console.log('err Strategy', err);
-    return done(null, false, { message: 'Error from Google Auth' });
+    return done(null, false, { message: 'Error from Facebook Auth' });
   }
 }));
 
