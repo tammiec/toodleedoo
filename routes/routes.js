@@ -129,6 +129,7 @@ module.exports = (db, dbHandler) => {
   });
 
   router.get('/todo', async (req, res) => {
+
     try {
       const tasks = await dbHandler.getUserTasks(res.locals.user.id);
       res.send(tasks.rows);

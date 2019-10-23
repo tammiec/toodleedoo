@@ -167,6 +167,7 @@ const renderTasks = function(tasks) {
 // loads all tasks from database
 const loadTasks = function() {
   $.get('/todo', function(tasks) {
+
     renderTasks(tasks);
     //new, putting into a loop
     for (let task of tasks) {
