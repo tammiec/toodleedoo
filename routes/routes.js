@@ -155,6 +155,8 @@ module.exports = (db, dbHandler) => {
     const taskId = req.query.taskId;
     const important = req.query.important;
     const taskName = req.query.taskName;
+    const taskDesc = req.query.taskDesc;
+    console.log(req.query);
     let obj;
 
     try {
@@ -163,8 +165,8 @@ module.exports = (db, dbHandler) => {
         obj = { category_id: cat.id };
       } else if (important) {
         obj = { important: important };
-      } else if (taskName) {
-        obj = { title: taskName };
+      } else if (taskName && taskDesc) {
+        obj = { title: taskName, description: taskDesc };
       } else {
         const toDo = await dbHandler.isRecord('to_do_items', { id: taskId }, true);
         let newStatus = (toDo.status_id === 1) ? 2 : 1;

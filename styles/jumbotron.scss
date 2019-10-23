@@ -88,11 +88,6 @@
   display: inline;
 }
 
-.checked {
-  background: rgba(0, 0, 0, 0.15);
-  text-decoration: line-through;
-}
-
 .x {
   display: none;
   float: right;
@@ -112,4 +107,9 @@
   height: 18px;
   float: right;
   display: none;
+}
+
+.checkbox {
+  height: 15px;
+  margin-right: 5px;
 }
