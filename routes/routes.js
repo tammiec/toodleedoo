@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const isAuthenticated = require('../auth/is_auth');
 const api = require('../lib/api/api');
+const { upload, manageFile } = require('../lib/uploadFiles');
 
 module.exports = (db, dbHandler) => {
   // Home page
@@ -57,10 +58,9 @@ module.exports = (db, dbHandler) => {
     res.render('profile', { layout: 'layouts/main.ejs' });
   });
 
-  router.put('/profile', isAuthenticated, async (req, res) => {
-    let { id, name, email, oldPassword, newPassword, photo } = req.body;
-    console.log('photo', photo);
-    console.log('req file', req.body.photo.filename);
+  router.put('/profile', isAuthenticated, upload.single('file'), async (req, res) => {
+    let { id, name, email, oldPassword, newPassword } = req.body;
+    let newFileName = manageFile(req.file);
     try {
       const userObj = await dbHandler.isRecord('users', { id }, true);
       if (oldPassword) {
@@ -69,11 +69,11 @@ module.exports = (db, dbHandler) => {
           let update = {};
           if (userObj.email !== email) update['email'] = email;
           if (userObj.name !== name) update['name'] = name;
+          if (newFileName) update['photo_url'] = newFileName;
           if (newPassword) update['password'] = bcrypt.hashSync(newPassword, 12);
           const res = await dbHandler.updateRecord('users', update, { id });
         } else {
           req.flash('error', 'Wrong password');
-          console.log('Not valid password');
           res.redirect('/profile');
           return;
         }

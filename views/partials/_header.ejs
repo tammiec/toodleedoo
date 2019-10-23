@@ -6,7 +6,7 @@
           <ul class="navbar-nav mr-auto nav-collapse">
             <li class="nav-item active">
               <!-- <a class="nav-link" href="/profile"><%= locals.user.name %><span class="sr-only">(current)</span></a> -->
-              <a class="nav-link" href= <%= locals.user.google_id ? "https://aboutme.google.com/" : "/profile" %> target="_blank"><%= locals.user.name %><span class="sr-only">(current)</span></a>
+              <a class="nav-link" href= <%= locals.user.google_id ? "https://aboutme.google.com/" : "/profile" %> target= <%= locals.user.google_id ? "_blank" : "" %> ><%= locals.user.name %><span class="sr-only">(current)</span></a>
             </li>
             <li>
               <!-- <h3 style="color: white;"> <%= locals.user.google_id ? 'Google' : 'Local' %> </h3> -->
@@ -23,7 +23,7 @@
               <nav>
                 <ul>
                   <li><a href="/">Home</a></li>
-                  <li><a href="/profile" <%= locals.user.google_id ? "hidden" : "" %>>Edit Profile</a></li>
+                  <li><a href= <%= locals.user.google_id ? "https://aboutme.google.com/" : "/profile" %> target= <%= locals.user.google_id ? "_blank" : "" %> >Edit Profile</a></li>
                   <li><a href="/logout">Logout</a></li>
                 </ul>
               </nav>
