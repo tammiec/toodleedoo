@@ -21,8 +21,7 @@ const deleteTask = async (taskId) => {
       await $.ajax(`/todo/delete?taskId=${taskId}`, { method: 'PUT'});
     }
   } catch (err) {
-    //whats this
-    // console.log(err);
+    console.log(err);
   }
 };
 
@@ -63,12 +62,15 @@ const updateTask = async (taskId, taskName, taskDesc) => {
 const toDoBehaviour = function(id) {
   // Mark task item as complete
   // $('.list-group-item').click(function() {
-  $('#task-' + id).click(function(event) {
-    const taskId = ($(this).attr('id')).split('-')[1];
-    // if ($(event.target) === $(this)) {
+  $(`#task-${id} .checkbox`).click(function(event) {
+    event.stopPropagation();
     $(this).toggleClass('checked');
-    updateStatus(taskId);
-    // }
+    updateStatus(id);
+    if ($(this).hasClass('checked')) {
+      $(this).attr('src', '../images/checked.png');
+    } else {
+      $(this).attr('src', '../images/not-checked.png');
+    }
   });
 
   // Mark task item as important
@@ -78,6 +80,7 @@ const toDoBehaviour = function(id) {
 
   // $('.list-group-item span').click(function() {
   $('#task-' + id + ' .x').click(function(event) {
+    event.stopPropagation()
     const taskId = ($(this).parent().attr('id')).split('-')[1];
     // console.log('taskId', taskId);
     deleteTask(taskId);
@@ -142,21 +145,20 @@ const renderTasks = function(tasks) {
     }
     if (task.status_id === 2) {
       $('#' + task.key).append(`
-        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">
+        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+          <img class='checkbox checked' src="../images/checked.png">
           <span class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
-          <span class='edit-task' data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
-          <img src="../images/edit.png"></span>
         </li>
       `);
     } else if (task.status_id === 1) {
       $('#' + task.key).append(`
-        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">
+        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+          <img class='checkbox' src="../images/not-checked.png">
           <span class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
-          <span class='edit-task' data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}"><img src="../images/edit.png"></span>
         </li>
       `);
     }
@@ -208,11 +210,11 @@ $(() => {
       console.log('#' + cat[0].key);
       // console.log(lanes);
       $('#' + cat[0].key).append(`
-        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">
-        <span class='task-name'>${inputTask.val()}</span>
-        <span class='x'>&#x2715</span>
-        <span class='star'><img class="marked-important" src="../images/not-important.png"></span>
-        <span class='edit-task' data-toggle="modal" data-target="#exampleModal" data-task-name="${inputTask.val()}" data-task-desc=""><img src="../images/edit.png"></span>
+        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${inputTask.val()}" data-task-desc="">
+          <img class='checkbox' src="../images/not-checked.png">
+          <span class='task-name'>${inputTask.val()}</span>
+          <span class='x'>&#x2715</span>
+          <span class='star'><img class="marked-important" src="../images/not-important.png"></span>
         </li>`
       );
       // alert(cat[0].title);
@@ -224,12 +226,12 @@ $(() => {
     }
   };
 
-  // Modal behaviour
+  // Open modal with task information
   $('#exampleModal').on('show.bs.modal', function (event) {
     const button = $(event.relatedTarget);
     const taskName = button.data('task-name');
     const taskDesc = button.data('task-desc');
-    const taskId = button.parent().attr('id').split('-')[1];
+    const taskId = button.attr('id').split('-')[1];
     const modal = $(this);
     modal.find('.modal-title').text('Edit Task: ' + taskName);
     modal.find('.modal-body #task-name').val(taskName);
@@ -237,14 +239,27 @@ $(() => {
     modal.find('.modal-body #task-id').val(taskId);
   });
 
-  // Submit task update
-  $('#update-task-btn').click(() => {
+  // Defines submit task update behaviour
+  const submitUpdate = function() {
     const taskId = $('#task-id').val();
     const taskName = $('#task-name').val();
     const taskDesc = $('#task-desc').val();
     console.log(taskId, taskName, taskDesc);
     updateTask(taskId, taskName, taskDesc);
     $('#exampleModal').modal('hide');
+    $('#task-' + taskId + ' .task-name').replaceWith(taskName);
+  };
+
+  // Submits task update on click
+  $('#update-task-btn').click(() => {
+    submitUpdate();
+  });
+
+  // Submits task update when user enters
+  $('.modal-body #task-name, .modal-body #task-desc').keypress((e) => {
+    if (e.which === 13) {
+      submitUpdate();
+    }
   });
 
 });

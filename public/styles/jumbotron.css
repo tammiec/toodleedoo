@@ -120,11 +120,6 @@ h1, h2, h3, h4, h5, h6 {
   display: inline;
 }
 
-.checked {
-  background: rgba(0, 0, 0, 0.15);
-  text-decoration: line-through;
-}
-
 .x {
   display: none;
   float: right;
@@ -144,4 +139,9 @@ h1, h2, h3, h4, h5, h6 {
   height: 18px;
   float: right;
   display: none;
+}
+
+.checkbox {
+  height: 15px;
+  margin-right: 5px;
 }
