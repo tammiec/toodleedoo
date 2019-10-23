@@ -250,7 +250,6 @@ $(() => {
     updateTask(taskId, taskName, taskDesc);
     $('#taskModal').modal('hide');
     $("#task-text-" + taskId).text(taskName);
-    // $('#task-' + taskId + ' .name').replaceWith(taskName); //not needed
     $('#task-' + taskId).data('desc', taskDesc);
     $('#task-' + taskId).data('name', taskName);
     const dat = $('#task-' + taskId).data('desc');
