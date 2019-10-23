@@ -166,8 +166,9 @@ const renderTasks = function(tasks) {
 };
 
 // loads all tasks from database
-const loadTasks = function() {
-  $.get('/todo', function(tasks) {
+const loadTasks = function(route) {
+  // $.get('/todo', function(tasks) {
+  $.get(route, function(tasks) {
 
     renderTasks(tasks);
     //new, putting into a loop
@@ -187,7 +188,7 @@ $(() => {
     handleChecked(allChecked);
   });
 
-  loadTasks();
+  loadTasks('/todo');
 
   const getCategoryBtn = $('#getCategoryBtn');
   const inputTask = $('#inputTask');
