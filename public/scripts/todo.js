@@ -230,13 +230,18 @@ $(() => {
   $('#exampleModal').on('show.bs.modal', function (event) {
     const button = $(event.relatedTarget);
     const taskName = button.data('task-name');
-    const taskDesc = button.data('task-desc');
     const taskId = button.attr('id').split('-')[1];
+    const taskDesc = await $.ajax(`/todo/${taskId}`, { method: 'GET' });
+    console.log(taskDesc);
     const modal = $(this);
-    modal.find('.modal-title').text('Edit Task: ' + taskName);
-    modal.find('.modal-body #task-name').val(taskName);
-    modal.find('.modal-body #task-desc').val(taskDesc);
-    modal.find('.modal-body #task-id').val(taskId);
+    try {
+      modal.find('.modal-title').text('Edit Task: ' + taskName);
+      modal.find('.modal-body #task-name').val(taskName);
+      modal.find('.modal-body #task-desc').val(taskDesc);
+      modal.find('.modal-body #task-id').val(taskId);
+    } catch (err) {
+      console.error(err);
+    }
   });
 
   // Defines submit task update behaviour
