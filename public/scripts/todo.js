@@ -41,10 +41,8 @@ const updateStatus = async (taskId, important = false) => {
 const handleChecked = (ob) => {
   ob.each(function() {
     let id = $(this)[0].id.split('-')[1];
-    console.log(id);
     deleteTask(id);
     $(this).remove();
-    console.log("DELETED");
   });
 };
 
@@ -55,6 +53,13 @@ const updateTask = async (taskId, taskName, taskDesc) => {
   } catch (err) {
     console.error(err);
   }
+};
+
+//NEW TO SHOW ARCHIVED//
+const showArchived = () => {
+  loadTasks('/todo?archived=true');
+  $('#hideMe').slideUp('slow');
+  $('#burger').prop('checked', false);
 };
 
 // Defines listeners for individual tasks
@@ -161,13 +166,29 @@ const renderTasks = function(tasks) {
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
         </li>
       `);
+    } else if (task.status_id === 3) {
+      $('#' + task.key).append(`
+        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+          <img class='checkbox' src="../images/not-checked.png">
+          <span class='task-name'>${task.title}</span>
+          <span class='x'>&#x2715</span>
+          <span class='star'><img class="marked-important" src="${imgSrc}"></span>
+        </li>
+      `);
     }
   }
 };
 
+
 // loads all tasks from database
 const loadTasks = function(route) {
-  // $.get('/todo', function(tasks) {
+
+  //added
+  $('.refill').each(function() {
+    $(this).empty();
+  });
+
+
   $.get(route, function(tasks) {
 
     renderTasks(tasks);
@@ -181,7 +202,7 @@ const loadTasks = function(route) {
 // Document Ready
 $(() => {
 
-
+  // console.log(res.status);
   $('#clearAll').click(function(event) {
     // event.stopPropagation();
     let allChecked = $('.checked');
