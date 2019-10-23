@@ -15,6 +15,8 @@ const partials        = require('express-partials')
 const methodOverride  = require('method-override');
 const GoogleStrategy  = require('passport-google-oauth').OAuth2Strategy;
 const app             = express();
+const facebookStrategy = require('passport-facebook').Strategy;
+
 
 // PG database client/connection setup
 const { Pool }        = require('pg');
@@ -64,10 +66,6 @@ passport.use(new GoogleStrategy({
   callbackURL: "http://localhost:8080/oauthCallback/"
 },
 async function(accessToken, refreshToken, profile, done) {
-    console.log('refreshToken', refreshToken);
-    console.log('accessToken', accessToken);
-    // console.log('done', done);
-    // console.log('profile', profile);
     try {
       const user = await User.findOrCreateGoogle(profile._json);
       console.log('user', user);
@@ -76,13 +74,37 @@ async function(accessToken, refreshToken, profile, done) {
       console.log('err Strategy', err);
       return done(null, false, { message: 'Error from Google Auth' });
     }
-
-    //  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //    return done(err, user);
-    //  });
 }
 ));
 
+passport.use(new facebookStrategy({
+  clientID: process.env['FACEBOOK_CLIENT_ID'],
+  clientSecret: process.env['FACEBOOK_CLIENT_SECRET'],
+  callbackURL: '/return'
+},
+async function(accessToken, refreshToken, profile, done) {
+  console.log('profile', profile);
+  // In this example, the user's Facebook profile is supplied as the user
+  // record.  In a production-quality application, the Facebook profile should
+  // be associated with a user record in the application's database, which
+  // allows for account linking and authentication with other identity
+  // providers.
+  // console.log('Here Im suposed rto get de FB user');
+  // return cb(null, profile);
+  try {
+    const prof = profile._json;
+    prof['sub'] = prof.id;
+    const user = await User.findOrCreateGoogle(profile._json);
+    console.log('user', user);
+
+
+
+    return done(null, user);
+  } catch (err) {
+    console.log('err Strategy', err);
+    return done(null, false, { message: 'Error from Google Auth' });
+  }
+}));
 
 
 // Global Variables

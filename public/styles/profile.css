@@ -50,8 +50,14 @@ h3 {
   background-size: cover;
 }
 
-.picture {
-  width: 50px;
+.profile-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20%;
+  cursor: pointer;
 }
 
 .profile-container {
@@ -80,5 +86,3 @@ h3 {
   margin-top: 1em;
   float: right;
 }
-
-/*# sourceMappingURL=profile.css.map */

@@ -92,3 +92,35 @@
   padding:10px;
   width: 80%;
 }
+
+.btn-action {
+  right: 10px;
+}
+
+.flex-container-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-container-center {
+  display: flex;
+  justify-content: center;
+}
+
+.google-button {
+  background-color: $google-color;
+  color: white;
+  font-size: 16pt;
+  padding: 10px;
+  font-weight: bolder;
+  box-shadow: 7px 10px 17px -2px rgba(0,0,0,0.75);
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+a:link{
+  text-decoration: none!important;
+}

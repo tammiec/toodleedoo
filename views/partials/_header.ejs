@@ -5,12 +5,12 @@
       <div class="navbar-inner user-view">
           <ul class="navbar-nav mr-auto nav-collapse">
             <li class="nav-item active">
-              <!-- <a class="nav-link" href="/profile"><%= locals.user.name %><span class="sr-only">(current)</span></a> -->
               <a class="nav-link" href= <%= locals.user.google_id ? "https://aboutme.google.com/" : "/profile" %> target= <%= locals.user.google_id ? "_blank" : "" %> ><%= locals.user.name %><span class="sr-only">(current)</span></a>
             </li>
             <li>
-              <!-- <h3 style="color: white;"> <%= locals.user.google_id ? 'Google' : 'Local' %> </h3> -->
-              <img src="<%= locals.user.photo_url ? locals.user.photo_url : '/images/avatar.png'%>" alt="avatar">
+              <a class="nav-link" href= <%= locals.user.google_id ? "https://aboutme.google.com/" : "/profile" %> target= <%= locals.user.google_id ? "_blank" : "" %> >
+                <img src="<%= locals.user.photo_url ? locals.user.photo_url : '/images/avatar.png'%>" alt="avatar">
+              </a>
             </li>
             <li>
               <!--new hamburger-->

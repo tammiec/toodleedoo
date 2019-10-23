@@ -48,6 +48,16 @@ module.exports = (db, dbHandler) => {
       res.redirect('/');
     });
 
+  router.get('/login/facebook',
+    passport.authenticate('facebook'));
+
+  router.get('/return',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      console.log('Worked FB!!!!!!')
+      res.redirect('/');
+    });
+
   // Landing page
   router.get('/landing', (req, res) => {
     res.render('landing', { layout: 'layouts/main.ejs' });
