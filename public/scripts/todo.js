@@ -106,6 +106,7 @@ const toDoBehaviour = function(id) {
       $(label).hide();
       $(label).next().show();
     });
+
     //When focus is lost from TextBox, hide TextBox and show Label.
     textbox.keypress(function (e) {
       if (e.which === 13) {
