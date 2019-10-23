@@ -249,6 +249,13 @@ $(() => {
     $('#taskModal').modal('hide');
     $('#task-' + taskId + ' .task-name').replaceWith(taskName);
     $('#task-' + taskId).attr('data-task-desc', taskDesc);
+    $('#task-' + taskId).attr('data-task-name', taskName);
+    // $('#taskModal').modal('dispose');
+    const modal = $('#taskModal');
+    modal.find('.modal-title').text('Edit Task: ' + taskName);
+    modal.find('.modal-body #task-name').val(taskName);
+    modal.find('.modal-body #task-desc').val(taskDesc);
+    modal.find('.modal-body #task-id').val(taskId);
   };
 
   // Submits task update on click
