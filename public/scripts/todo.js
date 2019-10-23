@@ -107,13 +107,15 @@ const toDoBehaviour = function(id) {
       $(label).next().show();
     });
     //When focus is lost from TextBox, hide TextBox and show Label.
-    textbox.focusout(function () {
-      const taskId = ($(this).parent().attr('id')).split('-')[1];
-      const taskName = $(this).val();
-      updateTitle(taskId, taskName);
-      $(this).hide();
-      $(this).prev().html(taskName);
-      $(this).prev().show();
+    textbox.keypress(function (e) {
+      if (e.which === 13) {
+        const taskId = ($(this).parent().attr('id')).split('-')[1];
+        const taskName = $(this).val();
+        updateTitle(taskId, taskName);
+        $(this).hide();
+        $(this).prev().html(taskName);
+        $(this).prev().show();
+      }
     });
 });
 };
