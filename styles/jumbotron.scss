@@ -67,14 +67,16 @@
 
 .card ul li:hover .x {
   display: inline;
-  cursor: pointer;
+}
+
+.card ul li:hover .edit-task img {
+  display: inline;
 }
 
 .checked {
   background: rgba(0, 0, 0, 0.15);
   text-decoration: line-through;
 }
-
 
 .x {
   display: none;
@@ -87,4 +89,12 @@
   margin-top: 3px;
   height: 18px;
   float: right;
+}
+
+.edit-task img {
+  margin-top: 3px;
+  margin-right: 5px;
+  height: 18px;
+  float: right;
+  display: none;
 }
