@@ -101,7 +101,7 @@ const toDoBehaviour = function(id) {
     textbox.focusout(function () {
       const taskId = ($(this).parent().attr('id')).split('-')[1];
       const taskName = $(this).val();
-      updateStatus(taskId, taskName);
+      updateStatus(taskId, taskName, 'false');
       $(this).hide();
       $(this).prev().html(taskName);
       $(this).prev().show();
