@@ -137,16 +137,16 @@ module.exports = (db, dbHandler) => {
     }
   });
 
-  router.get('/todo/:taskId', async (req, res) => {
-    try {
-      const taskId = req.params.taskId;
-      console.log(taskId);
-      await dbHandler.getTask(taskId);
-      console.log(dbHandler.getTask(taskId));
-    } catch (err) {
-      console.log('Error:', err.message);
-    }
-  });
+  // router.get('/todo/:taskId', async (req, res) => {
+  //   try {
+  //     const taskId = req.params.taskId;
+  //     console.log(taskId);
+  //     await dbHandler.getTask(taskId);
+  //     console.log(dbHandler.getTask(taskId));
+  //   } catch (err) {
+  //     console.log('Error:', err.message);
+  //   }
+  // });
 
   router.put('/todo/delete', async (req, res) => {
     try {

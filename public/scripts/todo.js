@@ -145,7 +145,7 @@ const renderTasks = function(tasks) {
     }
     if (task.status_id === 2) {
       $('#' + task.key).append(`
-        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-task-name="${task.title}" data-task-desc="${task.description}">
           <img class='checkbox checked' src="../images/checked.png">
           <span class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
@@ -154,7 +154,7 @@ const renderTasks = function(tasks) {
       `);
     } else if (task.status_id === 1) {
       $('#' + task.key).append(`
-        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-task-name="${task.title}" data-task-desc="${task.description}">
           <img class='checkbox' src="../images/not-checked.png">
           <span class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
@@ -210,7 +210,7 @@ $(() => {
       console.log('#' + cat[0].key);
       // console.log(lanes);
       $('#' + cat[0].key).append(`
-        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${inputTask.val()}" data-task-desc="">
+        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-task-name="${inputTask.val()}" data-task-desc="">
           <img class='checkbox' src="../images/not-checked.png">
           <span class='task-name'>${inputTask.val()}</span>
           <span class='x'>&#x2715</span>
@@ -227,21 +227,16 @@ $(() => {
   };
 
   // Open modal with task information
-  $('#exampleModal').on('show.bs.modal', function (event) {
+  $('#taskModal').on('show.bs.modal', function (event) {
     const button = $(event.relatedTarget);
     const taskName = button.data('task-name');
+    const taskDesc = button.data('task-desc');
     const taskId = button.attr('id').split('-')[1];
-    const taskDesc = await $.ajax(`/todo/${taskId}`, { method: 'GET' });
-    console.log(taskDesc);
     const modal = $(this);
-    try {
-      modal.find('.modal-title').text('Edit Task: ' + taskName);
-      modal.find('.modal-body #task-name').val(taskName);
-      modal.find('.modal-body #task-desc').val(taskDesc);
-      modal.find('.modal-body #task-id').val(taskId);
-    } catch (err) {
-      console.error(err);
-    }
+    modal.find('.modal-title').text('Edit Task: ' + taskName);
+    modal.find('.modal-body #task-name').val(taskName);
+    modal.find('.modal-body #task-desc').val(taskDesc);
+    modal.find('.modal-body #task-id').val(taskId);
   });
 
   // Defines submit task update behaviour
@@ -251,8 +246,9 @@ $(() => {
     const taskDesc = $('#task-desc').val();
     console.log(taskId, taskName, taskDesc);
     updateTask(taskId, taskName, taskDesc);
-    $('#exampleModal').modal('hide');
+    $('#taskModal').modal('hide');
     $('#task-' + taskId + ' .task-name').replaceWith(taskName);
+    $('#task-' + taskId).attr('data-task-desc', taskDesc);
   };
 
   // Submits task update on click
