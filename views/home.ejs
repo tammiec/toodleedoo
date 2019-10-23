@@ -72,6 +72,15 @@
                 <label for="message-text" class="col-form-label">Description:</label>
                 <textarea class="form-control" id="task-desc"></textarea>
               </div>
+              <div class="form-group">
+                  <label for="resources" class="additional-resources col-form-label">Additional Resources:</label>
+                  <div class='resource-form'>
+                    <input type="text" class="form-control resource-title" name="resource-title" placeholder="Resource Name" required>
+                    <input type="text" class="form-control resource-link" name="resource-link" placeholder="Link" required>
+                    <input type="submit" class="btn btn-sm">
+                  </div>
+                  <li class="list-group-item" id="task-${cat[0].taskId}"><a href="#">Link Title</a></li>
+              </div>
             </div>
           <div id='task-created'>Created on: <em>DATE GOES HERE</em></div>
           <div id='task-due'>Due on: <em>DATE GOES HERE</em></div>

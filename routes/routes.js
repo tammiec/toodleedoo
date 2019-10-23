@@ -191,6 +191,16 @@ module.exports = (db, dbHandler) => {
     }
   });
 
+  // Gets all resources for tasks owned by current user
+  router.get('/todo/resources', async (req, res) => {
+    try {
+      const resources = await dbHandler.getResources(res.locals.user.id);
+      res.send(resources.rows);
+    } catch (err) {
+      console.log('Error:', err.message);
+    }
+  });
+
   // 404 Page Not Found
   router.get('/*', (req, res) => {
     res.render('404', { layout: 'layouts/main.ejs' });

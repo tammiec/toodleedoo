@@ -176,6 +176,14 @@ const loadTasks = function() {
   });
 };
 
+const renderResources = function() {
+
+};
+
+const loadResources = function() {
+
+};
+
 // Document Ready
 $(() => {
 
@@ -263,6 +271,11 @@ $(() => {
     if (e.which === 13) {
       submitUpdate();
     }
+  });
+
+  $('.resource-form').hide();
+  $('.additional-resources').click(() => {
+    $('.resource-form').slideToggle();
   });
 
 });
