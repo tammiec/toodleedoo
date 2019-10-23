@@ -1,10 +1,9 @@
 @import 'partials/variables';
 @import 'partials/base';
 
-@media (max-height: 750px) and (max-width: 750px) {
+@media (max-width: 750px) {
   div.alert-danger.alert {
-    padding-top: 0;
-    padding-bottom: 0;
+
     height: 60px;
     width: 98%;
     left: 1%;
@@ -12,7 +11,9 @@
 }
 div.alert-danger {
   position: relative;
-  top: 120px;
+  padding-top: 0;
+  padding-bottom: 0;
+  top: 100px;
   left: 20%;
   opacity: .8;
   width: 60%;
