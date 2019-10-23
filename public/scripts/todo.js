@@ -50,13 +50,13 @@ const handleChecked = (ob) => {
 };
 
 
-const updateTitle = async (taskId, taskName) => {
+const updateTask = async (taskId, taskName, taskDesc) => {
   try {
-    await $.ajax(`/todo/update?taskId=${taskId}&taskName=${taskName}`, {method: 'PUT'});
+    await $.ajax(`/todo/update?taskId=${taskId}&taskName=${taskName || null}&taskDesc=${taskDesc || null}`, {method: 'PUT'});
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 // Defines listeners for individual tasks
 // const toDoBehaviour = function() {
@@ -88,7 +88,6 @@ const toDoBehaviour = function(id) {
   $('#task-' + id + ' .star img').click(function(event) {
     event.stopPropagation();
     let importance = $(this).attr('src');
-    const taskName = ($(this).siblings('.task-name').val());
     if (importance === '../images/not-important.png') {
       //call updateStatus with 'true' as a string
       updateStatus(id, 'true');
@@ -101,37 +100,37 @@ const toDoBehaviour = function(id) {
     $(this).attr('src', importance);
   });
 
-  // click on the edit button to edit task
-  $('#task-' + id + ' .task-name').each(function(event) {
-    //Reference the Label.
-    const label = $(this);
-    const editButton = $(this).siblings('.edit-task');
-    //Add a TextBox next to the Label.
-    label.after("<input type='text' style='display:none'/>");
-    //Reference the TextBox.
-    const textbox = $(this).next();
-    //Set the name attribute of the TextBox.
-    textbox[0].name = this.id.replace("lbl", "txt");
-    //Assign the value of Label to TextBox.
-    textbox.val(label.html());
-    //When Label is clicked, hide Label and show TextBox.
-    editButton.click(function (event) {
-      event.stopPropagation();
-      $(label).hide();
-      $(label).next().show();
-    });
-    //When focus is lost from TextBox, hide TextBox and show Label.
-    textbox.keypress(function (e) {
-      if (e.which === 13) {
-        const taskId = ($(this).parent().attr('id')).split('-')[1];
-        const taskName = $(this).val();
-        updateTitle(taskId, taskName);
-        $(this).hide();
-        $(this).prev().html(taskName);
-        $(this).prev().show();
-      }
-    });
-});
+  // // click on the edit button to edit task
+  // $('#task-' + id + ' .task-name').each(function(event) {
+  //   //Reference the Label.
+  //   const label = $(this);
+  //   const editButton = $(this).siblings('.edit-task');
+  //   //Add a TextBox next to the Label.
+  //   label.after("<input type='text' style='display:none'/>");
+  //   //Reference the TextBox.
+  //   const textbox = $(this).next();
+  //   //Set the name attribute of the TextBox.
+  //   textbox[0].name = this.id.replace("lbl", "txt");
+  //   //Assign the value of Label to TextBox.
+  //   textbox.val(label.html());
+  //   //When Label is clicked, hide Label and show TextBox.
+  //   editButton.click(function (event) {
+  //     event.stopPropagation();
+  //     $(label).hide();
+  //     $(label).next().show();
+  //   });
+  //   //When focus is lost from TextBox, hide TextBox and show Label.
+  //   textbox.keypress(function (e) {
+  //     if (e.which === 13) {
+  //       const taskId = ($(this).parent().attr('id')).split('-')[1];
+  //       const taskName = $(this).val();
+  //       updateTitle(taskId, taskName);
+  //       $(this).hide();
+  //       $(this).prev().html(taskName);
+  //       $(this).prev().show();
+  //     }
+  //   });
+  // });
 };
 
 // creates list items for existing tasks
@@ -147,7 +146,7 @@ const renderTasks = function(tasks) {
           <span class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
-          <span class='edit-task'>
+          <span class='edit-task' data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
           <img src="../images/edit.png"></span>
         </li>
       `);
@@ -157,7 +156,7 @@ const renderTasks = function(tasks) {
           <span class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
-          <span class='edit-task'><img src="../images/edit.png"></span>
+          <span class='edit-task' data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}"><img src="../images/edit.png"></span>
         </li>
       `);
     }
@@ -188,41 +187,64 @@ $(() => {
   loadTasks();
 
   const getCategoryBtn = $('#getCategoryBtn');
-    const inputTask = $('#inputTask');
+  const inputTask = $('#inputTask');
 
-    getCategoryBtn.on('click', (e) => {
+  getCategoryBtn.on('click', (e) => {
+    getCategory();
+  });
+
+  inputTask.keypress(function (e) {
+    if (e.which == 13) {
       getCategory();
-    });
+      return false;    //<---- Add this line
+    }
+  });
+  // AJAX GET - Get category from server
+  const getCategory = async () => {
+    try {
+      console.log(inputTask.val());
+      const cat = await $.ajax('/category?input=' + inputTask.val(), { method: 'GET' });
+      console.log(cat[0]);
+      console.log('#' + cat[0].key);
+      // console.log(lanes);
+      $('#' + cat[0].key).append(`
+        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">
+        <span class='task-name'>${inputTask.val()}</span>
+        <span class='x'>&#x2715</span>
+        <span class='star'><img class="marked-important" src="../images/not-important.png"></span>
+        <span class='edit-task' data-toggle="modal" data-target="#exampleModal" data-task-name="${inputTask.val()}" data-task-desc=""><img src="../images/edit.png"></span>
+        </li>`
+      );
+      // alert(cat[0].title);
+      $('#inputTask').val('');
+      // toDoBehaviour();
+      toDoBehaviour(cat[0].taskId);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    inputTask.keypress(function (e) {
-      if (e.which == 13) {
-        getCategory();
-        return false;    //<---- Add this line
-      }
-    });
-    // AJAX GET - Get category from server
-    const getCategory = async () => {
-      try {
-        console.log(inputTask.val());
-        const cat = await $.ajax('/category?input=' + inputTask.val(), { method: 'GET' });
-        console.log(cat[0]);
-        console.log('#' + cat[0].key);
-        // console.log(lanes);
-        $('#' + cat[0].key).append(`
-          <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">
-          <span class='task-name'>${inputTask.val()}</span>
-          <span class='x'>&#x2715</span>
-          <span class='star'><img class="marked-important" src="../images/not-important.png"></span>
-          <span class='edit-task'><img src="../images/edit.png"></span>
-          </li>`
-        );
-        // alert(cat[0].title);
-        $('#inputTask').val('');
-        // toDoBehaviour();
-        toDoBehaviour(cat[0].taskId);
+  // Modal behaviour
+  $('#exampleModal').on('show.bs.modal', function (event) {
+    const button = $(event.relatedTarget);
+    const taskName = button.data('task-name');
+    const taskDesc = button.data('task-desc');
+    const taskId = button.parent().attr('id').split('-')[1];
+    const modal = $(this);
+    modal.find('.modal-title').text('Edit Task: ' + taskName);
+    modal.find('.modal-body #task-name').val(taskName);
+    modal.find('.modal-body #task-desc').val(taskDesc);
+    modal.find('.modal-body #task-id').val(taskId);
+  });
 
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  // Submit task update
+  $('#update-task-btn').click(() => {
+    const taskId = $('#task-id').val();
+    const taskName = $('#task-name').val();
+    const taskDesc = $('#task-desc').val();
+    console.log(taskId, taskName, taskDesc);
+    updateTask(taskId, taskName, taskDesc);
+    $('#exampleModal').modal('hide');
+  });
+
 });
