@@ -22,18 +22,26 @@ const deleteTask = async (taskId) => {
   }
 };
 
-const updateStatus = async (taskId, taskName, important = false) => {
+const updateStatus = async (taskId, important = false) => {
   try {
     //add conditional
     if (important) {
-      await $.ajax(`/todo/update?taskId=${taskId}&taskName=${taskName}&important=${important}`, {method: 'PUT'});
+      await $.ajax(`/todo/update?taskId=${taskId}&important=${important}`, {method: 'PUT'});
     } else {
-      await $.ajax(`/todo/update?taskId=${taskId}&taskName=${taskName}`, {method: 'PUT'});
+      await $.ajax(`/todo/update?taskId=${taskId}`, {method: 'PUT'});
     }
   } catch (err) {
     console.error(err);
   }
 };
+
+const updateTitle = async (taskId, taskName) => {
+  try {
+    await $.ajax(`/todo/update?taskId=${taskId}&taskName=${taskName}`, {method: 'PUT'});
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 // Defines listeners for individual tasks
 // const toDoBehaviour = function() {
@@ -41,11 +49,11 @@ const toDoBehaviour = function(id) {
   // Mark task item as complete
   // $('.list-group-item').click(function() {
   $('#task-' + id).click(function(event) {
-    event.stopPropagation();
-    $(this).toggleClass('checked');
     const taskId = ($(this).attr('id')).split('-')[1];
-    const taskName = ($(this).children('.task-name').val());
-    updateStatus(taskId, taskName);
+    // if ($(event.target) === $(this)) {
+    $(this).toggleClass('checked');
+    updateStatus(taskId);
+    // }
   });
 
   // Mark task item as important
@@ -54,7 +62,7 @@ const toDoBehaviour = function(id) {
   // });
 
   // $('.list-group-item span').click(function() {
-  $('#task-' + id + ' .x').click(function() {
+  $('#task-' + id + ' .x').click(function(event) {
     const taskId = ($(this).parent().attr('id')).split('-')[1];
     // console.log('taskId', taskId);
     deleteTask(taskId);
@@ -69,21 +77,21 @@ const toDoBehaviour = function(id) {
     const taskName = ($(this).siblings('.task-name').val());
     if (importance === '../images/not-important.png') {
       //call updateStatus with 'true' as a string
-      updateStatus(id, taskName, 'true');
+      updateStatus(id, 'true');
       importance = '../images/important-a.png';
     } else {
       //call updateStatus with 'false' as a string
-      updateStatus(id, taskName, 'false');
+      updateStatus(id, 'false');
       importance = '../images/not-important.png';
     }
     $(this).attr('src', importance);
   });
 
   // click on the edit button to edit task
-  $(".task-name").each(function(event) {
+  $('#task-' + id + ' .task-name').each(function(event) {
     //Reference the Label.
     const label = $(this);
-    const editButton = $(this).nextAll('.edit-task');
+    const editButton = $(this).siblings('.edit-task');
     //Add a TextBox next to the Label.
     label.after("<input type='text' style='display:none'/>");
     //Reference the TextBox.
@@ -93,15 +101,16 @@ const toDoBehaviour = function(id) {
     //Assign the value of Label to TextBox.
     textbox.val(label.html());
     //When Label is clicked, hide Label and show TextBox.
-    editButton.click(function () {
-        $(label).hide();
-        $(label).next().show();
+    editButton.click(function (event) {
+      event.stopPropagation();
+      $(label).hide();
+      $(label).next().show();
     });
     //When focus is lost from TextBox, hide TextBox and show Label.
     textbox.focusout(function () {
       const taskId = ($(this).parent().attr('id')).split('-')[1];
       const taskName = $(this).val();
-      updateStatus(taskId, taskName, 'false');
+      updateTitle(taskId, taskName);
       $(this).hide();
       $(this).prev().html(taskName);
       $(this).prev().show();
@@ -149,6 +158,8 @@ const loadTasks = function() {
     }
   });
 };
+
+// Document Ready
 $(() => {
 
   loadTasks();
