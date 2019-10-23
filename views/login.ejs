@@ -15,19 +15,30 @@
           <div class="input-group-prepend">
             <div class="input-group-text"><i class="fas fa-envelope"></i></div>
           </div>
-          <input type="email" name="email" class="form-control" placeholder="Email" value="<%- locals.linEmail %>" required />
+          <input type="email" name="email" class="form-control" placeholder="Email" value="<%- locals.linEmail %>"
+            required />
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <div class="input-group-text"><i class="fas fa-key"></i></div>
           </div>
-          <input type="password" name="password" class="form-control" placeholder="Password" value="<%- locals.linEmail %>" required />
+          <input type="password" name="password" class="form-control" placeholder="Password"
+            value="<%- locals.linEmail %>" required />
         </div>
-        <div class="form-group">
-          <input type="submit" class="btn btn-login" value="Login" />
+        <div class="form-group flex-container-right">
+          <input type="submit" class="btn btn-login btn-action" value="Login" />
         </div>
-        <a href="/auth/google">Log in with your Google account</a>
-
+        <h2 class="flex-container-center">OR</h2>
+        <a href="/auth/google" class="no-link">
+          <div style="display: flex; " class="flex-container-center">
+            <div style="display: flex; background-color: white; align-items: center; padding: 10px;">
+              <img src="images/google.png" alt="" class="icon">
+            </div>
+            <div class="google-button">
+              Continue with Google
+            </div>
+          </div>
+        </a>
       </form>
 
       <form id='register-form' action='/signup' method='POST'>
@@ -36,23 +47,37 @@
           <div class="input-group-prepend">
             <div class="input-group-text"><i class="fas fa-user"></i></div>
           </div>
-          <input type="text" name="name" class="form-control" placeholder="Name" value="<%- locals.regName %>" required />
+          <input type="text" name="name" class="form-control" placeholder="Name" value="<%- locals.regName %>"
+            required />
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <div class="input-group-text"><i class="fas fa-envelope"></i></div>
           </div>
-          <input type="text" name="email" class="form-control" placeholder="Email" value="<%- locals.regEmail %>" required/>
+          <input type="text" name="email" class="form-control" placeholder="Email" value="<%- locals.regEmail %>"
+            required />
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <div class="input-group-text"><i class="fas fa-key"></i></div>
           </div>
-          <input type="password" name="password" class="form-control" placeholder="Password" value="<%- locals.regPwd %>" required />
+          <input type="password" name="password" class="form-control" placeholder="Password"
+            value="<%- locals.regPwd %>" required />
         </div>
-        <div class="form-group">
+        <div class="form-group flex-container-right">
           <input type="submit" class="btn btn-register" value="Register" />
         </div>
+        <h2 class="flex-container-center">OR</h2>
+        <a href="/auth/google" class="no-link">
+          <div style="display: flex; " class="flex-container-center">
+            <div style="display: flex; background-color: white; align-items: center; padding: 10px;">
+              <img src="images/google.png" alt="" class="icon">
+            </div>
+            <div class="google-button">
+              Continue with Google
+            </div>
+          </div>
+        </a>
       </form>
 
     </div>

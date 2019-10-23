@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const isAuthenticated = require('../auth/is_auth');
 const api = require('../lib/api/api');
+const { upload, manageFile } = require('../lib/uploadFiles');
 
 module.exports = (db, dbHandler) => {
   // Home page
@@ -47,6 +48,16 @@ module.exports = (db, dbHandler) => {
       res.redirect('/');
     });
 
+  router.get('/login/facebook',
+    passport.authenticate('facebook'));
+
+  router.get('/return',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      console.log('Worked FB!!!!!!')
+      res.redirect('/');
+    });
+
   // Landing page
   router.get('/landing', (req, res) => {
     res.render('landing', { layout: 'layouts/main.ejs' });
@@ -57,10 +68,9 @@ module.exports = (db, dbHandler) => {
     res.render('profile', { layout: 'layouts/main.ejs' });
   });
 
-  router.put('/profile', isAuthenticated, async (req, res) => {
-    let { id, name, email, oldPassword, newPassword, photo } = req.body;
-    console.log('photo', photo);
-    console.log('req file', req.body.photo.filename);
+  router.put('/profile', isAuthenticated, upload.single('file'), async (req, res) => {
+    let { id, name, email, oldPassword, newPassword } = req.body;
+    let newFileName = manageFile(req.file);
     try {
       const userObj = await dbHandler.isRecord('users', { id }, true);
       if (oldPassword) {
@@ -69,11 +79,11 @@ module.exports = (db, dbHandler) => {
           let update = {};
           if (userObj.email !== email) update['email'] = email;
           if (userObj.name !== name) update['name'] = name;
+          if (newFileName) update['photo_url'] = newFileName;
           if (newPassword) update['password'] = bcrypt.hashSync(newPassword, 12);
           const res = await dbHandler.updateRecord('users', update, { id });
         } else {
           req.flash('error', 'Wrong password');
-          console.log('Not valid password');
           res.redirect('/profile');
           return;
         }
@@ -143,15 +153,17 @@ module.exports = (db, dbHandler) => {
     const key = req.query.catKey;
     const taskId = req.query.taskId;
     const important = req.query.important;
-    console.log('important', important);
-
+    const taskName = req.query.taskName;
     let obj;
+
     try {
       if (key) {
         const cat = await dbHandler.isRecord('categories', { key }, true);
         obj = { category_id: cat.id };
       } else if (important) {
         obj = { important: important };
+      } else if (taskName) {
+        obj = { title: taskName };
       } else {
         const toDo = await dbHandler.isRecord('to_do_items', { id: taskId }, true);
         let newStatus = (toDo.status_id === 1) ? 2 : 1;

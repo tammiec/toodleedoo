@@ -25,6 +25,7 @@ const deleteTask = async (taskId) => {
     // console.log(err);
   }
 };
+
 const updateStatus = async (taskId, important = false) => {
   try {
     //add conditional
@@ -49,15 +50,25 @@ const handleChecked = (ob) => {
 };
 
 
+const updateTitle = async (taskId, taskName) => {
+  try {
+    await $.ajax(`/todo/update?taskId=${taskId}&taskName=${taskName}`, {method: 'PUT'});
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 // Defines listeners for individual tasks
 // const toDoBehaviour = function() {
 const toDoBehaviour = function(id) {
   // Mark task item as complete
-  $('#task-' + id).click(function() {
-    $(this).toggleClass('checked');
+  // $('.list-group-item').click(function() {
+  $('#task-' + id).click(function(event) {
     const taskId = ($(this).attr('id')).split('-')[1];
+    // if ($(event.target) === $(this)) {
+    $(this).toggleClass('checked');
     updateStatus(taskId);
+    // }
   });
 
   // Mark task item as important
@@ -65,7 +76,8 @@ const toDoBehaviour = function(id) {
   //   $(this).toggleClass('important');
   // });
 
-  $('#task-' + id + ' span').click(function() {
+  // $('.list-group-item span').click(function() {
+  $('#task-' + id + ' .x').click(function(event) {
     const taskId = ($(this).parent().attr('id')).split('-')[1];
     // console.log('taskId', taskId);
     deleteTask(taskId);
@@ -73,9 +85,10 @@ const toDoBehaviour = function(id) {
   });
 
   //change the star img when clicked
-  $('#task-' + id + ' img').click(function(event) {
+  $('#task-' + id + ' .star img').click(function(event) {
     event.stopPropagation();
     let importance = $(this).attr('src');
+    const taskName = ($(this).siblings('.task-name').val());
     if (importance === '../images/not-important.png') {
       //call updateStatus with 'true' as a string
       updateStatus(id, 'true');
@@ -87,6 +100,38 @@ const toDoBehaviour = function(id) {
     }
     $(this).attr('src', importance);
   });
+
+  // click on the edit button to edit task
+  $('#task-' + id + ' .task-name').each(function(event) {
+    //Reference the Label.
+    const label = $(this);
+    const editButton = $(this).siblings('.edit-task');
+    //Add a TextBox next to the Label.
+    label.after("<input type='text' style='display:none'/>");
+    //Reference the TextBox.
+    const textbox = $(this).next();
+    //Set the name attribute of the TextBox.
+    textbox[0].name = this.id.replace("lbl", "txt");
+    //Assign the value of Label to TextBox.
+    textbox.val(label.html());
+    //When Label is clicked, hide Label and show TextBox.
+    editButton.click(function (event) {
+      event.stopPropagation();
+      $(label).hide();
+      $(label).next().show();
+    });
+    //When focus is lost from TextBox, hide TextBox and show Label.
+    textbox.keypress(function (e) {
+      if (e.which === 13) {
+        const taskId = ($(this).parent().attr('id')).split('-')[1];
+        const taskName = $(this).val();
+        updateTitle(taskId, taskName);
+        $(this).hide();
+        $(this).prev().html(taskName);
+        $(this).prev().show();
+      }
+    });
+});
 };
 
 // creates list items for existing tasks
@@ -97,9 +142,24 @@ const renderTasks = function(tasks) {
       imgSrc = '../images/important-a.png';
     }
     if (task.status_id === 2) {
-      $('#' + task.key).append(`<li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span class='x'>&#x2715</span><span class='star'><img class="marked-important" src="${imgSrc}"></span></li>`);
+      $('#' + task.key).append(`
+        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">
+          <span class='task-name'>${task.title}</span>
+          <span class='x'>&#x2715</span>
+          <span class='star'><img class="marked-important" src="${imgSrc}"></span>
+          <span class='edit-task'>
+          <img src="../images/edit.png"></span>
+        </li>
+      `);
     } else if (task.status_id === 1) {
-      $('#' + task.key).append(`<li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">${task.title}<span class='x'>&#x2715</span><span class='star'><img class="marked-important" src="${imgSrc}"></span></li>`);
+      $('#' + task.key).append(`
+        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)">
+          <span class='task-name'>${task.title}</span>
+          <span class='x'>&#x2715</span>
+          <span class='star'><img class="marked-important" src="${imgSrc}"></span>
+          <span class='edit-task'><img src="../images/edit.png"></span>
+        </li>
+      `);
     }
   }
 };
@@ -108,13 +168,14 @@ const renderTasks = function(tasks) {
 const loadTasks = function() {
   $.get('/todo', function(tasks) {
     renderTasks(tasks);
-
     //new, putting into a loop
     for (let task of tasks) {
       toDoBehaviour(task.id);
     }
   });
 };
+
+// Document Ready
 $(() => {
 
 
@@ -147,7 +208,14 @@ $(() => {
         console.log(cat[0]);
         console.log('#' + cat[0].key);
         // console.log(lanes);
-        $('#' + cat[0].key).append(`<li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${inputTask.val()}<span class='x'>&#x2715</span><span class='star'><img class="marked-important" src="../images/not-important.png"></span></li>`);
+        $('#' + cat[0].key).append(`
+          <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)">
+          <span class='task-name'>${inputTask.val()}</span>
+          <span class='x'>&#x2715</span>
+          <span class='star'><img class="marked-important" src="../images/not-important.png"></span>
+          <span class='edit-task'><img src="../images/edit.png"></span>
+          </li>`
+        );
         // alert(cat[0].title);
         $('#inputTask').val('');
         // toDoBehaviour();
