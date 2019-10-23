@@ -50,6 +50,10 @@ h3 {
   background-size: cover;
 }
 
+.picture {
+  width: 50px;
+}
+
 .profile-container {
   margin-top: -7vh;
   justify-self: center;
@@ -76,3 +80,5 @@ h3 {
   margin-top: 1em;
   float: right;
 }
+
+/*# sourceMappingURL=profile.css.map */
