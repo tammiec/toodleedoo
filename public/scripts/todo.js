@@ -228,7 +228,6 @@ $(() => {
 
   // Open modal with task information
   $('#taskModal').on('show.bs.modal', function (event) {
-    debugger;
     const button = $(event.relatedTarget);
     const taskName = button.data('name');
     const taskDesc = button.data('desc');
@@ -242,7 +241,6 @@ $(() => {
 
   // Defines submit task update behaviour
   const submitUpdate = function() {
-    debugger;
     const taskId = $('#task-id').val();
     const taskName = $('#task-name').val();
     const taskDesc = $('#task-desc').val();

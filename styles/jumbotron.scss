@@ -113,3 +113,8 @@
   height: 15px;
   margin-right: 5px;
 }
+
+#taskModal .modal-content {
+  border-radius: 2px;
+  background-color: $background-color;
+}
