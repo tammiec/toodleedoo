@@ -1,7 +1,7 @@
 <main class="main-page-container">
 
     <div class='container'>
-      <div class="new-todo form-group">
+      <div id="hideMe" class="new-todo form-group">
         <!--new btn added-->
         <button id="clearAll" class="btn btn-submit">Clear All</button>
 
@@ -14,35 +14,35 @@
       <div class="card">
         <h5 class="card-header">To Watch</h5>
         <div class="card-body" ondrop="moveToDo(event)" ondragover="allowDrop(event)">
-          <ul id='toWatch' class="list-group list-group-flush">
+          <ul id='toWatch' class="refill list-group list-group-flush">
           </ul>
         </div>
       </div>
       <div class="card">
         <h5 class="card-header">To Read</h5>
         <div class="card-body" ondrop="moveToDo(event)" ondragover="allowDrop(event)">
-          <ul id='toRead' class="list-group list-group-flush">
+          <ul id='toRead' class="refill list-group list-group-flush">
           </ul>
         </div>
       </div>
       <div class="card">
         <h5 class="card-header">To Eat</h5>
         <div class="card-body" ondrop="moveToDo(event)" ondragover="allowDrop(event)">
-          <ul id='toEat' class="list-group list-group-flush">
+          <ul id='toEat' class="refill list-group list-group-flush">
           </ul>
         </div>
       </div>
       <div class="card">
         <h5 class="card-header">To Buy</h5>
         <div class="card-body" ondrop="moveToDo(event)" ondragover="allowDrop(event)">
-          <ul id='toBuy' class="list-group list-group-flush">
+          <ul id='toBuy' class="refill list-group list-group-flush">
           </ul>
         </div>
       </div>
       <div class="card">
           <h5 class="card-header">Miscellaneous</h5>
           <div class="card-body" ondrop="moveToDo(event)" ondragover="allowDrop(event)">
-            <ul id='misc' class="list-group list-group-flush">
+            <ul id='misc' class="refill list-group list-group-flush">
             </ul>
           </div>
         </div>
