@@ -145,18 +145,18 @@ const renderTasks = function(tasks) {
     }
     if (task.status_id === 2) {
       $('#' + task.key).append(`
-        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${task.title}" data-desc="${task.description}">
           <img class='checkbox checked' src="../images/checked.png">
-          <span class='task-name'>${task.title}</span>
+          <span id="task-text-${task.id}" class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
         </li>
       `);
     } else if (task.status_id === 1) {
       $('#' + task.key).append(`
-        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${task.title}" data-desc="${task.description}">
           <img class='checkbox' src="../images/not-checked.png">
-          <span class='task-name'>${task.title}</span>
+          <span id="task-text-${task.id}" class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
         </li>
@@ -210,7 +210,7 @@ $(() => {
       console.log('#' + cat[0].key);
       // console.log(lanes);
       $('#' + cat[0].key).append(`
-        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-task-name="${inputTask.val()}" data-task-desc="">
+        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${inputTask.val()}" data-task-desc="">
           <img class='checkbox' src="../images/not-checked.png">
           <span class='task-name'>${inputTask.val()}</span>
           <span class='x'>&#x2715</span>
@@ -228,9 +228,10 @@ $(() => {
 
   // Open modal with task information
   $('#taskModal').on('show.bs.modal', function (event) {
+    debugger;
     const button = $(event.relatedTarget);
-    const taskName = button.data('task-name');
-    const taskDesc = button.data('task-desc');
+    const taskName = button.data('name');
+    const taskDesc = button.data('desc');
     const taskId = button.attr('id').split('-')[1];
     const modal = $(this);
     modal.find('.modal-title').text('Edit Task: ' + taskName);
@@ -241,21 +242,18 @@ $(() => {
 
   // Defines submit task update behaviour
   const submitUpdate = function() {
+    debugger;
     const taskId = $('#task-id').val();
     const taskName = $('#task-name').val();
     const taskDesc = $('#task-desc').val();
     console.log(taskId, taskName, taskDesc);
     updateTask(taskId, taskName, taskDesc);
     $('#taskModal').modal('hide');
-    $('#task-' + taskId + ' .task-name').replaceWith(taskName);
-    $('#task-' + taskId).attr('data-task-desc', taskDesc);
-    $('#task-' + taskId).attr('data-task-name', taskName);
-    // $('#taskModal').modal('dispose');
-    const modal = $('#taskModal');
-    modal.find('.modal-title').text('Edit Task: ' + taskName);
-    modal.find('.modal-body #task-name').val(taskName);
-    modal.find('.modal-body #task-desc').val(taskDesc);
-    modal.find('.modal-body #task-id').val(taskId);
+    $("#task-text-" + taskId).text(taskName);
+    // $('#task-' + taskId + ' .name').replaceWith(taskName); //not needed
+    $('#task-' + taskId).data('desc', taskDesc);
+    $('#task-' + taskId).data('name', taskName);
+    const dat = $('#task-' + taskId).data('desc');
   };
 
   // Submits task update on click
