@@ -193,9 +193,11 @@ module.exports = (db, dbHandler) => {
 
   // Gets all resources for tasks owned by current user
   router.get('/todo/resources', async (req, res) => {
+    const taskId = req.query.taskId;
     try {
-      const resources = await dbHandler.getResources(res.locals.user.id);
+      const resources = await dbHandler.getResources(res.locals.user.id, taskId);
       res.send(resources.rows);
+      console.log(resources.rows)
     } catch (err) {
       console.log('Error:', err.message);
     }

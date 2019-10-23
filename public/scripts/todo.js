@@ -176,12 +176,16 @@ const loadTasks = function() {
   });
 };
 
-const renderResources = function() {
-
+const renderResources = function(resources) {
+  for (let resource of resources[0].namelink) {
+    $('.additional-resources').append(`<li class="list-group-item"><a target='_blank' href="${resource[1]}">${resource[0]}</a></li>`)
+  };
 };
 
-const loadResources = function() {
-
+const loadResources = function(taskId) {
+  $.get(`/todo/resources?taskId=${taskId}`, (resources) => {
+    renderResources(resources);
+  })
 };
 
 // Document Ready
@@ -235,17 +239,26 @@ $(() => {
   };
 
   // Open modal with task information
-  $('#taskModal').on('show.bs.modal', function (event) {
-    const button = $(event.relatedTarget);
-    const taskName = button.data('name');
-    const taskDesc = button.data('desc');
-    const taskId = button.attr('id').split('-')[1];
-    const modal = $(this);
-    modal.find('.modal-title').text('Edit Task: ' + taskName);
-    modal.find('.modal-body #task-name').val(taskName);
-    modal.find('.modal-body #task-desc').val(taskDesc);
-    modal.find('.modal-body #task-id').val(taskId);
+  $('#taskModal').on('show.bs.modal', async function (event) {
+    try {
+      const button = $(event.relatedTarget);
+      const taskName = button.data('name');
+      const taskDesc = button.data('desc');
+      const taskId = button.attr('id').split('-')[1];
+      const modal = $(this);
+      await loadResources(taskId);
+      modal.find('.modal-title').text('Edit Task: ' + taskName);
+      modal.find('.modal-body #task-name').val(taskName);
+      modal.find('.modal-body #task-desc').val(taskDesc);
+      modal.find('.modal-body #task-id').val(taskId);
+    } catch (err) {
+      console.log(err);
+    }
   });
+
+  $('#taskModal').on('hidden.bs.modal', () => {
+    $('.additional-resources li').remove();
+  })
 
   // Defines submit task update behaviour
   const submitUpdate = function() {
@@ -274,8 +287,12 @@ $(() => {
   });
 
   $('.resource-form').hide();
-  $('.additional-resources').click(() => {
-    $('.resource-form').slideToggle();
+
+  $('.additional-resources').click((e) => {
+    const target = $(e.target);
+    if (target.is('.additional-resources')) {
+      $('.resource-form').slideToggle();
+    }
   });
 
 });
