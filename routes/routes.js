@@ -203,6 +203,23 @@ module.exports = (db, dbHandler) => {
     }
   });
 
+  // Creates a new resource for that task
+  router.post('/todo/resources', async (req, res) => {
+    const taskId = req.query.taskId;
+    const name = req.query.resourceName;
+    const link = req.query.resourceLink;
+    try {
+      const resource = await dbHandler.insertRecord('resources', {
+        task_id: taskId,
+        name: name,
+        link: link
+      });
+      console.log(resource.rows);
+    } catch (err) {
+      console.log('Error:', err.message);
+    }
+  });
+
   // 404 Page Not Found
   router.get('/*', (req, res) => {
     res.render('404', { layout: 'layouts/main.ejs' });

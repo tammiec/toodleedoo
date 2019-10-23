@@ -178,7 +178,7 @@ const loadTasks = function() {
 
 const renderResources = function(resources) {
   for (let resource of resources[0].namelink) {
-    $('.additional-resources').append(`<li class="list-group-item"><a target='_blank' href="${resource[1]}">${resource[0]}</a></li>`)
+    $('#additional-resources').append(`<li class="list-group-item"><a target='_blank' href="${resource[1]}">${resource[0]}</a></li>`)
   };
 };
 
@@ -257,7 +257,7 @@ $(() => {
   });
 
   $('#taskModal').on('hidden.bs.modal', () => {
-    $('.additional-resources li').remove();
+    $('#additional-resources li').remove();
   })
 
   // Defines submit task update behaviour
@@ -286,13 +286,33 @@ $(() => {
     }
   });
 
-  $('.resource-form').hide();
+  $('#resource-form').hide();
 
-  $('.additional-resources').click((e) => {
+  $('#additional-resources').click((e) => {
     const target = $(e.target);
-    if (target.is('.additional-resources')) {
-      $('.resource-form').slideToggle();
+    if (target.is('#additional-resources')) {
+      $('#resource-form').slideToggle();
     }
+  });
+
+  const submitNewResource = function() {
+    const taskId = $('#task-id').val();
+    const resourceName = $('#resource-name').val();
+    const resourceLink = $('#resource-link').val();
+    console.log(taskId, resourceName, resourceLink)
+    try {
+      $.ajax(`/todo/resources?taskId=${taskId}&resourceName=${resourceName}&resourceLink=${resourceLink}`, { method: 'POST' });
+      $('#additional-resources').append(`<li class="list-group-item"><a target='_blank' href="${resourceLink}">${resourceName}</a></li>`);
+      $('#resource-name').val('');
+      $('#resource-link').val('');
+      $('#resource-form').slideUp();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  $('#submit-resource').click(() => {
+    submitNewResource();
   });
 
 });
