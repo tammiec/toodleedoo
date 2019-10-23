@@ -130,12 +130,25 @@ module.exports = (db, dbHandler) => {
 
   router.get('/todo', async (req, res) => {
 
-    try {
-      const tasks = await dbHandler.getUserTasks(res.locals.user.id);
-      res.send(tasks.rows);
-    } catch (err) {
-      console.log('Error:', err.message);
+    let archived = req.query.archived;
+    console.log('ARCHIVED', archived);
+    let tasks;
+    if (archived) {
+      try {
+        tasks = await dbHandler.getUserTasks(res.locals.user.id, true);
+        res.send(tasks.rows);
+      } catch (err) {
+        console.log('Error', err.message);
+      }
+    } else {
+      try {
+        tasks = await dbHandler.getUserTasks(res.locals.user.id);
+        res.send(tasks.rows);
+      } catch (err) {
+        console.log('Error:', err.message);
+      }
     }
+
   });
 
   router.put('/todo/delete', async (req, res) => {
@@ -180,6 +193,7 @@ module.exports = (db, dbHandler) => {
       console.error(err);
     }
   });
+
 
   // 404 Page Not Found
   router.get('/*', (req, res) => {
