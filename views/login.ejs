@@ -28,8 +28,9 @@
         <div class="form-group flex-container-right">
           <input type="submit" class="btn btn-login btn-action" value="Login" />
         </div>
-        <h2 class="flex-container-center">OR</h2>
-        <a href="/auth/google" class="no-link">
+        <h5 class="flex-container-center or">OR</h5>
+        <!--INITIAL-->
+        <!-- <a href="/auth/google" class="no-link">
           <div style="display: flex; " class="flex-container-center">
             <div style="display: flex; background-color: white; align-items: center; padding: 10px;">
               <img src="images/google.png" alt="" class="icon">
@@ -37,6 +38,27 @@
             <div class="google-button">
               Continue with Google
             </div>
+          </div>
+        </a> -->
+        <!--END INITIAL-->
+        <a class="form-group input-group" href="/auth/google">
+          <div class="input-group-prepend">
+            <div class="input-group-text rm-border">
+              <img src="images/google.png" alt="" class="icon">
+            </div>
+          </div>
+          <div class="form-control google-button gf-btn">
+            Continue with Google
+          </div>
+        </a>
+        <a class="form-group input-group" href="/login/facebook">
+          <div class="input-group-prepend">
+            <div class="input-group-text rm-border">
+              <img src="images/facebook.svg" alt="" class="icon">
+            </div>
+          </div>
+          <div class="form-control facebook-button gf-btn">
+            Continue with Facebook
           </div>
         </a>
       </form>
@@ -67,10 +89,13 @@
         <div class="form-group flex-container-right">
           <input type="submit" class="btn btn-register" value="Register" />
         </div>
-        <h2 class="flex-container-center">OR</h2>
-        <a href="/auth/google" class="no-link">
-          <div style="display: flex; " class="flex-container-center">
-            <div style="display: flex; background-color: white; align-items: center; padding: 10px;">
+        <h5 class="flex-container-center or">OR</h5>
+
+        <!--INITIAL-->
+        <!--
+        <a href="/auth/google" class="no-link form-group input-group">
+          <div class="flex-container-center federation-container">
+            <div class="federation-inner">
               <img src="images/google.png" alt="" class="icon">
             </div>
             <div class="google-button">
@@ -78,16 +103,40 @@
             </div>
           </div>
         </a>
-        <a href="/login/facebook" class="no-link">
-          <div style="display: flex; " class="flex-container-center">
-            <div style="display: flex; background-color: white; align-items: center; padding: 10px;">
+        <a href="/login/facebook" class="no-link form-group input-group">
+          <div class="flex-container-center federation-container">
+            <div class="federation-inner">
               <img src="images/facebook.svg" alt="" class="icon">
             </div>
             <div class="facebook-button">
               Continue with Facebook
             </div>
           </div>
+        </a> -->
+        <!--END INITIAL-->
+
+        <!--NOW-->
+        <a class="form-group input-group" href="/auth/google">
+          <div class="input-group-prepend">
+            <div class="input-group-text rm-border">
+              <img src="images/google.png" alt="" class="icon">
+            </div>
+          </div>
+          <div class="form-control google-button gf-btn">
+            Continue with Google
+          </div>
         </a>
+        <a class="form-group input-group" href="/login/facebook">
+          <div class="input-group-prepend">
+            <div class="input-group-text rm-border">
+              <img src="images/facebook.svg" alt="" class="icon">
+            </div>
+          </div>
+          <div class="form-control facebook-button gf-btn">
+            Continue with Facebook
+          </div>
+        </a>
+        <!--NOW-->
       </form>
 
     </div>
