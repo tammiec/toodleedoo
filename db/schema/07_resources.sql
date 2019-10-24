@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS resources CASCADE;
+
+CREATE TABLE resources (
+  id SERIAL PRIMARY KEY NOT NULL,
+  task_id INTEGER REFERENCES to_do_items(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  link TEXT NOT NULL
+);

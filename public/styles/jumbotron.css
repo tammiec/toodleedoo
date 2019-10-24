@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
   align-content: center;
   */
   display: grid;
-  grid-template: 1fr 1fr/1fr 1fr;
+  grid-template: 1fr 1fr / 1fr 1fr;
   margin-top: 10vh;
 }
 
@@ -112,17 +112,12 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(0, 0, 0, 0.15);
 }
 
-.card ul li:hover .x {
+li:hover .x {
   display: inline;
 }
 
 .card ul li:hover .edit-task img {
   display: inline;
-}
-
-.checked {
-  background: rgba(0, 0, 0, 0.15);
-  text-decoration: line-through;
 }
 
 .x {
@@ -146,4 +141,33 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 
-/*# sourceMappingURL=jumbotron.css.map */
+.checkbox {
+  height: 15px;
+  margin-right: 5px;
+}
+
+#taskModal .modal-content {
+  border-radius: 2px;
+  background-color: #FFFF;
+}
+
+#additional-resources {
+  display: inline;
+}
+
+#additional-resources span {
+  float: right;
+}
+
+#additional-resources li {
+  width: 100%;
+}
+
+#resource-form {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#resource-form .form-control {
+  margin-bottom: 0.5em;
+}

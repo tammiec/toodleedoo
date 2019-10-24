@@ -3,9 +3,9 @@
     <div class='container'>
       <div class="new-todo form-group">
         <!--new btn added-->
-        <button id="clearAll" class="btn btn-submit">Clear All</button>
+        <button id="clearAll" class="btn btn-submit">Clear All Completed</button>
 
-        <input id="inputTask" type="text" class="form-control" placeholder="What task do you need doing?">
+        <input id="inputTask" type="text" class="form-control" placeholder="What task do you need doing?" autofocus='true'>
         <button id="getCategoryBtn" class="btn btn-submit">Categorize!</button>
       </div>
     </div>
@@ -47,6 +47,49 @@
           </div>
         </div>
 
+    </div>
+
+  <!-- Modal -->
+    <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="taskModalLabel">Edit Task</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <div class="form-group">
+                <input id="task-id" type="hidden"/>
+              </div>
+              <div class="form-group">
+                <label for="task-name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="task-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Description:</label>
+                <textarea class="form-control" id="task-desc"></textarea>
+              </div>
+              <div class="form-group">
+                  <label id='additional-resources' for="resources" class="col-form-label list-group list-group-flush">Additional Resources:<span>&#xff0b;</span></label>
+                  <div id='resource-form'>
+                    <input id='resource-name' type="text" class="form-control" name="resource-name" placeholder="Resource Name" required>
+                    <input id='resource-link' type="text" class="form-control" name="resource-link" placeholder="Link" required>
+                    <input id='submit-resource' type="submit" class="btn btn-sm">
+                  </div>
+              </div>
+            </div>
+          <div id='task-created'>Created on: <em>DATE GOES HERE</em></div>
+          <div id='task-due'>Due on: <em>DATE GOES HERE</em></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+            <button id='update-task-btn' type="button" class="btn">Update Task</button>
+          </div>
+        </div>
+      </div>
     </div>
 
   </main>

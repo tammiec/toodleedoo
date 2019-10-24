@@ -140,6 +140,17 @@ module.exports = (db, dbHandler) => {
     }
   });
 
+  // router.get('/todo/:taskId', async (req, res) => {
+  //   try {
+  //     const taskId = req.params.taskId;
+  //     console.log(taskId);
+  //     await dbHandler.getTask(taskId);
+  //     console.log(dbHandler.getTask(taskId));
+  //   } catch (err) {
+  //     console.log('Error:', err.message);
+  //   }
+  // });
+
   router.put('/todo/delete', async (req, res) => {
     try {
       const taskId = req.query.taskId;
@@ -155,6 +166,8 @@ module.exports = (db, dbHandler) => {
     const taskId = req.query.taskId;
     const important = req.query.important;
     const taskName = req.query.taskName;
+    const taskDesc = req.query.taskDesc;
+    console.log(req.query);
     let obj;
 
     try {
@@ -163,8 +176,8 @@ module.exports = (db, dbHandler) => {
         obj = { category_id: cat.id };
       } else if (important) {
         obj = { important: important };
-      } else if (taskName) {
-        obj = { title: taskName };
+      } else if (taskName && taskDesc) {
+        obj = { title: taskName, description: taskDesc };
       } else {
         const toDo = await dbHandler.isRecord('to_do_items', { id: taskId }, true);
         let newStatus = (toDo.status_id === 1) ? 2 : 1;
@@ -176,6 +189,47 @@ module.exports = (db, dbHandler) => {
       res.send(true);
     } catch (err) {
       console.error(err);
+    }
+  });
+
+  // Gets all resources for tasks owned by current user
+  router.get('/todo/resources', async (req, res) => {
+    const taskId = req.query.taskId;
+    try {
+      const resources = await dbHandler.getResources(res.locals.user.id, taskId);
+      res.send(resources.rows);
+      console.log(resources.rows)
+    } catch (err) {
+      console.log('Error:', err.message);
+    }
+  });
+
+  // Creates a new resource for that task
+  router.post('/todo/resources', async (req, res) => {
+    const taskId = req.query.taskId;
+    const name = req.query.resourceName;
+    const link = req.query.resourceLink;
+    console.log('posting');
+    try {
+      const resource = await dbHandler.insertRecord('resources', {
+        task_id: taskId,
+        name: name,
+        link: link
+      });
+      res.json(resource);
+    } catch (err) {
+      console.log('Error:', err.message);
+    }
+  });
+
+  // Creates a new resource for that task
+  router.delete('/todo/resources', async (req, res) => {
+    const resourceId = req.query.resourceId
+    try {
+       await dbHandler.deleteResource(resourceId);
+       res.send(true);
+    } catch (err) {
+      console.log('Error:', err.message);
     }
   });
 
