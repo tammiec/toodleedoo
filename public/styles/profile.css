@@ -42,13 +42,14 @@ h1, h2, h3, h4, h5, h6 {
     left: 1%;
   }
 }
+
 div.alert-danger {
   position: relative;
   padding-top: 0;
   padding-bottom: 0;
   top: 100px;
   left: 20%;
-  opacity: 0.8;
+  opacity: .8;
   width: 60%;
 }
 
@@ -104,5 +105,3 @@ h3 {
   margin-top: 1em;
   float: right;
 }
-
-/*# sourceMappingURL=profile.css.map */
