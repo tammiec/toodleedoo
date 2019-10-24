@@ -54,7 +54,7 @@ const updateTask = async (taskId, taskName, taskDesc) => {
   }
 };
 
-//when the ARCHIVED link is clicked it calls this functin
+//when the ARCHIVED link is clicked it calls this function
 const showArchived = () => {
   loadTasks('/todo?archived=true');
   $('#hideMe').slideUp('slow');
