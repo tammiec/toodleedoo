@@ -39,6 +39,7 @@ const showArchived = () => {
 // AJAX GET - Get category from server
 const getCategory = async () => {
   const inputTask = $('#inputTask');
+  console.log('theinputTYPE:', typeof inputTask.val());
   try {
     const cat = await $.ajax('/category?input=' + inputTask.val(), { method: 'GET' });
     $('#' + cat[0].key).append(`
