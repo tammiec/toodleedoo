@@ -186,7 +186,7 @@ body input ~ nav > ul > li {
   transition-delay: 0s;
 }
 
-body input ~ nav > ul > li > a {
+body input ~ nav > ul > li > a, body input ~ nav > ul > li > p {
   text-decoration: none;
   text-transform: uppercase;
   color: #FFFF;
@@ -198,6 +198,11 @@ body input ~ nav > ul > li > a {
 
 body input ~ nav > ul > li > a:hover {
   text-decoration: none;
+}
+
+body input ~ nav > ul > li > p:hover {
+  cursor: pointer;
+  color: #1662b5;
 }
 
 body input:checked ~ nav {

@@ -134,7 +134,7 @@ body {
           opacity: 0;
           transition: .5s;
           transition-delay: 0s;
-          > a {
+          > a, > p {
             text-decoration: none;
             text-transform: uppercase;
             color: $background-color;
@@ -145,6 +145,10 @@ body {
           }
           > a:hover {
             text-decoration: none;
+          }
+          > p:hover {
+            cursor: pointer;
+            color: #1662b5;
           }
         }
       }
