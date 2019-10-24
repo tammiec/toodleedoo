@@ -50,9 +50,10 @@ a {
   color: $accent-color;
 }
 
-.nav-link {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+@media (max-width: 576px) {
+  .nav-link {
+    padding: 0;
+  }
 }
 
 .navbar-nav {

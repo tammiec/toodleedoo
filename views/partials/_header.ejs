@@ -1,5 +1,7 @@
 <header class="main-header">
   <a class='logo' href="/"><img src='/images/logo.png' title='Logo'></a>
+
+  <!-- User Information -->
   <nav class="navbar navbar-expand-sm justify-content-end">
     <% if (locals.user) { %>
       <div class="navbar-inner user-view">
@@ -13,7 +15,7 @@
               </a>
             </li>
             <li>
-              <!--new hamburger-->
+              <!-- Drop Down Menu -->
               <input id="burger" type="checkbox" />
               <label for="burger">
                 <span></span>
@@ -24,27 +26,11 @@
                 <ul>
                   <li><a href="/">Home</a></li>
                   <li><a href= <%= locals.user.google_id ? "https://aboutme.google.com/" : "/profile" %> target= <%= locals.user.google_id ? "_blank" : "" %> >Edit Profile</a></li>
-                  <!-- <li><a href="/todo?status=3">Archived</a></li> -->
                   <li><p class="archived" onclick="showArchived()">Archived</p></li>
                   <li><a href="/logout">Logout</a></li>
                 </ul>
               </nav>
 
-              <!--old hamburg-->
-              <!-- <div class="menu-collapsed">
-                <div class="bar"></div>
-                <ul class="nav-list">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Update</a></li>
-                  <li><a href="/logout">Logout</a></li>
-                </ul>
-              </div> -->
-
-              <!-- <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown03">
-                <a class="dropdown-item" href="#">Update</a>
-                <a class="dropdown-item" href="#">Logout</a>
-              </div> -->
             </li>
           </ul>
       </div>

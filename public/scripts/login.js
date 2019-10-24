@@ -1,15 +1,17 @@
 const showRegister = () => {
+  $('#error-alert').hide();
   $("#login").removeClass('select');
   $("#register").addClass('select');
   $("#login-form").hide();
-  $("#register-form").show();
+  $("#register-form").fadeIn();
 };
 
 const showLogin = () => {
+  $('#error-alert').hide();
   $("#register").removeClass('select');
   $("#login").addClass('select');
   $("#register-form").hide();
-  $("#login-form").show();
+  $("#login-form").fadeIn();
 };
 
 $(() => {

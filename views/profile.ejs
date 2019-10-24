@@ -2,15 +2,19 @@
   <div class="profile-container">
 
     <form id="update-profile" enctype="multipart/form-data" action='/profile?_method=PUT' method='POST'>
+
       <h3>My Profile</h3>
+
       <div class="form-group">
         <label>Profile picture</label><img class="edit" src='images/edit.png'>
         <img id="profile-photo" class="profile-photo" src="<%= locals.user.photo_url ? locals.user.photo_url : '/images/avatar.png'%>" alt="Your beautiful profile photo">
         <input name="file" type="file" id="photo-upload" accept="image/*" style="display:none" />
       </div>
+
       <div class="form-group">
         <input name="id" type="hidden" value="<%= locals.user.id %>" />
       </div>
+
       <div class="form-group">
         <label>Name</label><img class="edit" src='images/edit.png'>
         <input name="name" id="new-name" type="text" class="form-control" placeholder="Update Name"
@@ -22,21 +26,25 @@
         <input name="email" id="new-email" type="text" class="form-control" placeholder="Update Email"
           value="<%= locals.user.email %>" />
       </div>
+
       <div class="form-group">
         <label>Password</label><img class="edit" src='images/edit.png'>
         <input name="newPassword" id="new-password" type="password" class="form-control"
           placeholder="New Password (*optional)" />
       </div>
+
       <div class="form-group" id="enter-password">
         <label>Enter Your Password</label>
         <input name="oldPassword" id="old-password" type="password" class="form-control" placeholder="Password"
           required />
       </div>
+
       <div class="form-group">
         <input type="submit" class="btn" value="Update Profile" />
       </div>
 
     </form>
+
   </div>
 </main>
 
