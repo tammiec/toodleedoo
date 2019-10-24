@@ -36,9 +36,21 @@ const showArchived = () => {
   $('#burger').prop('checked', false);
 };
 
+$('#input-error').hide();
+
+const validateInput = function(string) {
+  $('#input-error').empty();
+  if (!string) {
+    $('#input-error').append(`<h6>Please enter a task before categorizing</h6>`);
+    $('#input-error').slideDown();
+  }
+};
+
 // AJAX GET - Get category from server
 const getCategory = async () => {
   const inputTask = $('#inputTask');
+  $('#input-error').slideUp();
+  validateInput(inputTask.val());
   try {
     const cat = await $.ajax('/category?input=' + inputTask.val(), { method: 'GET' });
     $('#' + cat[0].key).append(`
@@ -55,4 +67,5 @@ const getCategory = async () => {
     console.error(err);
   }
 };
+
 
