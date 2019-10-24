@@ -17,6 +17,7 @@
   align-content: center;
   */
 
+  // display: none;
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
   margin-top: 10vh;
@@ -110,7 +111,8 @@
   display: none;
 }
 
-.checkbox {
+.checkbox, .undo {
   height: 15px;
   margin-right: 5px;
+  cursor: pointer;
 }

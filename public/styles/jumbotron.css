@@ -142,7 +142,8 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 
-.checkbox {
+.checkbox, .undo {
   height: 15px;
   margin-right: 5px;
+  cursor: pointer;
 }
