@@ -71,6 +71,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-deck {
+  padding-bottom: 1em;
   margin-top: 6em;
   margin-right: 1em;
   margin-left: 1em;
@@ -141,9 +142,10 @@ li:hover .x {
   display: none;
 }
 
-.checkbox {
+.checkbox, .undo {
   height: 15px;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 #taskModal .modal-content {

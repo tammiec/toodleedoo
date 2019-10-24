@@ -129,12 +129,26 @@ module.exports = (db, dbHandler) => {
   });
 
   router.get('/todo', async (req, res) => {
-    try {
-      const tasks = await dbHandler.getUserTasks(res.locals.user.id);
-      res.send(tasks.rows);
-    } catch (err) {
-      console.log('Error:', err.message);
+
+    let archived = req.query.archived;
+    console.log('ARCHIVED', archived);
+    let tasks;
+    if (archived) {
+      try {
+        tasks = await dbHandler.getUserTasks(res.locals.user.id, true);
+        res.send(tasks.rows);
+      } catch (err) {
+        console.log('Error', err.message);
+      }
+    } else {
+      try {
+        tasks = await dbHandler.getUserTasks(res.locals.user.id);
+        res.send(tasks.rows);
+      } catch (err) {
+        console.log('Error:', err.message);
+      }
     }
+
   });
 
   // router.get('/todo/:taskId', async (req, res) => {

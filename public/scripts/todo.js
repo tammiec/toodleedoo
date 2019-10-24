@@ -13,10 +13,8 @@
 //   `;
 // };
 
-// AJAX DELETE - delete task item
 const deleteTask = async (taskId) => {
   try {
-    console.log(taskId);
     if (taskId !== undefined) {
       await $.ajax(`/todo/delete?taskId=${taskId}`, { method: 'PUT'});
     }
@@ -25,9 +23,9 @@ const deleteTask = async (taskId) => {
   }
 };
 
+
 const updateStatus = async (taskId, important = false) => {
   try {
-    //add conditional
     if (important) {
       await $.ajax(`/todo/update?taskId=${taskId}&important=${important}`, {method: 'PUT'});
     } else {
@@ -41,10 +39,9 @@ const updateStatus = async (taskId, important = false) => {
 const handleChecked = (ob) => {
   ob.each(function() {
     let id = $(this)[0].id.split('-')[1];
-    console.log(id);
+
     deleteTask(id);
     $(this).remove();
-    console.log("DELETED");
   });
 };
 
@@ -57,6 +54,13 @@ const updateTask = async (taskId, taskName, taskDesc) => {
   }
 };
 
+//when the ARCHIVED link is clicked it calls this functin
+const showArchived = () => {
+  loadTasks('/todo?archived=true');
+  $('#hideMe').slideUp('slow');
+  $('#burger').prop('checked', false);
+};
+
 // Defines listeners for individual tasks
 // const toDoBehaviour = function() {
 const toDoBehaviour = function(id) {
@@ -65,6 +69,7 @@ const toDoBehaviour = function(id) {
   $(`#task-${id} .checkbox`).click(function(event) {
     event.stopPropagation();
     $(this).toggleClass('checked');
+    $(this).parent().toggleClass('checked-todo');
     updateStatus(id);
     if ($(this).hasClass('checked')) {
       $(this).attr('src', '../images/checked.png');
@@ -73,12 +78,16 @@ const toDoBehaviour = function(id) {
     }
   });
 
-  // Mark task item as important
-  // $('.list-group-item').dblclick(function() {
-  //   $(this).toggleClass('important');
-  // });
 
-  // $('.list-group-item span').click(function() {
+  //the undo button appears in the archived view,
+  //when clicked, sets status_id = 1 and removes todo from the DOM
+  $('#task-' + id + ' .undo').click(function(event) {
+    event.stopPropagation();
+    // let taskId = 'task-' + id;
+    updateStatus(id);
+    $(this).parent().remove();
+  });
+
   $('#task-' + id + ' .x').click(function(event) {
     event.stopPropagation()
     const taskId = ($(this).parent().attr('id')).split('-')[1];
@@ -145,7 +154,7 @@ const renderTasks = function(tasks) {
     }
     if (task.status_id === 2) {
       $('#' + task.key).append(`
-        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${task.title}" data-desc="${task.description}">
+        <li class="list-group-item checked-todo" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
           <img class='checkbox checked' src="../images/checked.png">
           <span id="task-text-${task.id}" class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
@@ -161,13 +170,31 @@ const renderTasks = function(tasks) {
           <span class='star'><img class="marked-important" src="${imgSrc}"></span>
         </li>
       `);
+    } else if (task.status_id === 3) {
+      $('#' + task.key).append(`
+        <li class="list-group-item" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+          <img class='undo' src="../images/undo2.png">
+          <span class='task-name'>${task.title}</span>
+
+          <span class='star'><img class="marked-important" src="${imgSrc}"></span>
+        </li>
+      `);
     }
   }
 };
 
+
 // loads all tasks from database
-const loadTasks = function() {
-  $.get('/todo', function(tasks) {
+const loadTasks = function(route) {
+
+  //added: empties all ul before adding li elements
+  //this is to accomodate the archived view functionality
+  $('.refill').each(function() {
+    $(this).empty();
+  });
+
+  $.get(route, function(tasks) {
+
     renderTasks(tasks);
     //new, putting into a loop
     for (let task of tasks) {
@@ -214,13 +241,13 @@ const loadResources = function(taskId) {
 $(() => {
 
 
-  $('#clearAll').click(function(event) {
-    // event.stopPropagation();
-    let allChecked = $('.checked');
+  $('#clearAll').click(function() {
+    let allChecked = $('.checked-todo');
     handleChecked(allChecked);
   });
 
-  loadTasks();
+
+  loadTasks('/todo');
 
   const getCategoryBtn = $('#getCategoryBtn');
   const inputTask = $('#inputTask');

@@ -17,6 +17,7 @@
   align-content: center;
   */
 
+  // display: none;
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
   margin-top: 10vh;
@@ -38,6 +39,7 @@
 }
 
 .card-deck {
+  padding-bottom: 1em;
   margin-top: 6em;
   margin-right: 1em;
   margin-left: 1em;
@@ -109,9 +111,10 @@ li:hover .x {
   display: none;
 }
 
-.checkbox {
+.checkbox, .undo {
   height: 15px;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 #taskModal .modal-content {

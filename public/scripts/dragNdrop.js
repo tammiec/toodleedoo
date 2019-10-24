@@ -28,6 +28,7 @@ const addToUl = function(target, data) {
   //target.parentNode
   //target.firstElementChild
   let elem = target.localName;
+  console.log('elem:', elem);
   let key;
   let id = data.split('-')[1];
   if (elem === 'div') {
@@ -36,6 +37,12 @@ const addToUl = function(target, data) {
   } else if (elem === 'li') {
     target.parentNode.appendChild(document.getElementById(data));
     key = target.parentNode.id;
+  } else if (elem === 'span') {
+    target.parentNode.parentNode.appendChild(document.getElementById(data));
+    key = target.parentNode.parentNode.id;
+  } else if (elem === 'img') {
+    target.parentNode.parentNode.parentNode.appendChild(document.getElementById(data));
+    key = target.parentNode.parentNode.parentNode.id;
   } else {
     target.appendChild(document.getElementById(data));
     key = target.id;
