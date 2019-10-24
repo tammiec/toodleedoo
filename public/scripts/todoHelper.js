@@ -54,7 +54,7 @@ const getCategory = async () => {
   try {
     const cat = await $.ajax('/category?input=' + inputTask.val(), { method: 'GET' });
     $('#' + cat[0].key).append(`
-      <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${inputTask.val()}" data-task-desc="">
+      <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${inputTask.val()}" data-desc="">
         <img class='checkbox' src="../images/not-checked.png">
         <span id="task-text-${cat[0].taskId}" class='task-name'>${inputTask.val()}</span>
         <span class='x'>&#x2715</span>

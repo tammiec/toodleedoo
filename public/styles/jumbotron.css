@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
   align-content: center;
   */
   display: grid;
-  grid-template: 1fr 1fr/1fr 1fr;
+  grid-template: 1fr 1fr / 1fr 1fr;
   margin-top: 10vh;
 }
 
@@ -183,5 +183,3 @@ li:hover .x {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
-
-/*# sourceMappingURL=jumbotron.css.map */

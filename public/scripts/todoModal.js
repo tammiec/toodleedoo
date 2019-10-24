@@ -1,3 +1,4 @@
+// Renders each resource
 const renderResources = function(resources) {
   for (let resource of resources) {
     console.log('render', resource);
@@ -22,6 +23,7 @@ const deleteResourceListener = function(resourceId) {
   });
 };
 
+// loads resources when modal is called
 const loadResources = function(taskId) {
   $.get(`/todo/resources?taskId=${taskId}`, (resources) => {
     console.log('load', resources)
@@ -32,6 +34,7 @@ const loadResources = function(taskId) {
   });
 };
 
+// AJAX PUT - update task in database
 const updateTask = async (taskId, taskName, taskDesc) => {
   try {
     await $.ajax(`/todo/update?taskId=${taskId}&taskName=${taskName || null}&taskDesc=${taskDesc || null}`, {method: 'PUT'});
@@ -59,6 +62,7 @@ $('#taskModal').on('show.bs.modal', async function (event) {
     console.log(err);
   }
 });
+
 // Defines submit task update behaviour
 const submitUpdate = function() {
   const taskId = $('#task-id').val();
@@ -73,6 +77,7 @@ const submitUpdate = function() {
   const dat = $('#task-' + taskId).data('desc');
 };
 
+// Submits a new resource for a task
 const submitNewResource = async function() {
   const taskId = $('#task-id').val();
   const resourceName = $('#resource-name').val();
@@ -91,6 +96,7 @@ const submitNewResource = async function() {
   }
 };
 
+// clear all resources when modal is closed
 $('#taskModal').on('hidden.bs.modal', () => {
   $('#additional-resources li').remove();
 });
@@ -107,6 +113,7 @@ $('.modal-body #task-name, .modal-body #task-desc').keypress((e) => {
   }
 });
 
+// click to expand resource form
 $('#additional-resources span').click((e) => {
   const target = $(e.target);
   if (target.is('#additional-resources span')) {
@@ -114,6 +121,22 @@ $('#additional-resources span').click((e) => {
   }
 });
 
+// submit resource on click
 $('#submit-resource').click(() => {
   submitNewResource();
 });
+
+// AJAX POST - duplicate task for new user
+const shareTask = async (email, taskId) => {
+  try {
+    await $.ajax(`/todo/share?taskId=${taskId}&email=${email}`, {method: 'POST'});
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+$('#submit-share-task').click(() => {
+  const taskId = $('#task-id').val();
+  const email = $('#share-email').val();
+  shareTask(email, taskId);
+})

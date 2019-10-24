@@ -110,5 +110,47 @@ module.exports = (dbHandler) => {
       console.log('Error:', err.message);
     }
   });
+
+  // Duplicates resource for another local user
+  router.post('/share', async(req, res) => {
+    const email = req.query.email;
+    const taskId = req.query.taskId
+    console.log('email', email);
+    try {
+      const isEmail = await dbHandler.isRecord('users', { email }, true);
+      console.log('isEmail:', isEmail)
+      const taskInfo = await dbHandler.isRecord('to_do_items', { id: taskId }, true);
+      console.log('taskInfo:', taskInfo)
+      const resourceInfo = await dbHandler.getResources(res.locals.user.id, taskId);
+      console.log('resourceInfo:', resourceInfo.rows)
+      if (isEmail) {
+        // Duplicates task for recipient
+        const newTask = await dbHandler.insertRecord('to_do_items', {
+          user_id: isEmail.id,
+          category_id: 6,
+          title: taskInfo.title,
+          description: taskInfo.description,
+          status_id: taskInfo.status_id,
+          important: false
+        }, true);
+        console.log('newTask:', newTask.rows)
+        // Duplicates resources for task
+        for (let resource of resourceInfo.rows) {
+          console.log(resource);
+          const newResource = await dbHandler.insertRecord('resources', {
+            task_id: newTask.rows[0].id,
+            name: resource.namelink[0][0],
+            link: resource.namelink[0][1]
+          });
+          console.log('newResources:', newResource)
+        }
+      } else {
+        console.log('user does not exist');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
   return router;
 };
