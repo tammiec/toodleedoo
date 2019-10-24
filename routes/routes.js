@@ -106,8 +106,41 @@ module.exports = (db, dbHandler) => {
   });
 
   router.get('/category', async (req, res) => {
+
+
+    const validateInput = function(string) {
+      let trimmed = string.trim();
+      if (trimmed.length === 0 || trimmed.length > 50) {
+        return false;
+      }
+
+      let allEnc = "";
+      let danger = [34, 39, 60, 62];
+      for (let i = 0; i < trimmed.length; i++) {
+        if (danger.includes(trimmed.charCodeAt(i))) {
+          allEnc += '&#';
+          allEnc += trimmed.charCodeAt(i);
+          allEnc += ';';
+        } else {
+          allEnc += trimmed[i];
+        }
+      }
+      return allEnc;
+    };
+
+
     try {
       const input = req.query.input;
+
+      let safeStr = validateInput(input);
+
+      if (!safeStr) {
+        res.send(false);
+        return;
+      }
+
+
+      console.log('input:::', input);
       let result = await api(input);
       result = !result ? [{ key: 'misc'}] : result;
       let keyName = result[0].key;
@@ -122,11 +155,12 @@ module.exports = (db, dbHandler) => {
       const task = await dbHandler.insertRecord('to_do_items', {
         user_id: res.locals.user.id,
         category_id: categoryNames[keyName],
-        title: input,
+        title: validateInput(input),
         description: null,
         status_id: 1
       });
       result[0]['taskId'] = task.rows[0].id;
+      result[0].safe = validateInput(input);
       console.log(result);
       res.json(result);
     } catch (err) {
