@@ -7,7 +7,7 @@ const isAuthenticated = require('../auth/is_auth');
 const { upload, manageFile } = require('../lib/uploadFiles');
 const api = require('../lib/api/api' + apiVersion);
 
-module.exports = (db, dbHandler) => {
+module.exports = (dbHandler) => {
   // Home page
   router.get('/', isAuthenticated, (req, res) => {
     console.log('API V', process.env.API_CORE_VERSION);
@@ -156,17 +156,6 @@ module.exports = (db, dbHandler) => {
     }
 
   });
-
-  // router.get('/todo/:taskId', async (req, res) => {
-  //   try {
-  //     const taskId = req.params.taskId;
-  //     console.log(taskId);
-  //     await dbHandler.getTask(taskId);
-  //     console.log(dbHandler.getTask(taskId));
-  //   } catch (err) {
-  //     console.log('Error:', err.message);
-  //   }
-  // });
 
   router.put('/todo/delete', async (req, res) => {
     try {
