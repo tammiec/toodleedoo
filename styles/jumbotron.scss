@@ -118,3 +118,23 @@ li:hover .x {
   border-radius: 2px;
   background-color: $background-color;
 }
+
+#additional-resources {
+  display: inline;
+}
+#additional-resources span {
+  float: right;
+}
+
+#additional-resources li {
+  width: 100%;
+}
+
+#resource-form {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#resource-form .form-control {
+  margin-bottom: 0.5em;
+}

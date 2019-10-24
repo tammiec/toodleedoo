@@ -269,6 +269,7 @@ $(() => {
       const taskId = button.attr('id').split('-')[1];
       const modal = $(this);
       await loadResources(taskId);
+      $('#resource-form').hide();
       modal.find('.modal-title').text('Edit Task: ' + taskName);
       modal.find('.modal-body #task-name').val(taskName);
       modal.find('.modal-body #task-desc').val(taskDesc);
@@ -308,11 +309,9 @@ $(() => {
     }
   });
 
-  $('#resource-form').hide();
-
-  $('#additional-resources').click((e) => {
+  $('#additional-resources span').click((e) => {
     const target = $(e.target);
-    if (target.is('#additional-resources')) {
+    if (target.is('#additional-resources span')) {
       $('#resource-form').slideToggle();
     }
   });
