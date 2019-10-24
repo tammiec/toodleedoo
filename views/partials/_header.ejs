@@ -24,9 +24,9 @@
                 <ul>
                   <li><a href="/">Home</a></li>
                   <li><a href= <%= locals.user.google_id ? "https://aboutme.google.com/" : "/profile" %> target= <%= locals.user.google_id ? "_blank" : "" %> >Edit Profile</a></li>
-                  <li><a href="/logout">Logout</a></li>
                   <!-- <li><a href="/todo?status=3">Archived</a></li> -->
                   <li><p class="archived" onclick="showArchived()">Archived</p></li>
+                  <li><a href="/logout">Logout</a></li>
                 </ul>
               </nav>
 

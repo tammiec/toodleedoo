@@ -189,6 +189,9 @@ body input ~ nav > ul > li > p:hover {
   cursor: pointer;
   color: #1662b5;
 }
+body input ~ nav > ul > li .archived {
+  margin-bottom: 0;
+}
 body input:checked ~ nav {
   height: 100%;
   transition-delay: 0s;
