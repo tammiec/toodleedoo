@@ -17,6 +17,20 @@ const GoogleStrategy      = require('passport-google-oauth').OAuth2Strategy;
 const app                 = express();
 const facebookStrategy    = require('passport-facebook').Strategy;
 const downloadAndSaveImg  = require('./lib/downloadSaveImage');
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+let opt;
+try {
+  opt = {
+    key: fs.readFileSync('./key.pem'),
+    cert: fs.readFileSync('./cert.pem'),
+    passphrase: process.env.SSL_KEY
+  };
+} catch(err) {
+  console.error(err.message);
+}
+
 
 // PG database client/connection setup
 const { Pool }        = require('pg');
@@ -123,6 +137,9 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/", mainRoutes(db, dbHandler));
 // Note: mount other resources here, using the same pattern above
 
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Example app listening on port ${PORT}`);
+// });
+
+http.createServer(app).listen(PORT);
+https.createServer(opt, app).listen(443);
