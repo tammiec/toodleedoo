@@ -13,10 +13,8 @@
 //   `;
 // };
 
-// AJAX DELETE - delete task item
 const deleteTask = async (taskId) => {
   try {
-    console.log(taskId);
     if (taskId !== undefined) {
       await $.ajax(`/todo/delete?taskId=${taskId}`, { method: 'PUT'});
     }
@@ -41,6 +39,7 @@ const updateStatus = async (taskId, important = false) => {
 const handleChecked = (ob) => {
   ob.each(function() {
     let id = $(this)[0].id.split('-')[1];
+
     deleteTask(id);
     $(this).remove();
   });
@@ -55,7 +54,7 @@ const updateTask = async (taskId, taskName, taskDesc) => {
   }
 };
 
-//SHOW ARCHIVED//
+//when the ARCHIVED link is clicked it calls this functin
 const showArchived = () => {
   loadTasks('/todo?archived=true');
   $('#hideMe').slideUp('slow');
@@ -70,6 +69,7 @@ const toDoBehaviour = function(id) {
   $(`#task-${id} .checkbox`).click(function(event) {
     event.stopPropagation();
     $(this).toggleClass('checked');
+    $(this).parent().toggleClass('checked-todo');
     updateStatus(id);
     if ($(this).hasClass('checked')) {
       $(this).attr('src', '../images/checked.png');
@@ -80,7 +80,7 @@ const toDoBehaviour = function(id) {
 
 
   //the undo button appears in the archived view,
-  //when clicked, sets status_id = 1 and removes from todo the DOM
+  //when clicked, sets status_id = 1 and removes todo from the DOM
   $('#task-' + id + ' .undo').click(function(event) {
     event.stopPropagation();
     // let taskId = 'task-' + id;
@@ -88,7 +88,6 @@ const toDoBehaviour = function(id) {
     $(this).parent().remove();
   });
 
-  // $('.list-group-item span').click(function() {
   $('#task-' + id + ' .x').click(function(event) {
     event.stopPropagation()
     const taskId = ($(this).parent().attr('id')).split('-')[1];
@@ -155,7 +154,7 @@ const renderTasks = function(tasks) {
     }
     if (task.status_id === 2) {
       $('#' + task.key).append(`
-        <li class="list-group-item checked" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
+        <li class="list-group-item checked-todo" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#exampleModal" data-task-name="${task.title}" data-task-desc="${task.description}">
           <img class='checkbox checked' src="../images/checked.png">
           <span class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
@@ -189,7 +188,7 @@ const renderTasks = function(tasks) {
 const loadTasks = function(route) {
 
   //added: empties all ul before adding li elements
-  //this to accomodate the archived view functionality
+  //this is to accomodate the archived view functionality
   $('.refill').each(function() {
     $(this).empty();
   });
@@ -207,10 +206,9 @@ const loadTasks = function(route) {
 // Document Ready
 $(() => {
 
-  // console.log(res.status);
-  $('#clearAll').click(function(event) {
-    // event.stopPropagation();
-    let allChecked = $('.checked');
+
+  $('#clearAll').click(function() {
+    let allChecked = $('.checked-todo');
     handleChecked(allChecked);
   });
 
