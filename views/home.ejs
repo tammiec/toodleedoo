@@ -53,6 +53,14 @@
         </div>
       </div>
 
+      <div class="card">
+        <h5 class="card-header">Shared Tasks</h5>
+        <div class="card-body" ondrop="moveToDo(event)" ondragover="allowDrop(event)">
+          <ul id='shared' class="refill list-group list-group-flush">
+          </ul>
+        </div>
+      </div>
+
     </div>
 
   <!-- Modal -->
@@ -92,6 +100,15 @@
                     <input id='submit-resource' type="submit" class="btn btn-sm">
                   </div>
               </div>
+
+              <div class="form-group">
+                <div id='share-task-form'>
+                    <label id='share-task' for="shared" class="list-group list-group-flush">Share With a Friend:</label>
+                    <input id='share-email' type="email" class="form-control" name="share-email" placeholder="Email" required>
+                    <input id='submit-share-task' type="submit" class="btn btn-sm">
+                  </div>
+              </div>
+
             </div>
 
           <!-- Display Created on and Due Dates (STRETCH) -->
