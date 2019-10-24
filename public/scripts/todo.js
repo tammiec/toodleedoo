@@ -176,16 +176,38 @@ const loadTasks = function() {
   });
 };
 
+// AJAX DELETE - delete resource
+const deleteResource = async (resourceId) => {
+  try {
+    await $.ajax(`/todo/resources?resourceId=${resourceId}`, { method: 'DELETE'});
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const renderResources = function(resources) {
-  for (let resource of resources[0].namelink) {
-    $('#additional-resources').append(`<li class="list-group-item"><a target='_blank' href="${resource[1]}">${resource[0]}</a></li>`)
+  for (let resource of resources) {
+    console.log('render', resource);
+    $('#additional-resources').append(`<li id="resource-id-${resource.id}"class="list-group-item"><a target='_blank' href="${resource.namelink[0][1]}">${resource.namelink[0][0]}</a><span class='x'>&#x2715</span></li>`)
   };
+};
+
+const deleteResourceListener = function(resourceId) {
+  $(`#resource-id-${resourceId} span`).click(function(event) {
+    event.stopPropagation();
+    deleteResource(resourceId);
+    $(this).parent().remove();
+  });
 };
 
 const loadResources = function(taskId) {
   $.get(`/todo/resources?taskId=${taskId}`, (resources) => {
+    console.log('load', resources)
     renderResources(resources);
-  })
+    for (let resource of resources) {
+      deleteResourceListener(resource.id);
+    }
+  });
 };
 
 // Document Ready
@@ -265,7 +287,7 @@ $(() => {
     const taskId = $('#task-id').val();
     const taskName = $('#task-name').val();
     const taskDesc = $('#task-desc').val();
-    console.log(taskId, taskName, taskDesc);
+    // console.log(taskId, taskName, taskDesc);
     updateTask(taskId, taskName, taskDesc);
     $('#taskModal').modal('hide');
     $("#task-text-" + taskId).text(taskName);
@@ -295,17 +317,19 @@ $(() => {
     }
   });
 
-  const submitNewResource = function() {
+  const submitNewResource = async function() {
     const taskId = $('#task-id').val();
     const resourceName = $('#resource-name').val();
     const resourceLink = $('#resource-link').val();
     console.log(taskId, resourceName, resourceLink)
     try {
-      $.ajax(`/todo/resources?taskId=${taskId}&resourceName=${resourceName}&resourceLink=${resourceLink}`, { method: 'POST' });
-      $('#additional-resources').append(`<li class="list-group-item"><a target='_blank' href="${resourceLink}">${resourceName}</a></li>`);
+      const resource = await $.ajax(`/todo/resources?taskId=${taskId}&resourceName=${resourceName}&resourceLink=${resourceLink}`, { method: 'POST' });
+      const resourceId = resource.rows[0].id;
+      $('#additional-resources').append(`<li id="resource-id-${resourceId}"class="list-group-item"><a target='_blank' href="${resourceLink}">${resourceName}</a><span class='x'>&#x2715</span></li>`);
       $('#resource-name').val('');
       $('#resource-link').val('');
       $('#resource-form').slideUp();
+      deleteResourceListener(resourceId);
     } catch (err) {
       console.log(err);
     }
@@ -314,5 +338,7 @@ $(() => {
   $('#submit-resource').click(() => {
     submitNewResource();
   });
+
+
 
 });

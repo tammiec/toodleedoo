@@ -208,13 +208,25 @@ module.exports = (db, dbHandler) => {
     const taskId = req.query.taskId;
     const name = req.query.resourceName;
     const link = req.query.resourceLink;
+    console.log('posting');
     try {
       const resource = await dbHandler.insertRecord('resources', {
         task_id: taskId,
         name: name,
         link: link
       });
-      console.log(resource.rows);
+      res.json(resource);
+    } catch (err) {
+      console.log('Error:', err.message);
+    }
+  });
+
+  // Creates a new resource for that task
+  router.delete('/todo/resources', async (req, res) => {
+    const resourceId = req.query.resourceId
+    try {
+       await dbHandler.deleteResource(resourceId);
+       res.send(true);
     } catch (err) {
       console.log('Error:', err.message);
     }
