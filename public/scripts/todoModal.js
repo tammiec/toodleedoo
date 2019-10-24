@@ -50,6 +50,14 @@ $('#taskModal').on('show.bs.modal', async function (event) {
     const button = $(event.relatedTarget);
     const taskName = button.data('name');
     const taskDesc = button.data('desc');
+    const createdDate = new Date(button.data('created')).toLocaleString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
     const taskId = button.attr('id').split('-')[1];
     const modal = $(this);
     await loadResources(taskId);
@@ -58,6 +66,7 @@ $('#taskModal').on('show.bs.modal', async function (event) {
     modal.find('.modal-body #task-name').val(taskName);
     modal.find('.modal-body #task-desc').val(taskDesc);
     modal.find('.modal-body #task-id').val(taskId);
+    modal.find('.modal-body #task-created span').text(createdDate);
   } catch (err) {
     console.log(err);
   }

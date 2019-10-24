@@ -76,7 +76,7 @@ module.exports = (dbHandler) => {
     try {
       const resources = await dbHandler.getResources(res.locals.user.id, taskId);
       res.send(resources.rows);
-      console.log(resources.rows)
+      // console.log(resources.rows)
     } catch (err) {
       console.log('Error:', err.message);
     }

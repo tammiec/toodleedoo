@@ -79,6 +79,7 @@ module.exports = (dbHandler) => {
         status_id: 1
       });
       result[0]['taskId'] = task.rows[0].id;
+      result[0]['createdDate'] = task.rows[0].date_created;
       console.log(result);
       res.json(result);
     } catch (err) {
