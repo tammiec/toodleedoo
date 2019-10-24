@@ -35,12 +35,13 @@ h3 {
 }
 
 .profile-photo {
-  width: 200px;
-  height: 200px;
+  width: 50%;
+  // height: 200px;
   border-radius: 100px;
   margin-top:20px;
   margin-bottom: 20px;
-  margin-left: 20%;
+  margin-left: 25%;
+  margin-right: 25%;
   cursor: pointer;
 }
 
@@ -53,6 +54,7 @@ h3 {
   background-color: $glass-background;
   backdrop-filter: $glass-blur;
   padding: 2em;
+  overflow-y: auto;
 }
 
 .edit {

@@ -1,4 +1,5 @@
 const showRegister = () => {
+  $('#error-alert').hide();
   $("#login").removeClass('select');
   $("#register").addClass('select');
   $("#login-form").hide();
@@ -6,6 +7,7 @@ const showRegister = () => {
 };
 
 const showLogin = () => {
+  $('#error-alert').hide();
   $("#register").removeClass('select');
   $("#login").addClass('select');
   $("#register-form").hide();

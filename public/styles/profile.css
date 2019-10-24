@@ -42,14 +42,13 @@ h1, h2, h3, h4, h5, h6 {
     left: 1%;
   }
 }
-
 div.alert-danger {
   position: relative;
   padding-top: 0;
   padding-bottom: 0;
   top: 100px;
   left: 20%;
-  opacity: .8;
+  opacity: 0.8;
   width: 60%;
 }
 
@@ -69,12 +68,12 @@ h3 {
 }
 
 .profile-photo {
-  width: 200px;
-  height: 200px;
+  width: 50%;
   border-radius: 100px;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 20%;
+  margin-left: 25%;
+  margin-right: 25%;
   cursor: pointer;
 }
 
@@ -87,6 +86,7 @@ h3 {
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
   padding: 2em;
+  overflow-y: auto;
 }
 
 .edit {
@@ -104,3 +104,5 @@ h3 {
   margin-top: 1em;
   float: right;
 }
+
+/*# sourceMappingURL=profile.css.map */
