@@ -246,7 +246,7 @@ $(() => {
       $('#' + cat[0].key).append(`
         <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${inputTask.val()}" data-task-desc="">
           <img class='checkbox' src="../images/not-checked.png">
-          <span class='task-name'>${inputTask.val()}</span>
+          <span id="task-text-${cat[0].taskId}" class='task-name'>${inputTask.val()}</span>
           <span class='x'>&#x2715</span>
           <span class='star'><img class="marked-important" src="../images/not-important.png"></span>
         </li>`
