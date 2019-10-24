@@ -3,7 +3,7 @@ const showRegister = () => {
   $("#login").removeClass('select');
   $("#register").addClass('select');
   $("#login-form").hide();
-  $("#register-form").show();
+  $("#register-form").fadeIn();
 };
 
 const showLogin = () => {
@@ -11,7 +11,7 @@ const showLogin = () => {
   $("#register").removeClass('select');
   $("#login").addClass('select');
   $("#register-form").hide();
-  $("#login-form").show();
+  $("#login-form").fadeIn();
 };
 
 $(() => {
