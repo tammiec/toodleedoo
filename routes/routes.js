@@ -1,14 +1,16 @@
+const apiVersion = process.env.CORE_API_VERSION;
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const express = require('express');
 const router = express.Router();
 const isAuthenticated = require('../auth/is_auth');
-const api = require('../lib/api/api');
 const { upload, manageFile } = require('../lib/uploadFiles');
+const api = require('../lib/api/api' + apiVersion);
 
 module.exports = (db, dbHandler) => {
   // Home page
   router.get('/', isAuthenticated, (req, res) => {
+    console.log('API V', process.env.API_CORE_VERSION);
     res.render('home', { layout: 'layouts/main.ejs' });
   });
   // Login - Sign In page
@@ -53,11 +55,12 @@ module.exports = (db, dbHandler) => {
   router.get('/return',
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
-      res.redirect('/test');
+      res.redirect('/');
     });
 
   //test route (Delete eventually)
   router.get('/test', isAuthenticated, (req, res) => {
+    console.log('API V', process.env.API_CORE_VERSION);
     res.render('test', { layout: 'layouts/main.ejs' });
   });
 
