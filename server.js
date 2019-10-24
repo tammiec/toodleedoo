@@ -1,7 +1,7 @@
+
+// #region Web server config and imports
 // load .env data into process.env
 require('dotenv').config();
-
-// Web server config
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || 'development';
 const express = require('express');
@@ -20,25 +20,24 @@ const downloadAndSaveImg = require('./lib/downloadSaveImage');
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
+// #endregion
 
+// #region Database and Model management
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-
 //New DB management
 const dbHandler = require('./lib/dbHandler');
 dbHandler.db = db;
-
 // Models
 const User = require('./models/usersModel');
 User.dbHandler = dbHandler;
+// #endregion
 
+// #region Middleware management
 require('./auth/passport');
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 app.use(methodOverride('_method'));
 app.set("view engine", "ejs");
@@ -51,7 +50,6 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 app.use(partials());
-
 app.use(session({
   secret: process.env.SECRET_KEY,
   resave: false,
@@ -60,11 +58,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+// #endregion
 
+// #region FID strategies
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL:  `http://localhost:${process.env.PORT}/oauthCallback/`
+  callbackURL:  `http://localhost:${PORT}/oauthCallback/`
 },
   async function (accessToken, refreshToken, profile, done) {
     try {
@@ -93,9 +93,9 @@ passport.use(new facebookStrategy({
       return done(null, false, { message: 'Error from Facebook Auth' });
     }
   }));
+// #endregion
 
-
-// Global Variables
+// #region Global Variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -108,20 +108,18 @@ app.use((req, res, next) => {
   // res.locals.JWT_KEY = 'this is my key';
   next();
 });
+// #endregion
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/api_users");
-const widgetsRoutes = require("./routes/api_widgets");
-const mainRoutes = require("./routes/routes");
+// #region Set Routes
+const mainRoutes = require("./routes/main_routes");
+const todoRoutes = require("./routes/todo_routes");
+app.use("/todo", todoRoutes(dbHandler));
+app.use("/", mainRoutes(dbHandler));
+  // 404 Page Not Found
+app.get('/*', (req, res) => res.render('404', { layout: 'layouts/main.ejs' }));
+// #endregion
 
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use("/", mainRoutes(db, dbHandler));
-// Note: mount other resources here, using the same pattern above
-
+// #region Start Server Listening
 app.listen(PORT, () => {
   console.log(`TOODLEEDOO listening on port ${PORT}`);
 });
@@ -139,4 +137,4 @@ if (process.env.SSL_KEY) {
     console.error(err.message);
   }
 }
-
+// #endregion
