@@ -129,14 +129,19 @@ $('#submit-resource').click(() => {
 // AJAX POST - duplicate task for new user
 const shareTask = async (email, taskId) => {
   try {
-    await $.ajax(`/todo/share?taskId=${taskId}&email=${email}`, {method: 'POST'});
+    const task = await $.ajax(`/todo/share?taskId=${taskId}&email=${email}`, {method: 'POST'});
+    console.log('task:', task);
+    return task
   } catch (err) {
     console.error(err);
   }
 };
 
-$('#submit-share-task').click(() => {
+$('#submit-share-task').click( async () => {
   const taskId = $('#task-id').val();
-  const email = $('#share-email').val();
-  shareTask(email, taskId);
-})
+  const email = $('#share-email');
+  const shared = await shareTask(email.val(), taskId);
+  email.val('');
+  console.log(shared)
+  $('#share-message').text(shared).fadeIn().delay(1000).fadeOut();
+});
