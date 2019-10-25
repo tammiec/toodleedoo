@@ -8,7 +8,10 @@ Toodleedoo is a smart to-do list application that helps you organize and sort yo
 
 New tasks are automatically sorted, and users can easily mark as complete, important, or delete right from the main view. Users can also click on the task to reveal a modal with more details.
 
-![Home Page](/docs/page-on-load.png)
+![Home Page - Categorization](/docs/gifs/categorize.gif)
+![Home Page - Functionality](/docs/gifs/functionality.gif)
+![Home Page - Drag/Drop & Modal](/docs/gifs/moveandresources.gif)
+
 
 #### Edit Task:
 
@@ -24,7 +27,7 @@ New tasks are automatically sorted, and users can easily mark as complete, impor
 
 #### Responsive Layout:
 
-![Responsive Layout](/docs/responsive.gif)
+![Responsive Layout](/docs/gifs/responsiveness.gif)
 
 
 ## Getting Started
@@ -69,6 +72,7 @@ New tasks are automatically sorted, and users can easily mark as complete, impor
 - **Cross-Browser Support**: the web app was built with Google Chrome in mind. In future, we would like to implement more cross-browser support, such as making all CSS features appear the same across browsers and implementing drag and drop on mobile (only work on Chrome).
 - **Security Features**: we would like to implement a more robust email validation process and password authentication when users register for an account, and allow users to delete their account.
 - **Custom Categories**: we would like to implement the option for users to add custom categories and make these categories smart as well. 
+- **Ordered Tasks**: add functionality to allow users to re-order their lists, and for starred items to automatically appear at the top of the list.
 
 ## Creators
 
