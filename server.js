@@ -80,7 +80,7 @@ passport.use(new GoogleStrategy({
 passport.use(new facebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-  callbackURL: '/return'
+  callbackURL: 'https://toodleedoo.com/return'
 },
   async function (accessToken, refreshToken, profile, done) {
     try {
