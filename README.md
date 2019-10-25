@@ -63,9 +63,12 @@ New tasks are automatically sorted, and users can easily mark as complete, impor
 - pg-native
 - sass
 
-## Known Bugs
+## Known Bugs & Future Development
 - **Archive Page**: currently only works when you navigate to this page from the Home Page. Users are not able to access this view from the Edit Profile Page.
 - **Share Task Feature**: currently only works with local users (ie. users who have not logged in with Google or Facebook). Also, this feature does not allow for dynamic sharing, and once the task is sent to another user, it belongs solely to that user. In future, we would like to make this a true task sharing feature.
+- **Cross-Browser Support**: the web app was built with Google Chrome in mind. In future, we would like to implement more cross-browser support, such as making all CSS features appear the same across browsers and implementing drag and drop on mobile (only work on Chrome).
+- **Security Features**: we would like to implement a more robust email validation process and password authentication when users register for an account
+- **Custom Categories**: we would like to implement the option for users to add custom categories and make these categories smart as well. 
 
 ## Creators
 
