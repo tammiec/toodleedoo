@@ -64,8 +64,8 @@ New tasks are automatically sorted, and users can easily mark as complete, impor
 - sass
 
 ## Known Bugs
-- Archive Page: currently only works when you navigate to this page from the Home Page. Users are not able to access this view from the Edit Profile Page.
-- Share Task Feature: currently only works with local users (ie. users who have not logged in with Google or Facebook). Also, this feature does not allow for dynamic sharing, and once the task is sent to another user, it belongs solely to that user. In future, we would like to make this a true task sharing feature.
+- **Archive Page**: currently only works when you navigate to this page from the Home Page. Users are not able to access this view from the Edit Profile Page.
+- **Share Task Feature**: currently only works with local users (ie. users who have not logged in with Google or Facebook). Also, this feature does not allow for dynamic sharing, and once the task is sent to another user, it belongs solely to that user. In future, we would like to make this a true task sharing feature.
 
 ## Creators
 
