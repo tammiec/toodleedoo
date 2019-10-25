@@ -57,11 +57,74 @@ module.exports = (dbHandler) => {
   });
 
   // Get Category
+  // router.get('/category', async (req, res) => {
+  //   try {
+  //     const input = req.query.input;
+  //     let result = await api(input);
+  //     result = !result ? [{ key: 'misc' }] : result;
+  //     let keyName = result[0].key;
+  //     const categoryNames = {
+  //       toWatch: 1,
+  //       toEat: 2,
+  //       toRead: 3,
+  //       toBuy: 4,
+  //       misc: 5
+  //     };
+  //     //added
+  //     const task = await dbHandler.insertRecord('to_do_items', {
+  //       user_id: res.locals.user.id,
+  //       category_id: categoryNames[keyName],
+  //       title: input,
+  //       description: null,
+  //       status_id: 1
+  //     });
+  //     result[0]['taskId'] = task.rows[0].id;
+  //     result[0]['createdDate'] = task.rows[0].date_created;
+  //     console.log(result);
+  //     res.json(result);
+  //   } catch (err) {
+  //     console.log('Error:', err.message);
+  //   }
+  // });
+
   router.get('/category', async (req, res) => {
+
+
+    const validateInput = function(string) {
+      let trimmed = string.trim();
+      if (trimmed.length === 0 || trimmed.length > 50) {
+        return false;
+      }
+
+      let allEnc = "";
+      let danger = [34, 39, 60, 62];
+      for (let i = 0; i < trimmed.length; i++) {
+        if (danger.includes(trimmed.charCodeAt(i))) {
+          allEnc += '&#';
+          allEnc += trimmed.charCodeAt(i);
+          allEnc += ';';
+        } else {
+          allEnc += trimmed[i];
+        }
+      }
+      return allEnc;
+    };
+
+
     try {
       const input = req.query.input;
+
+      let safeStr = validateInput(input);
+
+      if (!safeStr) {
+        res.send(false);
+        return;
+      }
+
+
+      console.log('input:::', input);
       let result = await api(input);
-      result = !result ? [{ key: 'misc' }] : result;
+      result = !result ? [{ key: 'misc'}] : result;
       let keyName = result[0].key;
       const categoryNames = {
         toWatch: 1,
@@ -74,11 +137,12 @@ module.exports = (dbHandler) => {
       const task = await dbHandler.insertRecord('to_do_items', {
         user_id: res.locals.user.id,
         category_id: categoryNames[keyName],
-        title: input,
+        title: validateInput(input),
         description: null,
         status_id: 1
       });
       result[0]['taskId'] = task.rows[0].id;
+      result[0].safe = validateInput(input);
       result[0]['createdDate'] = task.rows[0].date_created;
       console.log(result);
       res.json(result);

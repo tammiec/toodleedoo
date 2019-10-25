@@ -42,6 +42,7 @@ header.main-header {
   width: 100%;
   z-index: 1;
   background-color: #FFFF;
+  box-shadow: 3px 3px 20px #0D0D0D;
 }
 
 .logo {
@@ -94,7 +95,6 @@ a {
     padding: 0;
   }
 }
-
 .navbar-nav {
   justify-items: center;
   align-items: center;
@@ -105,11 +105,9 @@ body {
   /**apply from here**/
   /**this selector good**/
 }
-
 body #burger {
   display: none;
 }
-
 body input + label {
   position: fixed;
   top: 20px;
@@ -118,7 +116,6 @@ body input + label {
   width: 15px;
   z-index: 5;
 }
-
 body input + label span {
   position: absolute;
   width: 100%;
@@ -128,36 +125,29 @@ body input + label span {
   left: 0;
   display: block;
   background: #595959;
-  transition: .5s;
+  transition: 0.5s;
 }
-
 body input + label span:first-child {
   top: 3px;
 }
-
 body input + label span:last-child {
   top: 16px;
 }
-
 body label:hover {
   cursor: pointer;
 }
-
 body input:checked + label span {
   opacity: 0;
   top: 50%;
 }
-
 body input:checked + label span:first-child {
   opacity: 1;
   transform: rotate(405deg);
 }
-
 body input:checked + label span:last-child {
   opacity: 1;
   transform: rotate(-405deg);
 }
-
 body input ~ nav {
   background: #0D0D0D;
   opacity: 0.9;
@@ -167,11 +157,10 @@ body input ~ nav {
   width: 100%;
   height: 56px;
   z-index: -1;
-  transition: .5s;
-  transition-delay: .5s;
+  transition: 0.5s;
+  transition-delay: 0.5s;
   overflow: hidden;
 }
-
 body input ~ nav > ul {
   text-align: center;
   position: absolute;
@@ -180,13 +169,11 @@ body input ~ nav > ul {
   right: 20%;
   list-style-type: none;
 }
-
 body input ~ nav > ul > li {
   opacity: 0;
-  transition: .5s;
+  transition: 0.5s;
   transition-delay: 0s;
 }
-
 body input ~ nav > ul > li > a, body input ~ nav > ul > li > p {
   text-decoration: none;
   text-transform: uppercase;
@@ -196,26 +183,23 @@ body input ~ nav > ul > li > a, body input ~ nav > ul > li > p {
   display: block;
   padding: 30px;
 }
-
 body input ~ nav > ul > li > a:hover {
   text-decoration: none;
 }
-
 body input ~ nav > ul > li > p:hover {
   cursor: pointer;
   color: #1662b5;
 }
-
 body input ~ nav > ul > li .archived {
   margin-bottom: 0;
 }
-
 body input:checked ~ nav {
   height: 100%;
   transition-delay: 0s;
 }
-
 body input:checked ~ nav > ul > li {
   opacity: 1;
-  transition-delay: .5s;
+  transition-delay: 0.5s;
 }
+
+/*# sourceMappingURL=header-override.css.map */

@@ -51,8 +51,8 @@ h1, h2, h3, h4, h5, h6 {
   align-content: center;
   */
   display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
-  margin-top: 10vh;
+  grid-template: 1fr 1fr/1fr 1fr;
+  margin-top: 11vh;
 }
 
 .new-todo input {
@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-deck {
   padding-bottom: 1em;
-  margin-top: 6em;
+  margin-top: 4em;
   margin-right: 1em;
   margin-left: 1em;
   display: flex;
@@ -188,3 +188,5 @@ li:hover .x {
   margin-left: 1em;
   display: inline;
 }
+
+/*# sourceMappingURL=jumbotron.css.map */

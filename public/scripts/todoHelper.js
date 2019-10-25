@@ -37,6 +37,7 @@ const showArchived = () => {
 };
 
 $('#input-error').hide();
+
 // AJAX GET - Get category from server
 const getCategory = async () => {
   const inputTask = $('#inputTask');
@@ -54,7 +55,7 @@ const getCategory = async () => {
       $('#input-error').slideDown();
     } else {
       $('#' + cat[0].key).append(`
-        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${cat[0].safe}" data-task-desc="" data-created="${cat[0].createdDate}">
+        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${cat[0].safe}" data-desc="" data-created="${cat[0].createdDate}">
           <img class='checkbox' src="../images/not-checked.png">
           <span id="task-text-${cat[0].taskId}" class='task-name'>${cat[0].safe}</span>
           <span class='x'>&#x2715</span>

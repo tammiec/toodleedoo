@@ -8,6 +8,7 @@ header.main-header {
   width: 100%;
   z-index: 1;
   background-color: $background-color;
+  box-shadow: 3px 3px 20px $base-color;
 }
 .logo {
   width: max-content;
