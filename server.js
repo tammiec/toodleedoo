@@ -61,11 +61,11 @@ app.use(flash());
 // #endregion
 
 // #region FID strategies
+const googleCallbackPath = process.env.SSL_KEY ? 'http://toodleedoo.com/oauthCallback/' : `http://localhost:${PORT}/oauthCallback/`;
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  // callbackURL:  `http://127.0.0.1:${PORT}/oauthCallback/`
-  callbackURL:  `http://toodleedoo.com/oauthCallback/`
+  callbackURL:  googleCallbackPath
 },
   async function (accessToken, refreshToken, profile, done) {
     try {
