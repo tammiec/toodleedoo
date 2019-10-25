@@ -62,6 +62,7 @@ $('#taskModal').on('show.bs.modal', async function (event) {
     const modal = $(this);
     await loadResources(taskId);
     $('#resource-form').hide();
+    $('#suggested-resource-form').hide();
     modal.find('.modal-title').text('Edit Task: ' + taskName);
     modal.find('.modal-body #task-name').val(taskName);
     modal.find('.modal-body #task-desc').val(taskDesc);

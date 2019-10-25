@@ -145,11 +145,36 @@ module.exports = (dbHandler) => {
       result[0].safe = validateInput(input);
       result[0]['createdDate'] = task.rows[0].date_created;
       console.log(result);
+      console.log('from API', result);
+      // Insert suggested resources
+      await insertSuggestedResources(result[0]);
       res.json(result);
     } catch (err) {
-      console.log('Error:', err.message);
+      console.log('Error from Cat:', err);
     }
   });
+
+  const insertSuggestedResources = (result) => {
+    if (!result.res) return;
+    const taskId = result.taskId;
+    if (result.res.length > 3) {
+      result.res.splice(3);
+    }
+    result.res.map(async r => {
+      const name = r.title;
+      const link = r.link;
+      console.log('posting from category resources');
+      try {
+        const resource = await dbHandler.insertRecord('resources', {
+          task_id: taskId,
+          name: name,
+          link: link
+        });
+      } catch (err) {
+        console.log('Error:', err.message);
+      }
+    });
+  };
 
   // #region User routes
   // User profile page
