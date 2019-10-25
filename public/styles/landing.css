@@ -64,6 +64,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .landing-content h1 {
   color: #0D0D0D;
+  text-shadow: 4px 4px 8px #595959;
 }
 
 .landing-content p {
@@ -85,3 +86,5 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 2em;
   margin-bottom: 2em;
 }
+
+/*# sourceMappingURL=landing.css.map */
