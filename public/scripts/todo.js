@@ -7,7 +7,7 @@ const renderTasks = function(tasks) {
     }
     if (task.status_id === 2) {
       $('#' + task.key).append(`
-        <li class="list-group-item checked-todo" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${task.title}" data-desc="${task.description} data-created="${task.date_created}">
+        <li class="list-group-item checked-todo" id="task-${task.id}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${task.title}" data-desc="${task.description}" data-created="${task.date_created}">
           <img class='checkbox checked' src="../images/checked.png">
           <span id="task-text-${task.id}" class='task-name'>${task.title}</span>
           <span class='x'>&#x2715</span>
