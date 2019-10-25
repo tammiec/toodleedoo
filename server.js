@@ -64,7 +64,7 @@ app.use(flash());
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL:  `http://localhost:${PORT}/oauthCallback/`
+  callbackURL:  `http://127.0.0.1:${PORT}/oauthCallback/`
 },
   async function (accessToken, refreshToken, profile, done) {
     try {
