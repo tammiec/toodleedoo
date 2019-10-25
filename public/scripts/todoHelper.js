@@ -51,11 +51,11 @@ const getCategory = async () => {
     console.log('catcat', cat);
 
     if (!cat) {
-      $('#input-error').append(`<h6>Please enter a task before categorizing</h6>`);
+      $('#input-error').append(`<h6>Your task isn't toodleedoo-able! Try again!</h6>`);
       $('#input-error').slideDown();
     } else {
       $('#' + cat[0].key).append(`
-        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${cat[0].safe}" data-desc="" data-created="${cat[0].createdDate}">
+        <li class="list-group-item" id="task-${cat[0].taskId}" class="draggable" draggable="true" ondragstart="drag(event)" data-toggle="modal" data-target="#taskModal" data-name="${cat[0].safe}" data-created="${cat[0].createdDate}">
           <img class='checkbox' src="../images/not-checked.png">
           <span id="task-text-${cat[0].taskId}" class='task-name'>${cat[0].safe}</span>
           <span class='x'>&#x2715</span>
