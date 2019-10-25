@@ -47,6 +47,7 @@ const toDoBehaviour = function(id) {
 };
 
 $('#getCategoryBtn').on('click', (e) => {
+
   getCategory();
 });
 
