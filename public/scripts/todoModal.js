@@ -51,6 +51,7 @@ $('#taskModal').on('show.bs.modal', async function (event) {
     const modal = $(this);
     await loadResources(taskId);
     $('#resource-form').hide();
+    $('#suggested-resource-form').hide();
     modal.find('.modal-title').text('Edit Task: ' + taskName);
     modal.find('.modal-body #task-name').val(taskName);
     modal.find('.modal-body #task-desc').val(taskDesc);
@@ -111,6 +112,13 @@ $('#additional-resources span').click((e) => {
   const target = $(e.target);
   if (target.is('#additional-resources span')) {
     $('#resource-form').slideToggle();
+  }
+});
+
+$('#suggested-resources span').click((e) => {
+  const target = $(e.target);
+  if (target.is('#suggested-resources span')) {
+    $('#suggested-resource-form').slideToggle();
   }
 });
 
